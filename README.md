@@ -4,7 +4,7 @@
 
 3. name of the project (alphanumeric, no spaces, max 32 chars, this will also be your URL)
 
-4.
+4. https://gitlab.com/10AMGroup11/cs373-idb
 
 5. the proposed project
 
