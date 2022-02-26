@@ -20,26 +20,26 @@ the ways the world work.
   https://rapidapi.com/natkapral/api/countries-cities/
 
 7. Our three models are:
-  1. Authors
-  2. Books
-  3. Countries
+  * Authors
+  * Books
+  * Countries
 
 8. Number of Instances Estimate:
-  1. Authors: 400
-  2. Books: 800
-  3. Countries: 100
+  Authors: 400
+  Books: 800
+  Countries: 100
 
 9. Model Attributes:
-  1. Authors
-      * Name
-      * Nationality
-      * Age
-      * Gender
-      * Books Authored
-      * Genre
-      * Biography
-      * Categories Written
-  2. Books
+  * Authors:
+    * Name
+    * Nationality
+    * Age
+    * Gender
+    * Publications
+    * Awards
+    * Genre(s)
+    * Biography
+  * Books:
       * Title
       * Author
       * Genre
@@ -47,7 +47,7 @@ the ways the world work.
       * Publish Date
       * Description
       * Language
-  3. Countries
+  * Countries:
       * Name
       * Code
       * Wikipedia Entry
@@ -58,34 +58,34 @@ the ways the world work.
       * Area
 
 10. Sortable Attributes:
-  1. Authors
-    Nationality, Gender, Genre(s), Age, Language, Name
-  2. Books
+  * Authors
+    Nationality, Gender, Genre(s), Age, Language, 
+  * Books
     Author, Date Published, Language, Genre, Title
-  3. Countries
+  * Countries
     Coordinates, Book, Code, Language, Population
 
 11. describe at least five additional attributes for each model that you could search for on the instance pages
 each model must connect to at least two other models.
-  1. Authors
-    Biography, Publications, Awards, Country, Books, 
-  2. Books
+  * Authors
+    Biography, Publications, Awards, Nationality, Name
+  * Books
     Summary, Series, Pages, Publisher, Maturity Rating, Print Type, Country, Author
-  3. Countries
+  * Countries
     Capitol, Authors, Books, Cities, Currency
 
 12. each model must be rich with different media (e.g., feeds, images, maps, text, videos, etc.) (be very sure about this)
-  1. Author
+  * Author
     * Background
       * Birthplace
       * Childhood
       * Adulthood
       * Publications
     * Image
-  2. Book
+  * Book
     * Synopsis
     * Image
-  3. Countries
+  * Countries
     * Description
     * Geographic Map
     * Capitol Image
@@ -99,6 +99,6 @@ each model must connect to at least two other models.
   home country must have felt like.
 
 14. what three questions will you answer due to doing this data synthesis on your site?
-  1. Who are the most influential authors and works coming out of this country?
-  2. What cultural background inspired this author to write this book?
-  3. Why is one author's literature different from another's?
+  * Who are the most influential authors and works coming out of this country?
+  * What cultural background inspired this author to write this book?
+  * Why is one author's literature different from another's?
