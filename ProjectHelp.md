@@ -26,3 +26,5 @@ https://documenter.getpostman.com/view/12123261/TVRdAWse (postman api documentat
 
 Intro into HTML, CSS, JS, and React:
 https://github.com/forbesye/cs373/blob/main/HTML_CSS_JS_React.md
+
+Fetching: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
