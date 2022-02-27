@@ -1,7 +1,7 @@
-Project Documentation: https://www.cs.utexas.edu/users/downing/cs373/projects/IDB.html
+**Project Documentation:** https://www.cs.utexas.edu/users/downing/cs373/projects/IDB.html
 
 
-Phase 1:
+**Phase 1:**
 
 Rubric:
 https://docs.google.com/document/d/1bZ5iZ8nCBvNXUjDUn9jqkalrLrsphGLqbTiiQpAvCds/edit#
@@ -14,7 +14,7 @@ https://github.com/forbesye/cs373/blob/main/React_AWS_Setup.md
 
 
 
-Additional Help:
+**Additional Help:**
 
 Past Projects:
 
