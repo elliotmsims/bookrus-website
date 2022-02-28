@@ -1,0 +1,61 @@
+Models
+  At least three pages for each model
+  Must have a grid or table for each model, which contain links to the instances of a model
+  Need to show at least five attributes of the model, these attributes must be filterable or sortable
+  Grid/table page must show total number of instances and pages
+  Each instance needs to contain connections to the other model instances
+  Each instance must have at least 2 forms of media
+  Do not need to implement sorting/filtering for this phase. Simply need to have  attributes that are filterable/sortable
+  
+  Books
+    Media: Image, Summary
+
+    Books to use:
+      Hamlet (points to Shakespeare & England)
+      1984 (points to George Orwell & India)
+      War and Peace (points to Leo Tolstoy & Russia)
+
+    Sortable Attributes:
+      Author
+      Date Published
+      Language
+      Genre
+      Title
+
+  Authors:
+    Media: Image, Abstract
+
+    Authors to use:
+      Shakespeare (points to Hamlet & England)
+      George Orwell (points to 1984 & India)
+      Leo Tolstoy (points to War and Peace & Russia)
+
+    Sortable Attributes:
+      Nationality
+      Gender
+      Genres
+      Age
+      Language
+
+  Countries
+    Media: Image, Abstract
+
+    Countries to use:
+      England (points to Shakespeare & Hamlet)
+      India (points to George Orwell & 1984)
+      Russia (points to Leo Tolstoy & War and Peace)
+
+    Sortable Attributes:
+      Coordinates
+      Books
+      Code
+      Language
+      Population
+
+About Page
+  Description of site (purpose, intended users)
+  Explanation of the interesting result of integrating disparate data (idk what this means tbh)
+  Name, photo, bio, major responsibilities (ex: frontend vs backend team), # of commits, issues, and unit tests contributed of each team member
+  Total # of commits, issues, and unit tests
+  Links to APIs and additional data sources, and how each was scraped
+  Tools used and a description of how they were used
