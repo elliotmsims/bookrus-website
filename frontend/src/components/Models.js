@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useParams, Outlet } from 'react-router-dom'
+import { useParams, Outlet, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const book_json = {
@@ -48,10 +48,12 @@ export function Books() {
                     <Col>Book Author</Col>
                 </Row>
                 
-                {book_json.books.map((book) => {
+                {book_json.books.map((book, index) => {
                     return(
                         <Row>
-                            <Col>{book.title}</Col>
+                            <Col>
+                                <Link to={`/books/${index}`}>{book.title}</Link>
+                            </Col>
                             <Col>{book.author}</Col>
                         </Row>
                     )
