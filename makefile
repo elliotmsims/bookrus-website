@@ -7,6 +7,16 @@ SHELL         := bash
 
 # All of these make commands must be called in root directory
 
+# Installs node packages
+frontend-install:
+	cd frontend; \
+	npm install
+
+# Runs the development server on your local machine
+frontend-run:
+	cd frontend; \
+	npm start
+
 all:
 
 # auto format the code
