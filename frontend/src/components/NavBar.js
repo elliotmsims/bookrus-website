@@ -7,13 +7,13 @@ export default function Navigation() {
     <>
       <Navbar bg="primary" variant="dark">
         <Container>
-        <Navbar.Brand href="#home">Home</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="#home">About</Nav.Link>
-          <Nav.Link href="#home">Books</Nav.Link>
-          <Nav.Link href="#features">Authors</Nav.Link>
-          <Nav.Link href="#pricing">Countries</Nav.Link>
-        </Nav>
+          <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/books">Books</Nav.Link>
+            <Nav.Link href="/authors">Authors</Nav.Link>
+            <Nav.Link href="/countries">Countries</Nav.Link>
+          </Nav>
         </Container>
       </Navbar>
     </>
