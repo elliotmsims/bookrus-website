@@ -4,7 +4,10 @@ import { Route, Routes, Outlet } from 'react-router-dom'
 import Navigation from './components/NavBar'
 import Home from './components/Home'
 import About from './components/About'
-import { Model, Books, Book, Authors, Countries } from './components/Models'
+import Model from './components/Models'
+import { Books, Book } from './components/Books'
+import { Authors } from './components/Authors'
+import { Countries } from './components/Countries'
 
 export default function App() {
   return (
