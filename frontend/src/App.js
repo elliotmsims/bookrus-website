@@ -6,8 +6,8 @@ import Home from './components/Home'
 import About from './components/About'
 import Models from './components/Models'
 import { Books, Book } from './components/Books'
-import { Authors } from './components/Authors'
-import { Countries } from './components/Countries'
+import { Authors, Author } from './components/Authors'
+import { Countries, Country } from './components/Countries'
 
 export default function App() {
   return (
@@ -20,8 +20,14 @@ export default function App() {
           <Route path=':bookId' element={<Book />} />
           <Route index element={<Books /> } />
         </Route>
-        <Route path='/authors' element={<Authors />} />
-        <Route path='/countries' element={<Countries />} />
+        <Route path='/authors' element={<Models />} >
+          <Route path=':authorId' element={<Author />} />
+          <Route index element={<Authors />} />
+        </Route>
+        <Route path='/countries' element={<Models />} >
+          <Route path=':countryId'element={<Country />} />
+          <Route index element={<Countries />} />
+        </Route>
         <Route
           path="*"
           element={
