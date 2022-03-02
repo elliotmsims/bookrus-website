@@ -1,66 +1,42 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
+import { Route, Routes, Outlet } from 'react-router-dom'
 
-class App extends Component {
-  state = {
-    topics: ["Loading..."],
-    question: "",
-    answer: ""
-  }
+import Navigation from './components/NavBar'
+import Home from './components/Home'
+import About from './components/About'
+import Models from './components/Models'
+import { Books, Book } from './components/Books'
+import { Authors, Author } from './components/Authors'
+import { Countries, Country } from './components/Countries'
 
-  componentDidMount() {
-    this.fetchTopics()
-
-  }
-
-  fetchTopics = async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/get_topics`,
-    );
-    const { topics } = data;
-    this.setState({topics})
-  }
-
-  handleChange = (event) => {
-    this.setState({question: event.target.value});
-  }
-
-  handleSubmit = (event) => {
-    this.fetchAnswer();
-    event.preventDefault();
-  }
-
-  fetchAnswer = async () => {
-    const { question } = this.state;
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/submit_question`, { question }
-    );
-    const { answer } = data;
-    this.setState({answer})
-  }
-
-  render() {
-    const { topics, question, answer } = this.state;
-    return (
-      <div className="App">
-        <header className="App-header">
-        <h1>List of topics to ask a question on</h1>
-        <ul>
-          {topics.map(topic => (<li key={topic}>{topic}</li>))}
-        </ul>
-          <form onSubmit={this.handleSubmit}>
-          <label>
-            Question:
-            <input type="text" value={question} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        <h1>Answer: {answer}</h1>
-        </header>
-      </div>
-    );
-  }
+export default function App() {
+  return (
+    <div class="App">
+      <Navigation/>
+      <Routes>
+        <Route exact path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/books' element={<Models />} >
+          <Route path=':bookId' element={<Book />} />
+          <Route index element={<Books /> } />
+        </Route>
+        <Route path='/authors' element={<Models />} >
+          <Route path=':authorId' element={<Author />} />
+          <Route index element={<Authors />} />
+        </Route>
+        <Route path='/countries' element={<Models />} >
+          <Route path=':countryId'element={<Country />} />
+          <Route index element={<Countries />} />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
+      </Routes>
+      <Outlet />
+    </div>
+  )
 }
-
-export default App;

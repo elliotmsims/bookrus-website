@@ -1,6 +1,5 @@
 **Project Documentation:** https://www.cs.utexas.edu/users/downing/cs373/projects/IDB.html
 
-
 **Phase 1:**
 
 Rubric:
@@ -11,8 +10,6 @@ https://github.com/forbesye/cs373/blob/main/IDB_tips_phase_1.md
 
 Set-up AWS Amplify:
 https://github.com/forbesye/cs373/blob/main/React_AWS_Setup.md
-
-
 
 **Additional Help:**
 

@@ -1,0 +1,77 @@
+Models
+  Need to show at least five attributes of the model, these attributes must be filterable or sortable
+  Each instance needs to contain connections to the other model instances
+  
+== Books ==
+  Books to use:
+    Hamlet (points to Shakespeare & England)
+      Media: 
+        Image: http://books.google.com/books/content?id=TqpK54ASXGkC&printsec=frontcover&img=1&zoom=1&source=gbs_api
+        Summary: "Here are the books that help teach Shakespeare plays without the teacher constantly needing to explain and define Elizabethan terms, slang, and other ways of expression that are different from our own. Each play is presented with Shakespeare's original lines on each left-hand page, and a modern, easy-to-understand \"translation\" on the facing right-hand page. All dramas are complete, with every original Shakespearian line, and a full-length modern rendition of the text. These invaluable teaching-study guides also include: Helpful background information that puts each play in its historical perspective. Discussion questions that teachers can use to spark student class participation, and which students can use as springboards for their own themes and term papers. Fact quizzes, sample examinations, and other features that improve student comprehension of what each play is about."
+    1984 (points to George Orwell & India)
+      Media: 
+        Image: http://books.google.com/books/content?id=ag5ongEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api
+        Summary: "It is 1984, and the worlds' three major powers-Oceania, Eurasia and Eastasia-are constantly at war. In Oceania, where the Party is in power, the thought police unearth every act of dissent, and Big Brother is always watching. Winston Smith, a dutiful citizen of Oceania, works for the Ministry of Truth as a propaganda writer who rewrites history to suit the needs of the authoritarian government. But when Winston falls in love with fellow worker Julia, they begin to question the very system they work for, placing them in immense danger. Pursuing their forbidden love affair, Winston plans a rebellion against the Party in order to regain the freedom to shape his own future. But the ever-watchful Big Brother will not tolerate opposition, and for those who speak up against the system or dare to think what the Party does not want them to think, Room 101 awaits them . . . 1984 is George Orwell's haunting prophesy of the future, which has held multiple generations of readers spellbound in its chilling and terrifying vision of life under a totalitarian regime. Powerful and unforgettable, this still-relevant novel explores the obliteration of truth, individuality and liberty in a world where the ruling power seeks to control everything, from information to thought and memory."
+    War and Peace (points to Leo Tolstoy & Russia)
+      Media: 
+        Image: http://books.google.com/books/content?id=bL3VlijouIwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api
+        Summary: "Presents a new translation of the classic reflecting the life and times of Russian society during the Napoleonic Wars, in a book accompanied by an index of historical figures, textual annotation, a chapter summary, and an introduction."
+
+  Sortable Attributes:
+    Author
+    Date Published
+    Language
+    Genre
+    Title
+
+== Authors ==
+  Authors to use:
+    Shakespeare (points to Hamlet & England)
+      Media: 
+        Image: https://upload.wikimedia.org/wikipedia/commons/a/a2/Shakespeare.jpg
+        Abstract: https://en.wikipedia.org/wiki/William_Shakespeare
+    George Orwell (points to 1984 & India)
+      Media: 
+        Image: https://upload.wikimedia.org/wikipedia/commons/7/7e/George_Orwell_press_photo.jpg
+        Abstract: https://en.wikipedia.org/wiki/George_Orwell
+    Leo Tolstoy (points to War and Peace & Russia)
+      Media: 
+        Image: https://upload.wikimedia.org/wikipedia/commons/c/c6/L.N.Tolstoy_Prokudin-Gorsky.jpg
+        Abstract: https://en.wikipedia.org/wiki/Leo_Tolstoy
+
+  Sortable Attributes:
+    Nationality
+    Gender
+    Genres
+    Age
+    Language
+
+== Countries ==
+  Countries to use:
+    England (points to Shakespeare & Hamlet)
+      Media:
+        Image: https://upload.wikimedia.org/wikipedia/commons/b/b3/England_in_the_UK_and_Europe.svg
+        Abstract: https://en.wikipedia.org/wiki/England
+    India (points to George Orwell & 1984)
+      Media:
+        Image: https://upload.wikimedia.org/wikipedia/commons/b/bb/India_%28orthographic_projection%29.svg
+        Abstract: https://en.wikipedia.org/wiki/India
+    Russia (points to Leo Tolstoy & War and Peace)
+      Media:
+        Image: https://upload.wikimedia.org/wikipedia/commons/5/5e/Russian_Federation_%28orthographic_projection%29_-_only_Crimea_disputed.svg
+        Abstract: https://en.wikipedia.org/wiki/Russia
+
+  Sortable Attributes:
+    Coordinates
+    Books
+    Code
+    Language
+    Population
+
+About Page
+  Description of site (purpose, intended users)
+  Explanation of the interesting result of integrating disparate data (idk what this means tbh)
+  Name, photo, bio, major responsibilities (ex: frontend vs backend team), # of commits, issues, and unit tests contributed of each team member
+  Total # of commits, issues, and unit tests
+  Links to APIs and additional data sources, and how each was scraped
+  Tools used and a description of how they were used
