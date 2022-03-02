@@ -9,6 +9,11 @@ export function Countries() {
             <Container>
                 <h1>Countries!</h1>
             </Container>
+            <Outlet />
         </div>
     )
+}
+
+export function Country() {
+    
 }

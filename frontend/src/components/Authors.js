@@ -9,6 +9,11 @@ export function Authors() {
             <Container>
                 <h2>Authors!</h2>
             </Container>
+            <Outlet />
         </div>
     )
+}
+
+export function Author() {
+    
 }
