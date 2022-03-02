@@ -1,4 +1,3 @@
-import React from 'react'
 import { Route, Routes, Outlet } from 'react-router-dom'
 
 import Navigation from './components/NavBar'
