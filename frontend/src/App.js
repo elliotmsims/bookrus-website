@@ -4,7 +4,7 @@ import { Route, Routes, Outlet } from 'react-router-dom'
 import Navigation from './components/NavBar'
 import Home from './components/Home'
 import About from './components/About'
-import Model from './components/Model'
+import Models from './components/Models'
 import { Books, Book } from './components/Books'
 import { Authors } from './components/Authors'
 import { Countries } from './components/Countries'
@@ -16,7 +16,7 @@ export default function App() {
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/books' element={<Model />} >
+        <Route path='/books' element={<Models />} >
           <Route path=':bookId' element={<Book />} />
           <Route index element={<Books /> } />
         </Route>

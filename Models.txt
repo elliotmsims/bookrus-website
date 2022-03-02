@@ -1,11 +1,6 @@
 Models
-  At least three pages for each model
-  Must have a grid or table for each model, which contain links to the instances of a model
   Need to show at least five attributes of the model, these attributes must be filterable or sortable
-  Grid/table page must show total number of instances and pages
   Each instance needs to contain connections to the other model instances
-  Each instance must have at least 2 forms of media
-  Do not need to implement sorting/filtering for this phase. Simply need to have  attributes that are filterable/sortable
   
 == Books ==
   Books to use:
