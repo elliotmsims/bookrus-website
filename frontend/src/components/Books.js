@@ -4,7 +4,6 @@ import { useParams, Outlet, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const book_json = {
-    "book_count": 3,
     "books": [
         {
             "title": "1984",
@@ -29,30 +28,30 @@ const book_json = {
 
 export function Books() {
     return(
-        <div class="Books">
-            <Container>
-                <h1>Books!</h1>
+      <div class="Books">
+          <Container>
+              <h1>Books!</h1>
 
-                <h3>Number of books: {book_json.book_count}</h3>
+              <h3>Number of books: {book_json.books.length}</h3>
 
-                <Row>
-                    <Col>Book Title</Col>
-                    <Col>Book Author</Col>
-                </Row>
-                
-                {book_json.books.map((book, index) => {
-                    return(
-                        <Row>
-                            <Col>
-                                <Link to={`/books/${index}`}>{book.title}</Link>
-                            </Col>
-                            <Col>{book.author}</Col>
-                        </Row>
-                    )
-                })}
-            </Container>
-            <Outlet />
-        </div>
+              <Row>
+                  <Col>Book Title</Col>
+                  <Col>Book Author</Col>
+              </Row>
+              
+              {book_json.books.map((book, index) => {
+                  return(
+                      <Row>
+                          <Col>
+                              <Link to={`/books/${index}`}>{book.title}</Link>
+                          </Col>
+                          <Col>{book.author}</Col>
+                      </Row>
+                  )
+              })}
+          </Container>
+          <Outlet />
+      </div>
     )
 }
 
