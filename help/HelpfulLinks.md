@@ -1,27 +1,23 @@
-**Project Documentation:** https://www.cs.utexas.edu/users/downing/cs373/projects/IDB.html
+# Tech Report Google Doc: https://docs.google.com/document/d/1UlwRhJIYcA8QKkxsJewmCOk-FpM32Lr3DKdKtRGMFxM/edit?usp=sharing
 
-**Phase 1:**
+# Phase 1:
 
-Rubric:
-https://docs.google.com/document/d/1bZ5iZ8nCBvNXUjDUn9jqkalrLrsphGLqbTiiQpAvCds/edit#
+### Project Documentation: https://www.cs.utexas.edu/users/downing/cs373/projects/IDB.html
 
-Tips:
-https://github.com/forbesye/cs373/blob/main/IDB_tips_phase_1.md
+### Rubric: https://docs.google.com/document/d/1bZ5iZ8nCBvNXUjDUn9jqkalrLrsphGLqbTiiQpAvCds/edit#
 
-Set-up AWS Amplify:
-https://github.com/forbesye/cs373/blob/main/React_AWS_Setup.md
+### Tips: https://github.com/forbesye/cs373/blob/main/IDB_tips_phase_1.md
 
-**Additional Help:**
+### Set-up AWS Amplify: https://github.com/forbesye/cs373/blob/main/React_AWS_Setup.md
 
-Past Projects:
+# Additional Help:
 
-https://www.cs.utexas.edu/users/downing/cs373/Groups.html (projects)
+### Past and Current Projects: https://www.cs.utexas.edu/users/downing/cs373/Groups.html
 
-https://www.texasvotes.me/ (working website)
+### Completed Working Website Example: https://www.texasvotes.me/
 
-https://documenter.getpostman.com/view/12123261/TVRdAWse (postman api documentation)
+### Postman API Example: https://documenter.getpostman.com/view/12123261/TVRdAWse
 
-Intro into HTML, CSS, JS, and React:
-https://github.com/forbesye/cs373/blob/main/HTML_CSS_JS_React.md
+### Intro into HTML, CSS, JS, and React: https://github.com/forbesye/cs373/blob/main/HTML_CSS_JS_React.md
 
-Fetching: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+### Fetching: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
