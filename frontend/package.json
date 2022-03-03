@@ -27,6 +27,15 @@
       "react-app/jest"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.+(json|css|md|html|js|jsx)": "prettier --write",
+    "src/**/*.+(js|jsx)": "eslint --fix"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -41,6 +50,16 @@
   },
   "devDependencies": {
     "eslint": "^8.10.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.2",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.4",
     "prettier": "2.5.1"
   }
 }
+

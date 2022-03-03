@@ -7,6 +7,12 @@ SHELL         := bash
 
 # All of these make commands must be called in root directory
 
+# auto format frontend (might change!!!)
+frontend-format:
+	cd frontend; \
+	npx prettier --check "src/**/*.+(json|css|md|html|js|jsx)"; \
+	npx eslint --fix "src/**/*.+(js|jsx)"
+	
 # Installs node packages
 frontend-install:
 	cd frontend; \
