@@ -5,7 +5,7 @@
 | Name                 | UTEID   | GitLab ID       |
 | -------------------- | ------- | --------------- |
 | Matthew Escobar      | -       | @matt594        |
-| Francisco Reyna      | -       | @francis0312    |
+| Francisco Reyna      | fjr649  | @francis0312    |
 | William Eng          | we2492  | @willeng37      |
 | Hrithik Ramganesh    | -       | @hrithikr       |
 | Elliot Sims          | ems4563 | @elliotsims     |
@@ -32,7 +32,7 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 | Name                 | Estimated | Actual |
 | -------------------- | --------- | ------ |
 | Matthew Escobar      | -         | -      |
-| Francisco Reyna      | -         | -      |
+| Francisco Reyna      | 8         | 6      |
 | William Eng          | 8         | 18     |
 | Hrithik Ramganesh    | -         | -      |
 | Elliot Sims          | 8         | 16     |
