@@ -1,3 +1,15 @@
 .nav-color {
     background-color: rgb(81, 45, 6);
+    font-size: 20px;
 }
+
+.nav-link{
+    font-family: 'Roboto', sans-serif;
+    color: #A36A2C !important;
+}
+
+.nav-link:hover{
+    font-family: 'Roboto', sans-serif;
+    color: #f1c697 !important;
+}
+
