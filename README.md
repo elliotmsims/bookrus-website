@@ -1,4 +1,4 @@
-# CS 373 Group 10am #11's Project: BookRUs
+# CS 373 Group 10am \#11's Project: BookRUs
 
 ## Members
 
@@ -21,13 +21,9 @@
 
 Leader's Responisibility: The leader is well-informed on all aspects of the project phase, organizes the team to perform effectively, and promotes equal collaboration from all members.
 
-## Gitlab Pipelines
+## Gitlab Pipelines: https://gitlab.com/10AMGroup11/bookrus/-/pipelines
 
-https://gitlab.com/10AMGroup11/bookrus/-/pipelines
-
-## Website Link
-
-https://www.bookrus.me
+## Website Link: https://www.bookrus.me
 
 ## Completion Times
 
