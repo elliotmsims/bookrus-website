@@ -10,8 +10,8 @@ export default function Navigation() {
       <Container>
         <Navbar.Brand href="/">
           <img
-            src= {logo}
-            width="190"
+            src={logo}
+            width="200"
             height="60"
             className="d-inline-block align-top"
             alt="React Bootstrap logo"

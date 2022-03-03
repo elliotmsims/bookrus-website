@@ -1,19 +1,15 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import "./Home.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Home() {
   return (
-    <Container>
+    <div className="main">
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <h1>Welcome to the Home Page.</h1>
+        className="home-bg"
+        style={{ backgroundImage: `url('splash-art.jpg')` }}>
       </div>
-    </Container>
+    </div>
   );
 }
