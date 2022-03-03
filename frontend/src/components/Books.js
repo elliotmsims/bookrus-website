@@ -45,6 +45,14 @@ export function Book() {
 
             <h3>Author Nationality: <Link to={`/countries/${models_json.authors[book.authorId].nationalityId}`}>{models_json.countries[models_json.authors[book.authorId].nationalityId].name}</Link></h3>
 
+            <h6>
+              <Row>
+                    <Col>Genre: {book.genre}</Col>
+                    <Col>Language: {book.language}</Col>
+                    <Col>Date Published: {book.date}</Col>
+              </Row>
+            </h6>
+
             <h3>Synopsis:</h3>
 
             <p>{book.synopsis}</p>

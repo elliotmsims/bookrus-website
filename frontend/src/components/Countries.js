@@ -69,6 +69,15 @@ export function Country() {
             }
           </h3>
 
+          <h6>
+              <Row>
+                    <Col>Capital: {country.capital}</Col>
+                    <Col>Language: {country.language}</Col>
+                    <Col>Population: {country.population}</Col>
+                    <Col>Code: {country.code}</Col>
+              </Row>
+            </h6>
+
           <h3>Description:</h3>
 
           <p>{country.desc}</p>

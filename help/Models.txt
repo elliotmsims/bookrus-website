@@ -1,6 +1,5 @@
 Models
   Need to show at least five attributes of the model, these attributes must be filterable or sortable
-  Each instance needs to contain connections to the other model instances
   
 == Books ==
   Books to use:
@@ -62,7 +61,7 @@ Models
         Abstract: https://en.wikipedia.org/wiki/Russia
 
   Sortable Attributes:
-    Coordinates
+    Capital
     Books
     Code
     Language

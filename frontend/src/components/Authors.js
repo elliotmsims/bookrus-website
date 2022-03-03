@@ -63,6 +63,20 @@ export function Author() {
             }
           </h3>
 
+          <h6>
+              <Row>
+                    <Col>
+                    Genres: {author.bookIds.map((ids, index) => {
+                          return(
+                            <p>{models_json.books[author.bookIds[index]].genre}</p>
+                          )
+                        })}
+                    </Col>
+                    <Col>Sex: {author.sex}</Col>
+                    <Col>Born: {author.born}</Col>
+              </Row>
+            </h6>
+
           <h3>Bio:</h3>
 
           <p>{author.bio}</p>
