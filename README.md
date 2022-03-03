@@ -6,7 +6,7 @@
 | -------------------- | ------- | --------------- |
 | Matthew Escobar      | -       | @matt594        |
 | Francisco Reyna      | -       | @francis0312    |
-| William Eng          | -       | @willeng37      |
+| William Eng          | we2492  | @willeng37      |
 | Hrithik Ramganesh    | -       | @hrithikr       |
 | Elliot Sims          | ems4563 | @elliotsims     |
 
@@ -33,7 +33,7 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 | -------------------- | --------- | ------ |
 | Matthew Escobar      | -         | -      |
 | Francisco Reyna      | -         | -      |
-| William Eng          | -         | -      |
+| William Eng          | 8         | 18     |
 | Hrithik Ramganesh    | -         | -      |
 | Elliot Sims          | 8         | 16     |
 
