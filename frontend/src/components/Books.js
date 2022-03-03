@@ -22,7 +22,9 @@ export function Books() {
                           <Col>
                               <Link to={`/books/${index}`}>{book.title}</Link>
                           </Col>
-                          <Col>{book.author}</Col>
+                          <Col>
+                              <Link to={`/authors/${book.authorId}`}>{book.author}</Link>
+                          </Col>
                       </Row>
                   )
               })}
@@ -39,7 +41,17 @@ export function Book() {
         <>
             <h1>Book: {book.title}</h1>
 
-            <h3>Author: {book.author}</h3>
+            <h3>Author: <Link to={`/authors/${book.authorId}`}>{book.author}</Link></h3>
+
+            <h3>Author Nationality: <Link to={`/countries/${models_json.authors[book.authorId].nationalityId}`}>{models_json.countries[models_json.authors[book.authorId].nationalityId].name}</Link></h3>
+
+            <h6>
+              <Row>
+                    <Col>Genre: {book.genre}</Col>
+                    <Col>Language: {book.language}</Col>
+                    <Col>Date Published: {book.date}</Col>
+              </Row>
+            </h6>
 
             <h3>Synopsis:</h3>
 
