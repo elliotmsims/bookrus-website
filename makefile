@@ -6,21 +6,17 @@ MAKEFLAGS += --no-builtin-rules
 SHELL         := bash
 
 # All of these make commands must be called in root directory
-
-# install husky node package
-husky-install:
-	npm install
-
-# auto format frontend (might change!!!)
-frontend-format:
-	cd frontend; \
-	npx prettier --check "src/**/*.+(json|css|md|html|js|jsx)"; \
-	npx eslint --fix "src/**/*.+(js|jsx)"
 	
 # Installs node packages
 frontend-install:
 	cd frontend; \
 	npm install
+
+# auto format frontend (add to make all format?)
+frontend-format:
+	cd frontend; \
+	npx prettier --check "src/**/*.+(json|css|md|html|js|jsx)"; \
+	npx eslint --fix "src/**/*.+(js|jsx)"
 
 # Runs the development server on your local machine
 frontend-run:

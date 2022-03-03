@@ -1,103 +1,46 @@
-1. Group Number: 10AM Group 11
+# CS 373 Group 10am #11's Project: BookRUs
 
-2. Team Members: Hrithik Ramganesh, Matthew Escobar, William Eng, Francisco Reyna, Elliot Sims
+## Members
 
-3. Project Name: BooksRUs
+| Name                 | UTEID   | GitLab ID       |
+| -------------------- | ------- | --------------- |
+| Matthew Escobar      | -       | @matt594        |
+| Francisco Reyna      | -       | @francis0312    |
+| William Eng          | -       | @willeng37      |
+| Hrithik Ramganesh    | -       | @hrithikr       |
+| Elliot Sims          | ems4563 | @elliotsims     |
 
-4. GitLab URL: https://gitlab.com/10AMGroup11/cs373-idb
+## Project Leader and Git SHA
 
-5. Project Proposal: BooksRUs exists to emphasize the literary contributions of different cultures around the world. The app will include information
-regarding famous publications around the globe, their authors, and the countries they hale from. The vision of BooksRUs is to connect
-and spread knowledge from distant lifestyles and faraway populations to others through sharing inspiring stories, insightful biographies, 
-and cross-country cultural exchange. This is because, ultimately, the more learned we are of each other, the more mindful we are of
-the ways the world work.
+| Phase #  | Leader               | Git ShA   |
+| -------- | -------------------- | --------- |
+| 1        | Matthew Escobar      | -         |
+| 2        | -                    | -         |
+| 3        | -                    | -         |
+| 4        | -                    | -         |
 
-6. URLs of at least three disparate data sources that you will programmatically scrape using a RESTful API:
-  https://developers.google.com/books/docs/overview
-  https://en.wikipedia.org/wiki/List_of_novelists_by_nationality
-  https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population
-  https://pypi.org/project/Wikidata/
-  https://rapidapi.com/natkapral/api/countries-cities/
+Leader's Responisibility: The leader is well-informed on all aspects of the project phase, organizes the team to perform effectively, and promotes equal collaboration from all members.
 
-7. Our three models are:
-  * Authors
-  * Books
-  * Countries
+## Gitlab Pipelines
 
-8. Number of Instances Estimate:
-  Authors: 400
-  Books: 800
-  Countries: 100
+https://gitlab.com/10AMGroup11/bookrus/-/pipelines
 
-9. Model Attributes:
-  * Authors:
-    * Name
-    * Nationality
-    * Age
-    * Gender
-    * Publications
-    * Awards
-    * Genre(s)
-    * Biography
-  * Books:
-    * Title
-    * Author
-    * Genre
-    * Publisher
-    * Publish Date
-    * Description
-    * Language
-  * Countries:
-    * Name
-    * Code
-    * Wikipedia Entry
-    * Flag
-    * Territories
-    * Languages
-    * Population
-    * Area
+## Website Link
 
-10. Sortable Attributes:
-  * Authors
-    Nationality, Gender, Genre(s), Age, Language, 
-  * Books
-    Author, Date Published, Language, Genre, Title
-  * Countries
-    Coordinates, Book, Code, Language, Population
+https://www.bookrus.me
 
-11. Searchable Attributes:
-  * Authors
-    Biography, Publications, Awards, Nationality, Name
-  * Books
-    Summary, Series, Pages, Publisher, Maturity Rating, Print Type, Country, Author
-  * Countries
-    Capitol, Authors, Books, Cities, Currency
+## Completion Times
 
-12. Types of media per model:
-  * Author
-    * Background
-      * Birthplace
-      * Childhood
-      * Adulthood
-      * Publications
-    * Image
-  * Book
-    * Synopsis
-    * Image
-  * Countries
-    * Description
-    * Geographic Map
-    * Capitol Image
-    * Flag
+### Phase 1
 
-13. Description of media:
-  For each model, we will display both images and textual descriptions upon the instance pages. Text
-  will serve the purpose of enriching the reader with information regarding who the author is/was, what
-  the book is about, and what the culture of the country they're from is like. Images will grant the
-  reader a stronger feel of who the author was, how the book appears, and what living in the author's
-  home country must have felt like.
+| Name                 | Estimated | Actual |
+| -------------------- | --------- | ------ |
+| Matthew Escobar      | -         | -      |
+| Francisco Reyna      | -         | -      |
+| William Eng          | -         | -      |
+| Hrithik Ramganesh    | -         | -      |
+| Elliot Sims          | 8         | 16     |
 
-14. What three questions will you answer due to doing this data synthesis on your site?
-  * Who are the most influential authors and works coming out of this country?
-  * What cultural background inspired this author to write this book?
-  * Why is one author's literature different from another's?
+## Comments
+
+Starting early is the most important thing!
