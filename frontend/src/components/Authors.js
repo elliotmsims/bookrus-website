@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { models_json } from './Models';
 
 export function Authors() {
-    return(
+    return( 
       <div class="Authors">
         <Container>
             <h1>Authors!</h1>
@@ -22,10 +22,22 @@ export function Authors() {
                         <Col>
                             <Link to={`/authors/${index}`}>{author.author}</Link>
                         </Col>
-                        <Col>{author.books}</Col>
+                        <Col>
+                            {author.bookIds.map((ids, index) => {
+                                return(
+                                    <Row>
+                                        <Col>
+                                            <Link to={`/books/${ids}`}>{author.books[index]}</Link>
+                                        </Col>
+                                    </Row>
+                                )
+                            })}
+                        </Col>
                     </Row>
                 )
             })}
+            
+
         </Container>
       <Outlet />
       </div>
@@ -39,7 +51,17 @@ export function Author() {
       <>
           <h1>Author: {author.author}</h1>
 
-          <h3>Books: {author.books}</h3>
+          <h3> Nationality: {<Link to={`/countries/${author.nationalityId}`}>{models_json.countries[author.nationalityId].name}</Link>}</h3>
+
+          <h3>Books: 
+            {
+              author.bookIds.map((ids, index) => {
+                return(
+                  <Link to={`/books/${ids}`}>{author.books[index]}</Link>
+                )
+              })
+            }
+          </h3>
 
           <h3>Bio:</h3>
 

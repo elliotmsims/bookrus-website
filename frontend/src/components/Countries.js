@@ -22,7 +22,17 @@ export function Countries() {
                         <Col>
                             <Link to={`/countries/${index}`}>{country.name}</Link>
                         </Col>
-                        <Col>{country.authors}</Col>
+                        <Col>
+                            {country.authorIds.map((ids, index) => {
+                                return(
+                                    <Row>
+                                        <Col>
+                                            <Link to={`/authors/${ids}`}>{country.authors[index]}</Link>
+                                        </Col>
+                                    </Row>
+                                )
+                            })}
+                        </Col>
                     </Row>
                 )
             })}
@@ -39,7 +49,25 @@ export function Country() {
       <>
           <h1>Country: {country.name}</h1>
 
-          <h3>Authors: {country.authors}</h3>
+          <h3>Authors: 
+            {
+              country.authorIds.map((ids, index) => {
+                return(
+                  <Link to={`/authors/${ids}`}>{country.authors[index]}</Link>
+                )
+              })
+            }
+          </h3>
+
+          <h3>Books: 
+            {
+              country.bookIds.map((ids, index) => {
+                return(
+                  <Link to={`/books/${ids}`}>{country.books[index]}</Link>
+                )
+              })
+            }
+          </h3>
 
           <h3>Description:</h3>
 
