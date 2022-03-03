@@ -7,6 +7,10 @@ SHELL         := bash
 
 # All of these make commands must be called in root directory
 
+# install husky node package
+husky-install:
+	npm install
+
 # auto format frontend (might change!!!)
 frontend-format:
 	cd frontend; \
