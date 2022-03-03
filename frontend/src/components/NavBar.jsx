@@ -1,10 +1,11 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import "./Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Navigation() {
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar className="nav-color" variant="dark">
       <Container>
         <Navbar.Brand href="/">Home</Navbar.Brand>
         <Nav className="me-auto">
