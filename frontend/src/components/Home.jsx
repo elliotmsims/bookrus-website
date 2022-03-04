@@ -8,17 +8,17 @@ const models = {
     {
       name: "Books",
       desc: "Discover new genres you have never read before, or find something new",
-      img: "../assets/book-card.jpg",
+      img: "book-card.jpg",
     },
     {
       name: "Authors",
       desc: "Learn about famous artists from all the ages, classic to modern",
-      img: "../assets/author-card.jpg"
+      img: "author-card.jpg",
     },
     {
       name: "Countries",
       desc: "Explore the cultures that have inspired countless pieces of literature",
-      img: "../assets/countries-card.jpg"
+      img: "country-card.jpg",
     },
   ],
 };
@@ -43,7 +43,7 @@ export default function Home() {
             {models.entry.map((item) => (
               <Col>
                 <Card>
-                  <Card.Img variant="top" src={item.img} />
+                  <Card.Img class="card-img" variant="top" src={item.img} />
                   <Card.Body>
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>{item.desc}</Card.Text>

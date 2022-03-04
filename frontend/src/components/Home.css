@@ -28,6 +28,14 @@
     background-size: cover;
 }
 
+.card-img {
+    display: flex;
+    filter: brightness(80%);
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}
+
 .bg-text {
     padding-top: 20px;
     padding-bottom: 20px;
