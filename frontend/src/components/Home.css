@@ -13,7 +13,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 2fr 1fr 1fr;
-    height: 94vh;
+    height: 150vh;
     width: 100vw;
 }
 
@@ -29,6 +29,10 @@
 }
 
 .card-img {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
     display: flex;
     filter: brightness(80%);
     background-size: cover;
