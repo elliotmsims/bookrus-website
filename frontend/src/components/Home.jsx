@@ -53,7 +53,7 @@ export default function Home() {
             ))}
           </Row>
         </Container>
-        <div className="bottom"/>
+        <div className="bottom" />
       </div>
     </div>
   );
