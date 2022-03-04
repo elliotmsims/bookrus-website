@@ -1,3 +1,13 @@
+:root {
+    --text-color: #997554;
+    --background-color: rgb(46, 26, 3);
+}
+
+.home-con {
+    position: relative;
+    text-align: center;
+}
+
 .main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -27,4 +37,20 @@
 .home{
     padding:0;
     max-width: 100%;
+}
+
+.bottom {
+    background-color: var(--background-color);
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.home-text {
+    color:beige;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

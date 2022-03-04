@@ -1,6 +1,7 @@
 :root {
     --text-color: #997554;
     --nav-color: rgb(46, 26, 3);
+    --nav-hover: rgb(245, 185, 117);
 }
 
 .nav-color {
@@ -16,5 +17,5 @@
 
 .nav-link:hover{
     font-family: 'Roboto', sans-serif;
-    color: var(--text-color) !important;
+    color: var(--nav-hover) !important;
 }

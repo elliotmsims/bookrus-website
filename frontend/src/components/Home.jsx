@@ -1,6 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import "./Home.css"
+import "./Home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Home() {
@@ -8,8 +7,9 @@ export default function Home() {
     <div className="main">
       <div
         className="home-bg"
-        style={{ backgroundImage: `url('splash-art.jpg')` }}>
-      </div>
+        style={{ backgroundImage: `url('splash-art.jpg')` }}
+      />
+      <div className="bottom" />
     </div>
   );
 }
