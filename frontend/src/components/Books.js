@@ -1,4 +1,4 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useParams, Outlet, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { models_json } from './Models';
@@ -10,21 +10,26 @@ export function Books() {
               <h1>Books!</h1>
 
               <h3>Number of books: {models_json.books.length}</h3>
-
-              <Row>
-                  <Col>Book Title</Col>
-                  <Col>Book Author</Col>
-              </Row>
               
               {models_json.books.map((book, index) => {
                   return(
                       <Row>
-                          <Col>
-                              <Link to={`/books/${index}`}>{book.title}</Link>
-                          </Col>
-                          <Col>
-                              <Link to={`/authors/${book.authorId}`}>{book.author}</Link>
-                          </Col>
+                          <Card style={{ width: '18rem' }}>
+                            <Card.Img variant="top" src={book.image} />
+                            <Card.Body>
+                              <Card.Title>{book.title}</Card.Title>
+                              <Card.Text>
+                              <ListGroup>
+                                <ListGroupItem>Author: <Link to={`/authors/${book.authorId}`}>{book.author}</Link></ListGroupItem>
+                                <ListGroupItem>Genre: {book.genre}</ListGroupItem>
+                                <ListGroupItem>Pages: {book.length}</ListGroupItem>
+                              </ListGroup>
+                              </Card.Text>
+                              <Link to={`/books/${index}`}>
+                                <Button variant="primary">Learn about {book.title}</Button>
+                              </Link>
+                            </Card.Body>
+                          </Card>
                       </Row>
                   )
               })}
@@ -48,6 +53,7 @@ export function Book() {
             <h6>
               <Row>
                     <Col>Genre: {book.genre}</Col>
+                    <Col>Pages: {book.length}</Col>
                     <Col>Language: {book.language}</Col>
                     <Col>Date Published: {book.date}</Col>
               </Row>

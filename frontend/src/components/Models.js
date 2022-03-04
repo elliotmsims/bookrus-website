@@ -14,7 +14,8 @@ export const models_json = {
           "code": "IN",
           "population": "1,352,642,280",
           "language": "Hindi",
-          "capital": "New Delhi"
+          "capital": "New Delhi",
+          "region": "South Asia"
       },
       {
           "name": "England",
@@ -27,7 +28,8 @@ export const models_json = {
           "code": "GB",
           "population": "56,286,961",
           "language": "English",
-          "capital": "London"
+          "capital": "London",
+          "region": "Europe & Central Asia"
       },
       {
           "name": "Russia",
@@ -36,11 +38,12 @@ export const models_json = {
           "authorIds": [2],
           "bookIds": [2],
           "desc": "Russia (Russian: Россия, tr. Rossiya, pronounced [rɐˈsʲijə]), or the Russian Federation,[c] is a transcontinental country spanning Eastern Europe and Northern Asia. It is the largest country in the world by area, covering over 17,125,191 square kilometres (6,612,073 sq mi), and encompassing one-eighth of Earth's inhabitable landmass. Russia extends across eleven time zones and borders sixteen sovereign nations, the most of any country in the world.[d] It is the ninth-most populous country and the most populous country in Europe, with a population of 145.5 million. Moscow, the capital, is the largest city entirely within Europe, while Saint Petersburg is the country's second-largest city and cultural centre. Other major urban areas include Novosibirsk, Yekaterinburg, Nizhny Novgorod and Kazan. The East Slavs emerged as a recognisable group in Europe between the 3rd and 8th centuries AD. The medieval state of Kievan Rus' arose in the 9th century. In 988, it adopted Orthodox Christianity from the Byzantine Empire. Rus' ultimately disintegrated, and among its principalities, the Grand Duchy of Moscow rose. By the early 18th century, Russia had vastly expanded through conquest, annexation, and exploration to evolve into the Russian Empire, the third-largest empire in history. Following the Russian Revolution, the Russian SFSR became the largest and the principal constituent of the Soviet Union, the world's first constitutionally socialist state. The Soviet Union played a decisive role in the Allied victory in World War II and emerged as a superpower and rival to the United States during the Cold War. The Soviet era saw some of the most significant technological achievements of the 20th century, including the world's first human-made satellite and the launching of the first human into space. Following the dissolution of the Soviet Union in 1991, the newly independent Russian SFSR renamed itself the Russian Federation. In the aftermath of the constitutional crisis of 1993, a new constitution was adopted, and Russia has since been governed as a federal semi-presidential republic. Vladimir Putin and the United Russia party have dominated Russia's political system since 2000. Since the turn of the century, Russia has experienced democratic backsliding and has shifted into an authoritarian state. Russia is a great power and potential superpower. It is ranked 52nd on the Human Development Index, with a universal healthcare system and free university education. Russia's economy is the world's eleventh-largest by nominal GDP and the sixth-largest by GDP (PPP). It is a recognized nuclear-weapons state, possessing the world's largest stockpile of nuclear weapons, with the second-most powerful military and the fourth-highest military expenditure. Russia's extensive mineral and energy resources are the world's largest, and it is among the leading producers of oil and natural gas globally. It is a permanent member of the United Nations Security Council, a member of the G20, the SCO, the Council of Europe,[e] BRICS, the APEC, the OSCE, the IIB and the WTO, as well as the leading member of the CIS, the CSTO, and the EAEU. Russia is also home to 30 UNESCO World Heritage Sites.",
-          "image": "https://upload.wikimedia.org/wikipedia/commons/c/c6/L.N.Tolstoy_Prokudin-Gorsky.jpg",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Russian_Federation_%28orthographic_projection%29_-_only_Crimea_disputed.svg",
           "code": "RU",
           "population": "145,478,097",
           "language": "Russian",
-          "capital": "Moscow"
+          "capital": "Moscow",
+          "region": "Europe & Central Asia"
       }
   ],
   "authors": [
@@ -83,8 +86,9 @@ export const models_json = {
       "synopsis": "It is 1984, and the worlds' three major powers-Oceania, Eurasia and Eastasia-are constantly at war. In Oceania, where the Party is in power, the thought police unearth every act of dissent, and Big Brother is always watching. Winston Smith, a dutiful citizen of Oceania, works for the Ministry of Truth as a propaganda writer who rewrites history to suit the needs of the authoritarian government. But when Winston falls in love with fellow worker Julia, they begin to question the very system they work for, placing them in immense danger. Pursuing their forbidden love affair, Winston plans a rebellion against the Party in order to regain the freedom to shape his own future. But the ever-watchful Big Brother will not tolerate opposition, and for those who speak up against the system or dare to think what the Party does not want them to think, Room 101 awaits them . . . 1984 is George Orwell's haunting prophesy of the future, which has held multiple generations of readers spellbound in its chilling and terrifying vision of life under a totalitarian regime. Powerful and unforgettable, this still-relevant novel explores the obliteration of truth, individuality and liberty in a world where the ruling power seeks to control everything, from information to thought and memory.",
       "image": "http://books.google.com/books/content?id=ag5ongEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "genre": "Fiction",
-      "date": "2014-03-25",
-      "language": "English"
+      "date": "8 June 1949",
+      "language": "English",
+      "length": "416"
   },
   {
       "title": "Hamlet",
@@ -93,8 +97,9 @@ export const models_json = {
       "synopsis": "Here are the books that help teach Shakespeare plays without the teacher constantly needing to explain and define Elizabethan terms, slang, and other ways of expression that are different from our own. Each play is presented with Shakespeare's original lines on each left-hand page, and a modern, easy-to-understand \"translation\" on the facing right-hand page. All dramas are complete, with every original Shakespearian line, and a full-length modern rendition of the text. These invaluable teaching-study guides also include: Helpful background information that puts each play in its historical perspective. Discussion questions that teachers can use to spark student class participation, and which students can use as springboards for their own themes and term papers. Fact quizzes, sample examinations, and other features that improve student comprehension of what each play is about.",
       "image": "http://books.google.com/books/content?id=TqpK54ASXGkC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "genre": "Drama",
-      "date": "2019-04-21",
-      "language": "English"
+      "date": "26 July 1602",
+      "language": "English",
+      "length": "148"
   },
   {
       "title": "War and Peace",
@@ -103,8 +108,9 @@ export const models_json = {
       "synopsis": "Presents a new translation of the classic reflecting the life and times of Russian society during the Napoleonic Wars, in a book accompanied by an index of historical figures, textual annotation, a chapter summary, and an introduction.",
       "image": "http://books.google.com/books/content?id=bL3VlijouIwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "genre": "Napoleonic Wars, 1800-1815",
-      "date": "1889",
-      "language": "English"
+      "date": "1869",
+      "language": "English",
+      "length": "1273"
   }
 ]
 };

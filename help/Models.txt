@@ -1,6 +1,6 @@
 Models
-  Need to show at least five attributes of the model, these attributes must be filterable or sortable
-  
+  Done!
+    
 == Books ==
   Books to use:
     Hamlet (points to Shakespeare & England)

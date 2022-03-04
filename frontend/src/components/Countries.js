@@ -1,4 +1,4 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { useParams, Outlet, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { models_json } from './Models';
@@ -10,29 +10,26 @@ export function Countries() {
             <h1>Countries!</h1>
 
             <h3>Number of countries: {models_json.countries.length}</h3>
-
-            <Row>
-                <Col>Country Name</Col>
-                <Col>Country Authors</Col>
-            </Row>
             
             {models_json.countries.map((country, index) => {
                 return(
                     <Row>
-                        <Col>
-                            <Link to={`/countries/${index}`}>{country.name}</Link>
-                        </Col>
-                        <Col>
-                            {country.authorIds.map((ids, index) => {
-                                return(
-                                    <Row>
-                                        <Col>
-                                            <Link to={`/authors/${ids}`}>{country.authors[index]}</Link>
-                                        </Col>
-                                    </Row>
-                                )
-                            })}
-                        </Col>
+                      <Card style={{ width: '18rem' }}>
+                          <Card.Img variant="top" src={country.image} />
+                          <Card.Body>
+                            <Card.Title>{country.name}</Card.Title>
+                            <Card.Text>
+                            <ListGroup>
+                              <ListGroupItem>Population: {country.population}</ListGroupItem>
+                              <ListGroupItem>Region: {country.region}</ListGroupItem>
+                              <ListGroupItem>Capital: {country.capital}</ListGroupItem>
+                            </ListGroup>
+                            </Card.Text>
+                            <Link to={`/countries/${index}`}>
+                              <Button variant="primary">Learn about {country.name}</Button>
+                            </Link>
+                          </Card.Body>
+                      </Card>
                     </Row>
                 )
             })}
@@ -72,6 +69,7 @@ export function Country() {
           <h6>
               <Row>
                     <Col>Capital: {country.capital}</Col>
+                    <Col>Region: {country.region}</Col>
                     <Col>Language: {country.language}</Col>
                     <Col>Population: {country.population}</Col>
                     <Col>Code: {country.code}</Col>
