@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Card, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  ListGroup,
+  ListGroupItem,
+} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const names = {
@@ -51,7 +58,8 @@ export default function About() {
       <Row
         md={3}
         className="dev_cards"
-        style={{ justifyContent: "space-evenly" }}>
+        style={{ justifyContent: "space-evenly" }}
+      >
         {names.devs.map((dev) => (
           <Col>
             <Card>
