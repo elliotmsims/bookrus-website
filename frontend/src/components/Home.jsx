@@ -11,7 +11,7 @@ const models = {
     },
     {
       name: "Authors",
-      desc: "Learn about famous artists all the ages, classic to modern",
+      desc: "Learn about famous artists from all the ages, classic to modern",
     },
     {
       name: "Countries",
