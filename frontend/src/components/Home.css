@@ -1,6 +1,7 @@
 :root {
     --text-color: #997554;
     --background-color: rgb(46, 26, 3);
+    --logo-color: #db9f42;
 }
 
 .home-con {
@@ -28,12 +29,14 @@
 }
 
 .bg-text {
+    padding-top: 20px;
+    padding-bottom: 20px;
     font-size: 20px;
     font-weight: bold;
     display: flex; 
     justify-content: center;
     align-items: center;
-    color:beige
+    color: var(--logo-color);
 }
 
 .home{

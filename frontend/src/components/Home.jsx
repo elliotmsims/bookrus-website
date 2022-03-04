@@ -1,15 +1,24 @@
 import React from "react";
 import "./Home.css";
-import {
-  Container,
-  Card,
-  Row,
-  Col,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Container, Card, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Typography from "@mui/material/Typography";
+
+const models = {
+  entry: [
+    {
+      name: "Books",
+      desc: "Discover new genres you have never read before, or find something new",
+    },
+    {
+      name: "Authors",
+      desc: "Learn about famous artists all the ages, classic to modern",
+    },
+    {
+      name: "Countries",
+      desc: "Explore the cultures that have inspired countless pieces of literature",
+    },
+  ],
+};
 
 export default function Home() {
   return (
@@ -21,23 +30,24 @@ export default function Home() {
       <div className="bottom">
         <Container style={{ maxWidth: "100%" }}>
           <div className="bg-text">
-            Test Header
+            Information about your favorite stories, all in one place
           </div>
           <Row
             md={3}
             className="dev_cards"
             style={{ justifyContent: "space-evenly" }}
           >
-            <Col>
-              <Card>
-                <Card.Img variant="top" src="holder.js/100px160" />
-                <Card.Body>
-                  <Card.Title>name</Card.Title>
-                  <Card.Subtitle className="text-muted">subtitle</Card.Subtitle>
-                  <Card.Text>description</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+            {models.entry.map((item) => (
+              <Col>
+                <Card>
+                  <Card.Img variant="top" src="holder.js/100px160" />
+                  <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text>{item.desc}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
           </Row>
         </Container>
       </div>
