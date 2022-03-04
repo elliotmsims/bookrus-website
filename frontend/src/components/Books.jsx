@@ -1,36 +1,45 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Card, ListGroup, Button, ListGroupItem } from "react-bootstrap";
 import { useParams, Outlet, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ModelsJson } from "./Models";
 
 export function Books() {
-  return (
+  return(
     <div className="Books">
-      <Container>
-        <h1>Books!</h1>
+        <Container>
+            <h1>Books!</h1>
 
-        <h3>Number of books: {ModelsJson.books.length}</h3>
-
-        <Row>
-          <Col>Book Title</Col>
-          <Col>Book Author</Col>
+            <h3>Number of books: {ModelsJson.books.length}</h3>
+            <Row xs={1} md={4}>
+            {ModelsJson.books.map((book, index) => {
+                return(
+                    <Row>
+                        <Card style={{ width: '18rem' }}>
+                          <Card.Img variant="top" src={book.image} />
+                          <Card.Body>
+                            <Card.Title>{book.title}</Card.Title>
+                            <Card.Text>
+                            <ListGroup>
+                              <ListGroupItem>Author: <Link to={`/authors/${book.authorId}`}>{book.author}</Link></ListGroupItem>
+                              <ListGroupItem>Genre: {book.genre}</ListGroupItem>
+                              <ListGroupItem>Pages: {book.length}</ListGroupItem>
+                            </ListGroup>
+                            </Card.Text>
+                            <Link to={`/books/${index}`}>
+                              <Button variant="primary">Learn about {book.title}</Button>
+                            </Link>
+                          </Card.Body>
+                        </Card>
+                    </Row>
+                )
+            })}
         </Row>
-
-        {ModelsJson.books.map((book, index) => (
-          <Row>
-            <Col>
-              <Link to={`/books/${index}`}>{book.title}</Link>
-            </Col>
-            <Col>
-              <Link to={`/authors/${book.authorId}`}>{book.author}</Link>
-            </Col>
-          </Row>
-        ))}
-      </Container>
-      <Outlet />
+        </Container>
+        <Outlet />
+        
     </div>
-  );
+  )
 }
 
 export function getBook(bookId) {
