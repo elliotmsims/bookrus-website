@@ -33,6 +33,9 @@ export function Countries() {
                       </ListGroupItem>
                       <ListGroupItem>Region: {country.region}</ListGroupItem>
                       <ListGroupItem>Capital: {country.capital}</ListGroupItem>
+                      <ListGroupItem>
+                        Language: {country.language}
+                      </ListGroupItem>
                     </ListGroup>
                   </Card.Text>
                   <Link to={`/countries/${index}`}>

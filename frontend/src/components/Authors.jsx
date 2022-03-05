@@ -33,6 +33,10 @@ export function Authors() {
                       <ListGroupItem>
                         Famous Book: {author.books[0]}
                       </ListGroupItem>
+                      <ListGroupItem>
+                        Birthplace:
+                        {ModelsJson.countries[author.nationalityId].name}
+                      </ListGroupItem>
                     </ListGroup>
                   </Card.Text>
                   <Link to={`/authors/${index}`}>

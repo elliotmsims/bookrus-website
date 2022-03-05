@@ -109,7 +109,7 @@ export const ModelsJson = {
       genre: "Drama",
       date: "2019-04-21",
       language: "English",
-      length: "416",
+      length: "148",
     },
     {
       title: "War and Peace",
@@ -122,7 +122,7 @@ export const ModelsJson = {
       genre: "Napoleonic Wars, 1800-1815",
       date: "1889",
       language: "English",
-      length: "416",
+      length: "1273",
     },
   ],
 };

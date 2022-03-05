@@ -36,6 +36,7 @@ export function Books() {
                       </ListGroupItem>
                       <ListGroupItem>Genre: {book.genre}</ListGroupItem>
                       <ListGroupItem>Pages: {book.length}</ListGroupItem>
+                      <ListGroupItem>Language: {book.language}</ListGroupItem>
                     </ListGroup>
                   </Card.Text>
                   <Link to={`/books/${index}`}>
