@@ -16,7 +16,7 @@ export const ModelsJson = {
       population: "1,352,642,280",
       language: "Hindi",
       capital: "New Delhi",
-      region: "South Asia"
+      region: "South Asia",
     },
     {
       name: "England",
@@ -31,7 +31,7 @@ export const ModelsJson = {
       population: "56,286,961",
       language: "English",
       capital: "London",
-      region: "Europe & Central Asia"
+      region: "Europe & Central Asia",
     },
     {
       name: "Russia",
@@ -46,7 +46,7 @@ export const ModelsJson = {
       population: "145,478,097",
       language: "Russian",
       capital: "Moscow",
-      region: "Europe & Central Asia"
+      region: "Europe & Central Asia",
     },
   ],
   authors: [
@@ -96,7 +96,7 @@ export const ModelsJson = {
       genre: "Fiction",
       date: "2014-03-25",
       language: "English",
-      length: "416"
+      length: "416",
     },
     {
       title: "Hamlet",
@@ -109,7 +109,7 @@ export const ModelsJson = {
       genre: "Drama",
       date: "2019-04-21",
       language: "English",
-      length: "416"
+      length: "416",
     },
     {
       title: "War and Peace",
@@ -122,7 +122,7 @@ export const ModelsJson = {
       genre: "Napoleonic Wars, 1800-1815",
       date: "1889",
       language: "English",
-      length: "416"
+      length: "416",
     },
   ],
 };

@@ -19,7 +19,7 @@ frontend-format:
 	npx eslint --fix "src/**/*.+(js|jsx)"
 
 # Runs the development server on your local machine
-frontend-run:
+frontend-start:
 	cd frontend; \
 	npm start
 

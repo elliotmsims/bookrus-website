@@ -7,7 +7,7 @@
 | Matthew Escobar      | mle2249 | @matt594        |
 | Francisco Reyna      | fjr649  | @francis0312    |
 | William Eng          | we2492  | @willeng37      |
-| Hrithik Ramganesh    | -       | @hrithikr       |
+| Hrithik Ramganesh    | hr8386  | @hrithikr       |
 | Elliot Sims          | ems4563 | @elliotsims     |
 
 ## Project Leader and Git SHA
@@ -32,10 +32,10 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 | Name                 | Estimated | Actual |
 | -------------------- | --------- | ------ |
 | Matthew Escobar      | 8         | 18     |
-| Francisco Reyna      | 8         | 8      |
+| Francisco Reyna      | 8         | 12     |
 | William Eng          | 8         | 18     |
-| Hrithik Ramganesh    | -         | -      |
-| Elliot Sims          | 8         | 16     |
+| Hrithik Ramganesh    | 8         | 12     |
+| Elliot Sims          | 8         | 14     |
 
 ## Comments
 

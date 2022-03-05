@@ -1,21 +1,21 @@
 :root {
-    --text-color: #997554;
-    --nav-color: rgb(46, 26, 3);
-    --nav-hover: rgb(245, 185, 117);
+  --text-color: #997554;
+  --nav-color: rgb(46, 26, 3);
+  --nav-hover: rgb(245, 185, 117);
 }
 
 .nav-color {
-    background-color: var(--nav-color);
-    font-size: 20px;
+  background-color: var(--nav-color);
+  font-size: 20px;
 }
 
-.nav-link{
-    font-family: 'Roboto', sans-serif; 
-    font-weight: bold;
-    color: var(--text-color) !important;
+.nav-link {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: var(--text-color) !important;
 }
 
-.nav-link:hover{
-    font-family: 'Roboto', sans-serif;
-    color: var(--nav-hover) !important;
+.nav-link:hover {
+  font-family: "Roboto", sans-serif;
+  color: var(--nav-hover) !important;
 }
