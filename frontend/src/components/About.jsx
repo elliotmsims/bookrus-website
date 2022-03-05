@@ -41,7 +41,7 @@ const allInfo = [
   ),
   new Member(
     "Francisco Reyna",
-    "francis0312",
+    "Francis0312",
     francis,
     "I am a third year computer science major at UT Austin. I am focusing on the backend of this project because I am proficient in Python and have used it during my time at Microsoft.",
     0,
@@ -174,7 +174,7 @@ export default function About() {
           let commits = 0;
           data.forEach((user) => {
             const mem = baseUserData.find(
-              (con) => con.username === user.username || con.name === user.name
+              (con) => con.username === user.name || con.name === user.name
             );
             if (mem !== undefined) {
               mem.commits += user.commits;
