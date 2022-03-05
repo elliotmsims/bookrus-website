@@ -16,6 +16,7 @@ export const ModelsJson = {
       population: "1,352,642,280",
       language: "Hindi",
       capital: "New Delhi",
+      region: "South Asia"
     },
     {
       name: "England",
@@ -30,6 +31,7 @@ export const ModelsJson = {
       population: "56,286,961",
       language: "English",
       capital: "London",
+      region: "Europe & Central Asia"
     },
     {
       name: "Russia",
@@ -39,11 +41,12 @@ export const ModelsJson = {
       bookIds: [2],
       desc: "Russia (Russian: Россия, tr. Rossiya, pronounced [rɐˈsʲijə]), or the Russian Federation,[c] is a transcontinental country spanning Eastern Europe and Northern Asia. It is the largest country in the world by area, covering over 17,125,191 square kilometres (6,612,073 sq mi), and encompassing one-eighth of Earth's inhabitable landmass. Russia extends across eleven time zones and borders sixteen sovereign nations, the most of any country in the world.[d] It is the ninth-most populous country and the most populous country in Europe, with a population of 145.5 million. Moscow, the capital, is the largest city entirely within Europe, while Saint Petersburg is the country's second-largest city and cultural centre. Other major urban areas include Novosibirsk, Yekaterinburg, Nizhny Novgorod and Kazan. The East Slavs emerged as a recognisable group in Europe between the 3rd and 8th centuries AD. The medieval state of Kievan Rus' arose in the 9th century. In 988, it adopted Orthodox Christianity from the Byzantine Empire. Rus' ultimately disintegrated, and among its principalities, the Grand Duchy of Moscow rose. By the early 18th century, Russia had vastly expanded through conquest, annexation, and exploration to evolve into the Russian Empire, the third-largest empire in history. Following the Russian Revolution, the Russian SFSR became the largest and the principal constituent of the Soviet Union, the world's first constitutionally socialist state. The Soviet Union played a decisive role in the Allied victory in World War II and emerged as a superpower and rival to the United States during the Cold War. The Soviet era saw some of the most significant technological achievements of the 20th century, including the world's first human-made satellite and the launching of the first human into space. Following the dissolution of the Soviet Union in 1991, the newly independent Russian SFSR renamed itself the Russian Federation. In the aftermath of the constitutional crisis of 1993, a new constitution was adopted, and Russia has since been governed as a federal semi-presidential republic. Vladimir Putin and the United Russia party have dominated Russia's political system since 2000. Since the turn of the century, Russia has experienced democratic backsliding and has shifted into an authoritarian state. Russia is a great power and potential superpower. It is ranked 52nd on the Human Development Index, with a universal healthcare system and free university education. Russia's economy is the world's eleventh-largest by nominal GDP and the sixth-largest by GDP (PPP). It is a recognized nuclear-weapons state, possessing the world's largest stockpile of nuclear weapons, with the second-most powerful military and the fourth-highest military expenditure. Russia's extensive mineral and energy resources are the world's largest, and it is among the leading producers of oil and natural gas globally. It is a permanent member of the United Nations Security Council, a member of the G20, the SCO, the Council of Europe,[e] BRICS, the APEC, the OSCE, the IIB and the WTO, as well as the leading member of the CIS, the CSTO, and the EAEU. Russia is also home to 30 UNESCO World Heritage Sites.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/c/c6/L.N.Tolstoy_Prokudin-Gorsky.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/5/5e/Russian_Federation_%28orthographic_projection%29_-_only_Crimea_disputed.svg",
       code: "RU",
       population: "145,478,097",
       language: "Russian",
       capital: "Moscow",
+      region: "Europe & Central Asia"
     },
   ],
   authors: [
@@ -93,6 +96,7 @@ export const ModelsJson = {
       genre: "Fiction",
       date: "2014-03-25",
       language: "English",
+      length: "416"
     },
     {
       title: "Hamlet",
@@ -105,6 +109,7 @@ export const ModelsJson = {
       genre: "Drama",
       date: "2019-04-21",
       language: "English",
+      length: "416"
     },
     {
       title: "War and Peace",
@@ -117,6 +122,7 @@ export const ModelsJson = {
       genre: "Napoleonic Wars, 1800-1815",
       date: "1889",
       language: "English",
+      length: "416"
     },
   ],
 };
