@@ -14,7 +14,7 @@
 
 | Phase #  | Leader               | Git ShA   |
 | -------- | -------------------- | --------- |
-| 1        | Matthew Escobar      | -         |
+| 1        | Matthew Escobar      | 8f460c30bc1547a29d7228b4ee8f1ea4cbe330d7         |
 | 2        | -                    | -         |
 | 3        | -                    | -         |
 | 4        | -                    | -         |
