@@ -32,7 +32,7 @@ export default function App() {
           path="*"
           element={
             <main style={{ padding: "1rem" }}>
-              <p>There&aposs nothing here!</p>
+              <p>There&apos;s nothing here!</p>
             </main>
           }
         />

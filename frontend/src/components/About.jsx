@@ -74,6 +74,87 @@ const allInfo = [
   ),
 ];
 
+const dataSources = [
+  {
+    name: "Google Book API",
+    url: "https://developers.google.com/books/docs/overview",
+    description: "Gives book info and images",
+  },
+  {
+    name: "Geo Country API",
+    url: "https://rapidapi.com/natkapral/api/countries-cities/",
+    description: "Gives country info and link to their wiki",
+  },
+  {
+    name: "World Bank Country/Region API",
+    url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/898590-country-api-queries",
+    description: "Gives country info including their region",
+  },
+  {
+    name: "Open Library API",
+    url: "https://openlibrary.org/developers/api",
+    description: "Gives book and author info",
+  },
+  {
+    name: "Wiki API",
+    url: "https://www.mediawiki.org/wiki/API:Main_page",
+    description: "Multiple wikipedia apis to get long descriptions of objects",
+  },
+];
+
+const tools = [
+  {
+    name: "React",
+    url: "https://reactjs.org/",
+    description: "JS library to build the frontend",
+  },
+  {
+    name: "React-Bootstrap",
+    url: "https://react-bootstrap.github.io/",
+    description: "Provides Bootstrap as React components",
+  },
+  {
+    name: "React-Router",
+    url: "https://reactrouter.com/",
+    description: "Enables navigation between pages",
+  },
+  {
+    name: "Prettier",
+    url: "https://prettier.io/",
+    description: "Code formater used for all files",
+  },
+  {
+    name: "Eslint/Eslint-Config-Airbnb",
+    url: "https://eslint.org/",
+    description: "Linter for JS/JSX",
+  },
+  {
+    name: "Postman",
+    url: "https://www.postman.com/",
+    description: "Used to document our API",
+  },
+  {
+    name: "Namecheap",
+    url: "https://react-bootstrap.github.io/",
+    description: "Domain provider and register",
+  },
+  {
+    name: "AWS Amplify",
+    url: "https://aws.amazon.com/amplify/",
+    description: "Hosting service for the website",
+  },
+  {
+    name: "Gitlab",
+    url: "https://about.gitlab.com/",
+    description: "Version control system",
+  },
+  {
+    name: "Discord",
+    url: "https://discord.com/",
+    description: "Communication platform with video share",
+  },
+];
+
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["user"] }] */
 
 // About page
@@ -143,6 +224,15 @@ export default function About() {
         learned we are of each other, the more mindful we are of the ways the
         world work.
       </p>
+      <h3>Integration:</h3>
+      <p>
+        Connecting books to their authors is not too interesting. However, once
+        we integrated the author&apos;s country into the data model, we
+        discovered how location and culture influences their writing. This
+        additional context provides a deeper understanding between the reader
+        and the book. Our website hopes to display these relationships and help
+        readers learn more about their favoriate books/authors.
+      </p>
       <Link to="https://www.postman.com/booksrus/workspace/ccb2dbee-a37a-4961-81e3-4de867746837/api/3429211e-f767-46d8-ae5a-5c2ca170b6fc">
         <br />
         Postman API
@@ -201,6 +291,30 @@ export default function About() {
               <Card.Title>Total Unit Tests: {unitData}</Card.Title>
             </Card.Body>
           </Card>
+        </Col>
+      </Row>
+      <Row className="sources">
+        <Col className="datasources">
+          <h3>Data Sources/APIs:</h3>
+          {dataSources.map((source) => (
+            <Row>
+              <h5>
+                <a href={source.url}>{source.name}</a>
+              </h5>
+              <p>{source.description}</p>
+            </Row>
+          ))}
+        </Col>
+        <Col className="tools">
+          <h3>Tools:</h3>
+          {tools.map((source) => (
+            <Row>
+              <h5>
+                <a href={source.url}>{source.name}</a>
+              </h5>
+              <p>{source.description}</p>
+            </Row>
+          ))}
         </Col>
       </Row>
     </Container>
