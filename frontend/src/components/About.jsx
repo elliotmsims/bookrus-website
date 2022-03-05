@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -233,11 +232,11 @@ export default function About() {
         and the book. Our website hopes to display these relationships and help
         readers learn more about their favoriate books/authors.
       </p>
-      <Link to="https://www.postman.com/booksrus/workspace/ccb2dbee-a37a-4961-81e3-4de867746837/api/3429211e-f767-46d8-ae5a-5c2ca170b6fc">
-        <br />
-        Postman API
-        <br />
-      </Link>
+      <h3>
+        <a href="https://documenter.getpostman.com/view/19701903/UVkvJYLx">
+          Our Postman API Documentation
+        </a>
+      </h3>
       <Row
         md={3}
         className="mx-auto"
