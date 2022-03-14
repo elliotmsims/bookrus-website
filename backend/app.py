@@ -1,26 +1,10 @@
-import json
-from flask import Flask, request
-from flask_cors import CORS
+from flask import Flask
 
 app = Flask(__name__)
-CORS(app)
 
-# NOTE: This route is needed for the default EB health check route
 @app.route("/")
-def home():
-    return "ok"
-
-
-@app.route("/api/get_topics")
-def get_topics():
-    return {"topics": ["topic1", "other stuff", "next topic"]}
-
-
-@app.route("/api/submit_question", methods=["POST"])
-def submit_question():
-    question = json.loads(request.data)["question"]
-    return {"answer": f"Your question was {len(question)} chars long"}
-
+def hello_world():
+    return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    app.run(host="0.0.0.0", port=5000, debug=True)
