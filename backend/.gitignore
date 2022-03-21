@@ -3,3 +3,6 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# SQLAlchemy credentials file
+credentials.py
