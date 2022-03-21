@@ -6,3 +6,4 @@
 
 # SQLAlchemy credentials file
 credentials.py
+credentials.py.example
