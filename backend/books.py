@@ -3,12 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, Column, String, Integer
 import urllib
 import json
+import credentials
 
 app = Flask(__name__)
 app.debug = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Schema: "postgres+psycopg2://<USERNAME>:<PASSWORD>@<IP_ADDRESS>:<PORT>/<DATABASE_NAME>"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://matt594:UACk3sfFZ337@bookrus.ccpec27yf35b.us-west-2.rds.amazonaws.com:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = credentials.db_login
 db = SQLAlchemy(app)
 
 # Define Country table/data model
