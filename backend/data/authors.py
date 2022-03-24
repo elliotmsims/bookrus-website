@@ -4,13 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, Column, String, Integer
 import json
 import credentials
-import sys
 import wikipediaapi
 import urllib
 from os.path import exists
 
-#TODO Parse pages for lists of authors and authors into text file
-#TODO Parse author pages for information into db (name, bio, image, sex, born...)
 #TODO Add cross-model data to db
 # Books to authors
 # Books to countries

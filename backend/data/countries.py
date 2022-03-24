@@ -5,6 +5,14 @@ import urllib
 import json
 import credentials
 
+#TODO Add cross-model data to db
+# Books to authors
+# Books to countries
+# Authors to books
+# Authors to countries
+# Countries to authors
+# Countries to books
+
 app = Flask(__name__)
 app.debug = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

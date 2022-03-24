@@ -5,6 +5,15 @@ import urllib
 import json
 import credentials
 
+#TODO Fill up the books data depending on authors in db
+#TODO Add cross-model data to db
+# Books to authors
+# Books to countries
+# Authors to books
+# Authors to countries
+# Countries to authors
+# Countries to books
+
 app = Flask(__name__)
 app.debug = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -39,6 +48,10 @@ def __init__(self, book_title="NaN", book_author="NaN", book_published="NaN", bo
 db.create_all()
 
 # Get API request
+lists = ['List of American novelists.txt','List of Australian novelists.txt',
+'List of English novelists.txt','List of French novelists.txt',
+'List of Korean novelists.txt','List of novelists by nationality.txt',
+'List of Scottish novelists.txt']
 request_url = 'https://www.googleapis.com/books/v1/volumes?q=inauthor:Shakespeare&key=AIzaSyBfeqs1GhZbXfzKvPihZxYJz3y4h--W5ZM'
 r = urllib.request.urlopen(request_url)
 data = json.loads(r.read())
