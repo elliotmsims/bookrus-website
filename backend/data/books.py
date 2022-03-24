@@ -15,7 +15,8 @@ db = SQLAlchemy(app)
 # Define Book table/data model
 class Book(db.Model):
     # book_id = db.Column(db.String())
-    book_title = db.Column(db.String(), primary_key=True)
+    book_id = db.Column(db.Integer, primary_key=True)
+    book_title = db.Column(db.String())
     book_author = db.Column(db.String())
     book_published = db.Column(db.String())
     book_pages = db.Column(db.Integer)
