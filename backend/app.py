@@ -30,6 +30,17 @@ class Country(db.Model):
     country_lat = db.Column(db.Float)
     country_long = db.Column(db.Float)
 
+# Define Author table/data model
+class Author(db.Model):
+    author_id = db.Column(db.Integer, primary_key=True)
+    author_name = db.Column(db.String())
+    author_birth_date = db.Column(db.String())
+    author_death_date = db.Column(db.String())
+    author_top_work = db.Column(db.String())
+    author_work_count = db.Column(db.Integer)
+    author_bio = db.Column(db.String())
+    author_image = db.Column(db.String())
+
 # Build database
 db.create_all()
 
@@ -39,6 +50,7 @@ methods = ['GET']
 manager = APIManager(app, session=db.session)
 manager.create_api(Book, methods=methods)
 manager.create_api(Country, methods=methods)
+manager.create_api(Author, methods=methods)
 
 @app.route("/")
 def hello_world():
