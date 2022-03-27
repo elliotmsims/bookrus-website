@@ -19,7 +19,7 @@ export default function App() {
         <Route path="/authors" element={<Authors />} />
         <Route path="/authors/:authorId" element={<Author />} />
         <Route path="/countries" element={<Countries />} />
-        <Route path="/countries:countryId" element={<Country />} />
+        <Route path="/countries/:countryId" element={<Country />} />
         <Route
           path="*"
           element={
