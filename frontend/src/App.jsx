@@ -1,43 +1,36 @@
-import React from "react";
-import { Route, Routes, Outlet } from "react-router-dom";
-// test
-import Navigation from "./components/NavBar";
-import Home from "./components/Home";
-import About from "./components/About";
-import Models from "./components/Models";
-import { Books, Book } from "./components/Books";
-import { Authors, Author } from "./components/Authors";
-import { Countries, Country } from "./components/Countries";
+import { Route, Routes } from "react-router-dom";
+import Navigation from "./components/navigation/NavBar";
+import Home from "./views/Home/HomePage";
+import About from "./views/About/AboutPage";
+import { Books, Book } from "./views/Books/BooksPage";
+import { Authors, Author } from "./views/Authors/AuthorsPage";
+import { Countries, Country } from "./views/Countries/CountriesPage";
+import "./App.scss";
 
 export default function App() {
   return (
-    <div className="App">
+    <>
       <Navigation />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/books" element={<Models />}>
-          <Route path=":bookId" element={<Book />} />
-          <Route index element={<Books />} />
-        </Route>
-        <Route path="/authors" element={<Models />}>
-          <Route path=":authorId" element={<Author />} />
-          <Route index element={<Authors />} />
-        </Route>
-        <Route path="/countries" element={<Models />}>
-          <Route path=":countryId" element={<Country />} />
-          <Route index element={<Countries />} />
-        </Route>
+        <Route path="/books" element={<Books />} />
+        <Route path="/books/:bookId" element={<Book />} />
+        <Route path="/authors" element={<Authors />} />
+        <Route path="/authors/:authorId" element={<Author />} />
+        <Route path="/countries" element={<Countries />} />
+        <Route path="/countries:countryId" element={<Country />} />
         <Route
           path="*"
           element={
             <main style={{ padding: "1rem" }}>
-              <p>There&apos;s nothing here!</p>
+              <h1>There&apos;s nothing here!</h1>
             </main>
           }
         />
       </Routes>
-      <Outlet />
-    </div>
+    </>
   );
 }
+
+/* do we need Outlet? */

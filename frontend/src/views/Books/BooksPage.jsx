@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Container,
   Row,
@@ -9,8 +8,7 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import { useParams, Outlet, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { ModelsJson } from "./Models";
+import { ModelsJson } from "../../components/Models";
 
 export function Books() {
   return (

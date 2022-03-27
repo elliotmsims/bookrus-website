@@ -1,8 +1,6 @@
-import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import "./Navbar.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 
 export default function Navigation() {
   return (
