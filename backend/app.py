@@ -56,9 +56,9 @@ def add_cors_headers(response):
 methods = ['GET']
 
 manager = APIManager(app, session=db.session)
-book_blueprint = manager.create_api_blueprint('book', Book, methods=methods)
-country_blueprint = manager.create_api_blueprint('country', Country, methods=methods)
-author_blueprint = manager.create_api_blueprint('author', Author, methods=methods)
+book_blueprint = manager.create_api_blueprint('book', Book, methods=methods, url_prefix='/')
+country_blueprint = manager.create_api_blueprint('country', Country, methods=methods, url_prefix='/')
+author_blueprint = manager.create_api_blueprint('author', Author, methods=methods, url_prefix='/')
 blueprints = (book_blueprint, country_blueprint, author_blueprint)
 for blueprint in blueprints:
     blueprint.after_request(add_cors_headers)
