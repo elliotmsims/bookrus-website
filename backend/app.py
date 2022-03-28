@@ -44,13 +44,22 @@ class Author(db.Model):
 # Build database
 db.create_all()
 
+# Method to add CORS headers to all api sessions
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
 # Define database API system here, accessible at /api/[modelname]/[number]
 methods = ['GET']
 
 manager = APIManager(app, session=db.session)
-manager.create_api(Book, methods=methods)
-manager.create_api(Country, methods=methods)
-manager.create_api(Author, methods=methods)
+book_blueprint = manager.create_api_blueprint('book', Book, methods=methods)
+country_blueprint = manager.create_api_blueprint('country', Country, methods=methods)
+author_blueprint = manager.create_api_blueprint('author', Author, methods=methods)
+blueprints = (book_blueprint, country_blueprint, author_blueprint)
+for blueprint in blueprints:
+    blueprint.after_request(add_cors_headers)
+    app.register_blueprint(blueprint)
 
 @app.route("/")
 def hello_world():
