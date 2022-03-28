@@ -68,9 +68,5 @@ for blueprint in blueprints:
 def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
-@app.route("/api")
-def api_overview():
-    return "<h2>BookRUs API</h2><p>This is a (blank) landing page for BookRUs's API. GET requests can be made to our available models.</p>"
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
