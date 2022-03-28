@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-
 import {
   Container,
   Card,
@@ -9,13 +8,11 @@ import {
   ListGroup,
   ListGroupItem,
 } from "react-bootstrap";
-import hrithik from "../assets/hrithik.jpg";
-import francis from "../assets/francis.jpg";
-import elliot from "../assets/elliot.jpg";
-import matthew from "../assets/matthew.jpg";
-import william from "../assets/william.jpg";
-
-import "bootstrap/dist/css/bootstrap.min.css";
+import hrithik from "../../assets/member-images/hrithik.jpg";
+import francis from "../../assets/member-images/francis.jpg";
+import elliot from "../../assets/member-images/elliot.jpg";
+import matthew from "../../assets/member-images/matthew.jpg";
+import william from "../../assets/member-images/william.jpg";
 
 class Member {
   constructor(name, username, image, bio, unittests, role) {
