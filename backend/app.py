@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restless import APIManager
 from flask_sqlalchemy import SQLAlchemy
-import credentials
+import data.credentials
 # from data.countries import Country
 # from data.books import Book
 # from data.authors import Author
@@ -9,7 +9,7 @@ import credentials
 app = Flask(__name__)
 app.debug = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = credentials.db_login
+app.config['SQLALCHEMY_DATABASE_URI'] = data.credentials.db_login
 db = SQLAlchemy(app)
 
 # Define Book table/data model
