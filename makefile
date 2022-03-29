@@ -25,6 +25,9 @@ backend-run: backend-clean
 	cd backend; \
 	docker run --name bookrus-backend-test -it -v `pwd`:/usr/src/backend -w /usr/src/backend -p 5000:5000 bookrus-backend-dev
 
+backend-test:
+	python3 backend/tests.py
+
 # Frontend build/run commands
 	
 # Installs node packages
