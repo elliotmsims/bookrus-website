@@ -1,9 +1,17 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { useParams, Link } from "react-router-dom";
 import getAuthor from "../../api/getAuthor";
+// import getBook from "../../api/getBook";
+import getCountry from "../../api/getCountry";
 
 export default function Author() {
   const author = getAuthor(parseInt(useParams().authorId, 10));
+  console.log(author.author_country_id);
+  console.log(author.author_name);
+  console.log(author.author_books);
+  const country = getCountry(parseInt(author.author_country_id, 10) - 1);
+  console.log(country.country_name);
+
   return (
     // <Container>
     //   <h1>Author: {author.author_name}</h1>
@@ -29,24 +37,24 @@ export default function Author() {
         {" "}
         Nationality:{" "}
         <Link to={`https://api.bookrus.me/country/${author.author_country_id}`}>
-          {'BlahBlahBlah'}
+          {country.country_name}
         </Link>
       </h3>
-      <h3>
+      {/* <h3>
         Books:
         <p>{author.author_books}</p>
-        {/* {author.author_books.map((ids, index) => (
+        {author.author_books.map((ids, index) => (
           <Link to={`https://api.bookrus.me/book/${ids}`}>{}</Link>
-        ))} */}
+        ))}
       </h3>
       <h6>
         <Row>
-          {/* <Col>
+          <Col>
             Genres:{" "}
             {author.author_books.map((ids, index) => (
               <p>{}</p>
             ))}
-          </Col> */}
+          </Col>
           <Col>Born: {author.author_birth_date}</Col>
           <Col>Died: {author.author_death_date}</Col>
           <Col>Total Works: {author.author_work_count}</Col>
@@ -55,7 +63,7 @@ export default function Author() {
       </h6>
       <h3>Bio:</h3>
       <p>{author.author_bio}</p>
-      <img src={author.author_image} alt={author.author_name} width="180" height="256" />
+      <img src={author.author_image} alt={author.author_name} width="180" height="256" /> */}
     </Container>
   );
 }
