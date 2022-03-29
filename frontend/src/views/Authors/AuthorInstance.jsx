@@ -1,24 +1,9 @@
-import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import getAuthor from "../../api/getAuthor";
 
 export default function Author() {
-  const id = parseInt(useParams().authorId, 10) + 1; // FIX THISSSSSSS
-  const [author, setAuthor] = useState(0);
-  useEffect(() => {
-    const getAuthor = async () => {
-      await axios
-        .get(`https://api.bookrus.me/author/${id}`, {
-          headers: { Accept: "application/vnd.api+json" },
-        })
-        .then((response) => response.data)
-        .then((data) => {
-          setAuthor(data.data.attributes);
-        });
-    };
-    getAuthor();
-  }, []);
+  const author = getAuthor(parseInt(useParams().authorId, 10));
   return (
     <Container>
       <Row>
