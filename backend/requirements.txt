@@ -4,3 +4,4 @@ SQLAlchemy==1.4.32
 Flask-Restless-NG==2.2.9
 Flask-SQLAlchemy==2.5.1
 psycopg2-binary==2.9.3
+requests==2.27.1
