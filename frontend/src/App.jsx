@@ -2,9 +2,12 @@ import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/navigation/NavBar";
 import Home from "./views/Home/HomePage";
 import About from "./views/About/AboutPage";
-import { Books, Book } from "./views/Books/BooksPage";
-import { Authors, Author } from "./views/Authors/AuthorsPage";
-import { Countries, Country } from "./views/Countries/CountriesPage";
+import Books from "./views/Books/BooksPage";
+import Book from "./views/Books/BookInstance";
+import Authors from "./views/Authors/AuthorsPage";
+import Author from "./views/Authors/AuthorInstance";
+import Countries from "./views/Countries/CountriesPage";
+import Country from "./views/Countries/CountryInstance";
 import "./App.scss";
 
 export default function App() {

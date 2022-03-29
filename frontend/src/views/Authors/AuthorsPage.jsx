@@ -7,15 +7,10 @@ import {
   Button,
   ListGroupItem,
 } from "react-bootstrap";
-import { useParams, Outlet, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { ModelsJson } from "../../components/Models";
 
-export function Authors() {
-  // fetch("http://localhost:5000/country/2", {
-  //   headers: { Accept: "application/vnd.api+json" },
-  // })
-  //   .then((response) => response.text())
-  //   .then((data) => console.log(data));
+export default function Authors() {
   return (
     <div className="Authors">
       <Container>
@@ -58,50 +53,50 @@ export function Authors() {
   );
 }
 
-export function getAuthor(authorId) {
-  return ModelsJson.authors[authorId];
-}
+// export function getAuthor(authorId) {
+//   return ModelsJson.authors[authorId];
+// }
 
-export function Author() {
-  const params = useParams();
-  const author = getAuthor(parseInt(params.authorId, 10));
-  return (
-    <>
-      <h1>Author: {author.author}</h1>
+// export function Author() {
+//   const params = useParams();
+//   const author = getAuthor(parseInt(params.authorId, 10));
+//   return (
+//     <>
+//       <h1>Author: {author.author}</h1>
 
-      <h3>
-        {" "}
-        Nationality:{" "}
-        <Link to={`/countries/${author.nationalityId}`}>
-          {ModelsJson.countries[author.nationalityId].name}
-        </Link>
-      </h3>
+//       <h3>
+//         {" "}
+//         Nationality:{" "}
+//         <Link to={`/countries/${author.nationalityId}`}>
+//           {ModelsJson.countries[author.nationalityId].name}
+//         </Link>
+//       </h3>
 
-      <h3>
-        Books:
-        {author.bookIds.map((ids, index) => (
-          <Link to={`/books/${ids}`}>{author.books[index]}</Link>
-        ))}
-      </h3>
+//       <h3>
+//         Books:
+//         {author.bookIds.map((ids, index) => (
+//           <Link to={`/books/${ids}`}>{author.books[index]}</Link>
+//         ))}
+//       </h3>
 
-      <h6>
-        <Row>
-          <Col>
-            Genres:{" "}
-            {author.bookIds.map((ids, index) => (
-              <p>{ModelsJson.books[author.bookIds[index]].genre}</p>
-            ))}
-          </Col>
-          <Col>Sex: {author.sex}</Col>
-          <Col>Born: {author.born}</Col>
-        </Row>
-      </h6>
+//       <h6>
+//         <Row>
+//           <Col>
+//             Genres:{" "}
+//             {author.bookIds.map((ids, index) => (
+//               <p>{ModelsJson.books[author.bookIds[index]].genre}</p>
+//             ))}
+//           </Col>
+//           <Col>Sex: {author.sex}</Col>
+//           <Col>Born: {author.born}</Col>
+//         </Row>
+//       </h6>
 
-      <h3>Bio:</h3>
+//       <h3>Bio:</h3>
 
-      <p>{author.bio}</p>
+//       <p>{author.bio}</p>
 
-      <img src={author.image} alt={author.author} width="180" height="256" />
-    </>
-  );
-}
+//       <img src={author.image} alt={author.author} width="180" height="256" />
+//     </>
+//   );
+// }

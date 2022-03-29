@@ -3,27 +3,28 @@ import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-export default function Author() {
-  const id = parseInt(useParams().authorId, 10) + 1; // FIX THISSSSSSS
-  const [author, setAuthor] = useState(0);
+export default function Country() {
+  const id = parseInt(useParams().countryId, 10) + 1; // FIX THISSSSSSS
+  const [country, setCountry] = useState(0);
   useEffect(() => {
-    const getAuthor = async () => {
+    const getCountry = async () => {
       await axios
-        .get(`https://api.bookrus.me/author/${id}`, {
+        .get(`https://api.bookrus.me/country/${id}`, {
           headers: { Accept: "application/vnd.api+json" },
         })
         .then((response) => response.data)
         .then((data) => {
-          setAuthor(data.data.attributes);
+          setCountry(data.data.attributes);
         });
     };
-    getAuthor();
+    getCountry();
   }, []);
+  console.log(country);
   return (
     <Container>
       <Row>
         <Col>
-          <h1>{author.author_name}</h1>
+          <h1>{country.country_name}</h1>
         </Col>
       </Row>
     </Container>

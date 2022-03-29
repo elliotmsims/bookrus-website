@@ -1,16 +1,15 @@
 import {
   Container,
   Row,
-  Col,
   Card,
   ListGroup,
   Button,
   ListGroupItem,
 } from "react-bootstrap";
-import { useParams, Outlet, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { ModelsJson } from "../../components/Models";
 
-export function Countries() {
+export default function Countries() {
   return (
     <div className="Countries">
       <Container>
@@ -52,45 +51,45 @@ export function Countries() {
   );
 }
 
-export function getCountry(countryId) {
-  return ModelsJson.countries[countryId];
-}
+// export function getCountry(countryId) {
+//   return ModelsJson.countries[countryId];
+// }
 
-export function Country() {
-  const params = useParams();
-  const country = getCountry(parseInt(params.countryId, 10));
-  return (
-    <>
-      <h1>Country: {country.name}</h1>
+// export function Country() {
+//   const params = useParams();
+//   const country = getCountry(parseInt(params.countryId, 10));
+//   return (
+//     <>
+//       <h1>Country: {country.name}</h1>
 
-      <h3>
-        Authors:
-        {country.authorIds.map((ids, index) => (
-          <Link to={`/authors/${ids}`}>{country.authors[index]}</Link>
-        ))}
-      </h3>
+//       <h3>
+//         Authors:
+//         {country.authorIds.map((ids, index) => (
+//           <Link to={`/authors/${ids}`}>{country.authors[index]}</Link>
+//         ))}
+//       </h3>
 
-      <h3>
-        Books:
-        {country.bookIds.map((ids, index) => (
-          <Link to={`/books/${ids}`}>{country.books[index]}</Link>
-        ))}
-      </h3>
+//       <h3>
+//         Books:
+//         {country.bookIds.map((ids, index) => (
+//           <Link to={`/books/${ids}`}>{country.books[index]}</Link>
+//         ))}
+//       </h3>
 
-      <h6>
-        <Row>
-          <Col>Capital: {country.capital}</Col>
-          <Col>Language: {country.language}</Col>
-          <Col>Population: {country.population}</Col>
-          <Col>Code: {country.code}</Col>
-        </Row>
-      </h6>
+//       <h6>
+//         <Row>
+//           <Col>Capital: {country.capital}</Col>
+//           <Col>Language: {country.language}</Col>
+//           <Col>Population: {country.population}</Col>
+//           <Col>Code: {country.code}</Col>
+//         </Row>
+//       </h6>
 
-      <h3>Description:</h3>
+//       <h3>Description:</h3>
 
-      <p>{country.desc}</p>
+//       <p>{country.desc}</p>
 
-      <img src={country.image} alt={country.name} width="512" height="512" />
-    </>
-  );
-}
+//       <img src={country.image} alt={country.name} width="512" height="512" />
+//     </>
+//   );
+// }

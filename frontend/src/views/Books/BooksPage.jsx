@@ -1,21 +1,19 @@
 import {
   Container,
   Row,
-  Col,
   Card,
   ListGroup,
   Button,
   ListGroupItem,
 } from "react-bootstrap";
-import { useParams, Outlet, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { ModelsJson } from "../../components/Models";
 
-export function Books() {
+export default function Books() {
   return (
     <div className="Books">
       <Container>
         <h1>Books!</h1>
-
         <h3>Number of books: {ModelsJson.books.length}</h3>
         <Row xs={1} md={4}>
           {ModelsJson.books.map((book, index) => (
@@ -51,47 +49,47 @@ export function Books() {
   );
 }
 
-export function getBook(bookId) {
-  return ModelsJson.books[bookId];
-}
+// export function getBook(bookId) {
+//   return ModelsJson.books[bookId];
+// }
 
-export function Book() {
-  const params = useParams();
-  const book = getBook(parseInt(params.bookId, 10));
-  return (
-    <>
-      <h1>Book: {book.title}</h1>
+// export function Book() {
+//   const params = useParams();
+//   const book = getBook(parseInt(params.bookId, 10));
+//   return (
+//     <>
+//       <h1>Book: {book.title}</h1>
 
-      <h3>
-        Author: <Link to={`/authors/${book.authorId}`}>{book.author}</Link>
-      </h3>
+//       <h3>
+//         Author: <Link to={`/authors/${book.authorId}`}>{book.author}</Link>
+//       </h3>
 
-      <h3>
-        Author Nationality:{" "}
-        <Link
-          to={`/countries/${ModelsJson.authors[book.authorId].nationalityId}`}
-        >
-          {
-            ModelsJson.countries[
-              ModelsJson.authors[book.authorId].nationalityId
-            ].name
-          }
-        </Link>
-      </h3>
+//       <h3>
+//         Author Nationality:{" "}
+//         <Link
+//           to={`/countries/${ModelsJson.authors[book.authorId].nationalityId}`}
+//         >
+//           {
+//             ModelsJson.countries[
+//               ModelsJson.authors[book.authorId].nationalityId
+//             ].name
+//           }
+//         </Link>
+//       </h3>
 
-      <h6>
-        <Row>
-          <Col>Genre: {book.genre}</Col>
-          <Col>Language: {book.language}</Col>
-          <Col>Date Published: {book.date}</Col>
-        </Row>
-      </h6>
+//       <h6>
+//         <Row>
+//           <Col>Genre: {book.genre}</Col>
+//           <Col>Language: {book.language}</Col>
+//           <Col>Date Published: {book.date}</Col>
+//         </Row>
+//       </h6>
 
-      <h3>Synopsis:</h3>
+//       <h3>Synopsis:</h3>
 
-      <p>{book.synopsis}</p>
+//       <p>{book.synopsis}</p>
 
-      <img src={book.image} alt={book.title} />
-    </>
-  );
-}
+//       <img src={book.image} alt={book.title} />
+//     </>
+//   );
+// }

@@ -3,27 +3,28 @@ import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-export default function Author() {
-  const id = parseInt(useParams().authorId, 10) + 1; // FIX THISSSSSSS
-  const [author, setAuthor] = useState(0);
+export default function Book() {
+  const id = parseInt(useParams().bookId, 10) + 1; // FIX THISSSSSSS
+  const [book, setBook] = useState(0);
   useEffect(() => {
-    const getAuthor = async () => {
+    const getBook = async () => {
       await axios
-        .get(`https://api.bookrus.me/author/${id}`, {
+        .get(`https://api.bookrus.me/book/${id}`, {
           headers: { Accept: "application/vnd.api+json" },
         })
         .then((response) => response.data)
         .then((data) => {
-          setAuthor(data.data.attributes);
+          setBook(data.data.attributes);
         });
     };
-    getAuthor();
+    getBook();
   }, []);
+  console.log(book);
   return (
     <Container>
       <Row>
         <Col>
-          <h1>{author.author_name}</h1>
+          <h1>{book.book_title}</h1>
         </Col>
       </Row>
     </Container>
