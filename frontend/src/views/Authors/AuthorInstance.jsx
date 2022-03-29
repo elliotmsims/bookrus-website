@@ -8,7 +8,6 @@ export default function Author() {
   const author = getAuthor(parseInt(useParams().authorId, 10));
   console.log(author.author_country_id);
   console.log(author.author_name);
-  console.log(author.author_books);
   const country = getCountry(parseInt(author.author_country_id, 10) - 1);
   console.log(country.country_name);
 

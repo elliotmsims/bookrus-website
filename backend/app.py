@@ -51,6 +51,7 @@ class Author(db.Model):
     author_bio = db.Column(db.String())
     author_image = db.Column(db.String())
     author_country_id = db.Column(db.Integer)
+    author_books = db.Column(db.String())
 
 # Build database
 db.create_all()

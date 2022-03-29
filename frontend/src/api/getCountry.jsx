@@ -8,7 +8,8 @@ export default function getCountry(countryId) {
     const get = async () => {
       await axios
         .get(`https://api.bookrus.me/country/${id}`, {
-          headers: { Accept: "application/vnd.api+json" },
+          headers: { Accept: "application/vnd.api+json", 
+          "Access-Control-Allow-Origin": "*" },
         })
         .then((response) => response.data)
         .then((data) => {
