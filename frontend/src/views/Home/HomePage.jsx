@@ -1,10 +1,10 @@
-import "./styles.css";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import authorImage from "../../assets/home-images/author.jpg";
 import bookImage from "../../assets/home-images/book.jpg";
 import countryImage from "../../assets/home-images/country.jpg";
 import splashArt from "../../assets/home-images/splash-art.jpg";
+import "./styles.css";
 
 const models = {
   entry: [
@@ -54,7 +54,7 @@ export default function Home() {
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>{item.desc}</Card.Text>
                     <Link to={item.link}>
-                      <Button variant="primary">Learn about {item.name}</Button>
+                      <Button variant="dark">Learn about {item.name}</Button>
                     </Link>
                   </Card.Body>
                 </Card>

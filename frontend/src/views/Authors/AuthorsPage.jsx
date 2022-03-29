@@ -11,6 +11,11 @@ import { useParams, Outlet, Link } from "react-router-dom";
 import { ModelsJson } from "../../components/Models";
 
 export function Authors() {
+  // fetch("http://localhost:5000/country/2", {
+  //   headers: { Accept: "application/vnd.api+json" },
+  // })
+  //   .then((response) => response.text())
+  //   .then((data) => console.log(data));
   return (
     <div className="Authors">
       <Container>

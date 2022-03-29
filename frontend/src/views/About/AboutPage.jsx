@@ -7,12 +7,35 @@ import {
   Col,
   ListGroup,
   ListGroupItem,
+  Accordion,
+  Table,
+  Button,
 } from "react-bootstrap";
 import hrithik from "../../assets/member-images/hrithik.jpg";
 import francis from "../../assets/member-images/francis.jpg";
 import elliot from "../../assets/member-images/elliot.jpg";
 import matthew from "../../assets/member-images/matthew.jpg";
 import william from "../../assets/member-images/william.jpg";
+import postman from "../../assets/documentation-images/postman.jpg";
+import gitlab from "../../assets/documentation-images/gitlab.jpg";
+import gbooks from "../../assets/api-images/googlebooks.png";
+import wbank from "../../assets/api-images/worldbank.jpg";
+import openlib from "../../assets/api-images/openlib.jpg";
+import wiki from "../../assets/api-images/wiki.png";
+import awsA from "../../assets/tools-images/awsA.png";
+import awsEB from "../../assets/tools-images/awsEB.png";
+import black from "../../assets/tools-images/black.png";
+import discord from "../../assets/tools-images/discord.png";
+import docker from "../../assets/tools-images/docker.png";
+import eslint from "../../assets/tools-images/eslint.png";
+import flask from "../../assets/tools-images/flask.png";
+import namecheap from "../../assets/tools-images/namecheap.png";
+import prettier from "../../assets/tools-images/prettier.png";
+import react from "../../assets/tools-images/react.png";
+import reactb from "../../assets/tools-images/reactb.png";
+import reactr from "../../assets/tools-images/reactr.png";
+import sqla from "../../assets/tools-images/sqla.png";
+import "./styles.css";
 
 class Member {
   constructor(name, username, image, bio, unittests, role) {
@@ -75,26 +98,25 @@ const dataSources = [
     name: "Google Book API",
     url: "https://developers.google.com/books/docs/overview",
     description: "Gives book info and images",
-  },
-  {
-    name: "Geo Country API",
-    url: "https://rapidapi.com/natkapral/api/countries-cities/",
-    description: "Gives country info and link to their wiki",
+    image: gbooks,
   },
   {
     name: "World Bank Country/Region API",
     url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/898590-country-api-queries",
     description: "Gives country info including their region",
+    image: wbank,
   },
   {
     name: "Open Library API",
     url: "https://openlibrary.org/developers/api",
     description: "Gives book and author info",
+    image: openlib,
   },
   {
     name: "Wiki API",
     url: "https://www.mediawiki.org/wiki/API:Main_page",
     description: "Multiple wikipedia apis to get long descriptions of objects",
+    image: wiki,
   },
 ];
 
@@ -103,51 +125,91 @@ const tools = [
     name: "React",
     url: "https://reactjs.org/",
     description: "JS library to build the frontend",
+    image: react,
   },
   {
     name: "React-Bootstrap",
     url: "https://react-bootstrap.github.io/",
     description: "Provides Bootstrap as React components",
+    image: reactb,
   },
   {
     name: "React-Router",
     url: "https://reactrouter.com/",
     description: "Enables navigation between pages",
+    image: reactr,
   },
   {
     name: "Prettier",
     url: "https://prettier.io/",
-    description: "Code formater used for all files",
+    description: "Code formater used for frontend",
+    image: prettier,
   },
   {
     name: "Eslint/Eslint-Config-Airbnb",
     url: "https://eslint.org/",
     description: "Linter for JS/JSX",
+    image: eslint,
   },
   {
     name: "Postman",
     url: "https://www.postman.com/",
     description: "Used to document our API",
+    image: postman,
   },
   {
     name: "Namecheap",
     url: "https://react-bootstrap.github.io/",
     description: "Domain provider and register",
+    image: namecheap,
   },
   {
     name: "AWS Amplify",
     url: "https://aws.amazon.com/amplify/",
     description: "Hosting service for the website",
+    image: awsA,
   },
   {
     name: "Gitlab",
     url: "https://about.gitlab.com/",
     description: "Version control system",
+    image: gitlab,
   },
   {
     name: "Discord",
     url: "https://discord.com/",
     description: "Communication platform with video share",
+    image: discord,
+  },
+  {
+    name: "Flask",
+    url: "https://flask.palletsprojects.com/en/2.1.x/",
+    description: "Python framework for backend",
+    image: flask,
+  },
+  {
+    name: "SQL Alchemy",
+    url: "https://www.sqlalchemy.org/",
+    description: "Python SQL toolkit",
+    image: sqla,
+  },
+  {
+    name: "AWS Elastic-Beanstalk",
+    url: "https://aws.amazon.com/elasticbeanstalk/",
+    description: "Hosting for backend db",
+    image: awsEB,
+  },
+  {
+    name: "Black",
+    url: "https://pypi.org/project/black/",
+    description: "Python code formatter",
+    image: black,
+  },
+  {
+    name: "Docker",
+    url: "https://www.docker.com/",
+    description: "Package applications into containers",
+    image: docker,
   },
 ];
 
@@ -205,35 +267,99 @@ export default function About() {
     };
     getIssues();
   }, []);
-
   return (
     <Container>
-      <h3>Objective:</h3>
-      <p>
-        BooksRUs exists to emphasize the literary contributions of different
-        cultures around the world. The app will include information regarding
-        famous publications around the globe, their authors, and the countries
-        they hale from. The vision of BooksRUs is to connect and spread
-        knowledge from distant lifestyles and faraway populations to others
-        through sharing inspiring stories, insightful biographies, and
-        cross-country cultural exchange. This is because, ultimately, the more
-        learned we are of each other, the more mindful we are of the ways the
-        world work.
-      </p>
-      <h3>Integration:</h3>
-      <p>
-        Connecting books to their authors is not too interesting. However, once
-        we integrated the author&apos;s country into the data model, we
-        discovered how location and culture influences their writing. This
-        additional context provides a deeper understanding between the reader
-        and the book. Our website hopes to display these relationships and help
-        readers learn more about their favoriate books/authors.
-      </p>
-      <h3>
-        <a href="https://documenter.getpostman.com/view/19701903/UVkvJYLx">
-          Our Postman API Documentation
-        </a>
-      </h3>
+      <br />
+      <h2>Project Info:</h2>
+      <Row>
+        <Accordion>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Objective</Accordion.Header>
+            <Accordion.Body>
+              BooksRUs exists to emphasize the literary contributions of
+              different cultures around the world. The app will include
+              information regarding famous publications around the globe, their
+              authors, and the countries they hale from. The vision of BooksRUs
+              is to connect and spread knowledge from distant lifestyles and
+              faraway populations to others through sharing inspiring stories,
+              insightful biographies, and cross-country cultural exchange. This
+              is because, ultimately, the more learned we are of each other, the
+              more mindful we are of the ways the world work.
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>Integration</Accordion.Header>
+            <Accordion.Body>
+              Connecting books to their authors is not too interesting. However,
+              once we integrated the author&apos;s country into the data model,
+              we discovered how location and culture influences their writing.
+              This additional context provides a deeper understanding between
+              the reader and the book. Our website hopes to display these
+              relationships and help readers learn more about their favoriate
+              books/authors.
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="2">
+            <Accordion.Header>Phase Leaders</Accordion.Header>
+            <Accordion.Body>
+              <Table striped bordered hover variant="dark">
+                <thead>
+                  <tr>
+                    <th>Phase #</th>
+                    <th>Name</th>
+                    <th>GitLab ID</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Matthew Escobar</td>
+                    <td>@matt594</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>William Eng</td>
+                    <td>@willeng37</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Elliot Sims</td>
+                    <td>@elliotsims</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Hrithik Ramganesh</td>
+                    <td>@hrithikr</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="3">
+            <Accordion.Header>Documentation</Accordion.Header>
+            <Accordion.Body>
+              <div className="d-grid gap-2">
+                <Button
+                  variant="outline-dark"
+                  href="https://documenter.getpostman.com/view/19701903/UVkvJYLx"
+                  target="_blank"
+                >
+                  API documentation from Postman
+                </Button>
+                <Button
+                  variant="outline-dark"
+                  href="https://gitlab.com/10AMGroup11/bookrus"
+                  target="_blank"
+                >
+                  Source code from Gitlab
+                </Button>
+              </div>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </Row>
+      <br />
+      <h2>The Team:</h2>
       <Row
         md={3}
         className="mx-auto"
@@ -262,6 +388,7 @@ export default function About() {
                 <ListGroupItem>Tests: {dev.unittests}</ListGroupItem>
               </ListGroup>
             </Card>
+            <br />
           </Col>
         ))}
       </Row>
@@ -289,29 +416,57 @@ export default function About() {
           </Card>
         </Col>
       </Row>
-      <Row className="sources">
-        <Col className="datasources">
-          <h3>Data Sources/APIs:</h3>
-          {dataSources.map((source) => (
-            <Row>
-              <h5>
-                <a href={source.url}>{source.name}</a>
-              </h5>
-              <p>{source.description}</p>
-            </Row>
-          ))}
-        </Col>
-        <Col className="tools">
-          <h3>Tools:</h3>
-          {tools.map((source) => (
-            <Row>
-              <h5>
-                <a href={source.url}>{source.name}</a>
-              </h5>
-              <p>{source.description}</p>
-            </Row>
-          ))}
-        </Col>
+      <br />
+      <h2>Data Sources/APIs:</h2>
+      <Row xs={2} md={4} className="g-4">
+        {dataSources.map((source) => (
+          <Col>
+            <Card style={{ width: "9rem" }}>
+              <Card.Img variant="top" src={source.image} />
+              <Card.Body>
+                <Card.Title>{source.name}</Card.Title>
+                <Card.Text>{source.description}</Card.Text>
+                <Button variant="dark" href={source.url} target="_blank">
+                  More Info
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+      <br />
+      <h2>Tools:</h2>
+      <Row xs={2} md={5} className="g-4">
+        {tools.slice(0, tools.length / 2).map((source) => (
+          <Col className="cards" style={{ justifyContent: "space-evenly" }}>
+            <Card style={{ width: "9rem" }}>
+              <Card.Img variant="top" src={source.image} />
+              <Card.Body>
+                <Card.Title>{source.name}</Card.Title>
+                <Card.Text>{source.description}</Card.Text>
+                <Button variant="dark" href={source.url} target="_blank">
+                  More Info
+                </Button>
+              </Card.Body>
+            </Card>
+            <br />
+          </Col>
+        ))}
+        {tools.slice(tools.length / 2).map((source) => (
+          <Col className="cards" style={{ justifyContent: "space-evenly" }}>
+            <Card style={{ width: "9rem" }}>
+              <Card.Img variant="top" src={source.image} />
+              <Card.Body>
+                <Card.Title>{source.name}</Card.Title>
+                <Card.Text>{source.description}</Card.Text>
+                <Button variant="dark" href={source.url} target="_blank">
+                  More Info
+                </Button>
+              </Card.Body>
+            </Card>
+            <br />
+          </Col>
+        ))}
       </Row>
     </Container>
   );

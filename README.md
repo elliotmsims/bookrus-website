@@ -15,9 +15,9 @@
 | Phase #  | Leader               | Git ShA   |
 | -------- | -------------------- | --------- |
 | 1        | Matthew Escobar      | a9ef89b3d9710546e84b6a5cd4b94c1fff161134         |
-| 2        | -                    | -         |
-| 3        | -                    | -         |
-| 4        | -                    | -         |
+| 2        | William Eng          | -         |
+| 3        | Elliot Sims          | -         |
+| 4        | Hrithik Ramganesh    | -         |
 
 Leader's Responisibility: The leader is well-informed on all aspects of the project phase, organizes the team to perform effectively, and promotes equal collaboration from all members.
 
@@ -36,6 +36,16 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 | William Eng          | 8         | 18     |
 | Hrithik Ramganesh    | 8         | 12     |
 | Elliot Sims          | 8         | 14     |
+
+### Phase 2
+
+| Name                 | Estimated | Actual |
+| -------------------- | --------- | ------ |
+| Matthew Escobar      | 0         | 0      |
+| Francisco Reyna      | 0         | 0      |
+| William Eng          | 0         | 0      |
+| Hrithik Ramganesh    | 0         | 0      |
+| Elliot Sims          | 20        | 8      |
 
 ## Comments
 
