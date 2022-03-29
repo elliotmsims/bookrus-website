@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function getCountry(countryId) {
-  const [country, setCountry] = useState(0);
+export default function getCountries() {
+  const [countries, setCountries] = useState(0);
   useEffect(() => {
     const get = async () => {
       await axios
-        .get(`https://api.bookrus.me/country/${countryId}`, {
+        .get(`https://api.bookrus.me/country`, {
           headers: { Accept: "application/vnd.api+json" },
         })
         .then((response) => response.data)
         .then((data) => {
-          setCountry(data.data.attributes);
+          setCountries(data.data);
         });
     };
     get();
   }, []);
-  return country;
+  return countries;
 }
