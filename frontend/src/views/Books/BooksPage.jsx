@@ -7,8 +7,11 @@ import {
   // ListGroupItem,
 } from "react-bootstrap";
 // import { Outlet, Link } from "react-router-dom";
+import getBooks from "../../api/getBooks";
 
 export default function Books() {
+  const books = getBooks();
+  console.log(books);
   return (
     <div className="Books">
       <Container>

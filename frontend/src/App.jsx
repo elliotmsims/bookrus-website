@@ -16,6 +16,30 @@ export default function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route
+          path="/books/0"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <h1>There&apos;s nothing here!</h1>
+            </main>
+          }
+        />
+        <Route
+          path="authors/0"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <h1>There&apos;s nothing here!</h1>
+            </main>
+          }
+        />
+        <Route
+          path="countries/0"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <h1>There&apos;s nothing here!</h1>
+            </main>
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/books" element={<Books />} />
         <Route path="/books/:bookId" element={<Book />} />
