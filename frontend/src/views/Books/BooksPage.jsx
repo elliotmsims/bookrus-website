@@ -8,7 +8,7 @@ import {
   // ListGroupItem,
 } from "react-bootstrap";
 // import { Outlet, Link } from "react-router-dom";
-import getBooks from "../../api/getBooks";
+import { getBooks } from "../../apiCalls";
 
 export default function Books() {
   const books = getBooks();

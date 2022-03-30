@@ -1,19 +1,13 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import getAuthor from "../../api/getAuthor";
-import getBook from "../../api/getBook";
-import getCountry from "../../api/getCountry";
+import { getAuthor, getCountry, getBook } from "../../apiCalls";
 
 export default function Author() {
   const author = getAuthor(parseInt(useParams().authorId, 10));
-  const country = getCountry(parseInt(author.author_country_id, 10));
-  let books = author.author_books;
-  console.log(books);
-  let arr;
-  if (books != null) {
-    arr = books.replace("[", "").replace("]", "").split(", ");
-  } else {
-    arr = [];
+  const country = getCountry(author.author_country_id);
+  const arr = author.author_books.replace("[","").replace("]","").split(", ");
+  for(let i = 0; i < arr.length; i += 1) {
+    console.log(getBook(arr[i]).book_title);
   }
 
   return (
@@ -28,7 +22,12 @@ export default function Author() {
       </h3>
       <h3>
         Books:
-        <p>{books}</p>
+        <p>
+          {
+            arr
+             .map((id) => (getBook(id).book_title))
+          }
+        </p>
         {arr.map((id) => (
           <Link to={`https://api.bookrus.me/book/${id}`}>
             {getBook(id).book_title}
