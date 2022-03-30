@@ -9,12 +9,9 @@ export default function getCountry(countryId) {
         .get(`https://api.bookrus.me/country/${countryId}`, {
           headers: { Accept: "application/vnd.api+json" },
         })
-        .then((response) => response.data)
-        .then((data) => {
-          setCountry(data.data.attributes);
-        });
+        .then((response) => setCountry(response.data.data.attributes));
     };
     get();
-  }, []);
+  }, [countryId]);
   return country;
 }

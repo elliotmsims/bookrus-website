@@ -9,12 +9,9 @@ export default function getBook(bookId) {
         .get(`https://api.bookrus.me/book/${bookId}`, {
           headers: { Accept: "application/vnd.api+json" },
         })
-        .then((response) => response.data)
-        .then((data) => {
-          setBook(data.data.attributes);
-        });
+        .then((response) => setBook(response.data.data.attributes));
     };
     get();
-  }, []);
+  }, [bookId]);
   return book;
 }

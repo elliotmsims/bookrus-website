@@ -1,7 +1,8 @@
 import {
   Container,
-  // Row,
-  // Card,
+  Col,
+  Row,
+  Card,
   // ListGroup,
   // Button,
   // ListGroupItem,
@@ -11,40 +12,45 @@ import getBooks from "../../api/getBooks";
 
 export default function Books() {
   const books = getBooks();
-  console.log(books);
+  const arr = [];
+  Object.keys(books).forEach((index) => {
+    arr.push(books[index].attributes);
+  });
   return (
     <div className="Books">
       <Container>
         <h1>Books!</h1>
-        <h3>Number of books: 0</h3>
-        {/* <Row xs={1} md={4}>
-          {ModelsJson.books.map((book, index) => (
-            <Row>
+        <h3>Number of authors: {books.length}</h3>
+        <Row xs={1} md={4}>
+          {arr.map((book) => (
+            <Col>
               <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={book.image} />
+                <Card.Img variant="top" src={book.book_image} />
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <Card.Text>
+                  <Card.Title>{book.book_title}</Card.Title>
+                  {/* <Card.Text>
                     <ListGroup>
+                      <ListGroupItem>Born: {author.born}</ListGroupItem>
+                      <ListGroupItem>Sex: {author.sex}</ListGroupItem>
                       <ListGroupItem>
-                        Author:{" "}
-                        <Link to={`/authors/${book.authorId}`}>
-                          {book.author}
-                        </Link>
+                        Famous Book: {author.books[0]}
                       </ListGroupItem>
-                      <ListGroupItem>Genre: {book.genre}</ListGroupItem>
-                      <ListGroupItem>Pages: {book.length}</ListGroupItem>
-                      <ListGroupItem>Language: {book.language}</ListGroupItem>
+                      <ListGroupItem>
+                        Birthplace:
+                        {ModelsJson.countries[author.nationalityId].name}
+                      </ListGroupItem>
                     </ListGroup>
                   </Card.Text>
-                  <Link to={`/books/${index}`}>
-                    <Button variant="primary">Learn about {book.title}</Button>
-                  </Link>
+                  <Link to={`/authors/${index}`}>
+                    <Button variant="primary">
+                      Learn about {author.author}
+                    </Button>
+                  </Link> */}
                 </Card.Body>
               </Card>
-            </Row>
+            </Col>
           ))}
-        </Row> */}
+        </Row>
       </Container>
     </div>
   );
