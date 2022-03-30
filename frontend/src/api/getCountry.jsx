@@ -7,7 +7,9 @@ export default function getCountry(countryId) {
     const get = async () => {
       await axios
         .get(`https://api.bookrus.me/country/${countryId}`, {
-          headers: { Accept: "application/vnd.api+json" },
+          headers: {
+            Accept: "application/vnd.api+json",
+          },
         })
         .then((response) => response.data)
         .then((data) => {
@@ -15,6 +17,6 @@ export default function getCountry(countryId) {
         });
     };
     get();
-  }, []);
+  }, [countryId]);
   return country;
 }

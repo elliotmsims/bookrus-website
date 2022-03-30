@@ -15,6 +15,6 @@ export default function getAuthor(authorId) {
         });
     };
     get();
-  }, []);
+  }, [authorId]);
   return author;
 }

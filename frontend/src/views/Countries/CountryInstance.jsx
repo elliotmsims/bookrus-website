@@ -4,6 +4,7 @@ import getCountry from "../../api/getCountry";
 
 export default function Country() {
   const country = getCountry(parseInt(useParams().countryId, 10));
+  console.log(country.country_name);
   return (
     <Container>
       <Row>

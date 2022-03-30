@@ -15,6 +15,6 @@ export default function getBook(bookId) {
         });
     };
     get();
-  }, []);
+  }, [bookId]);
   return book;
 }
