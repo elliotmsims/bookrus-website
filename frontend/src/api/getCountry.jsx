@@ -11,10 +11,7 @@ export default function getCountry(countryId) {
             Accept: "application/vnd.api+json",
           },
         })
-        .then((response) => response.data)
-        .then((data) => {
-          setCountry(data.data.attributes);
-        });
+        .then((response) => setCountry(response.data.data.attributes));
     };
     get();
   }, [countryId]);

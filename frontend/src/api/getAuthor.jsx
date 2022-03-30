@@ -9,10 +9,7 @@ export default function getAuthor(authorId) {
         .get(`https://api.bookrus.me/author/${authorId}`, {
           headers: { Accept: "application/vnd.api+json" },
         })
-        .then((response) => response.data)
-        .then((data) => {
-          setAuthor(data.data.attributes);
-        });
+        .then((response) => setAuthor(response.data.data.attributes));
     };
     get();
   }, [authorId]);
