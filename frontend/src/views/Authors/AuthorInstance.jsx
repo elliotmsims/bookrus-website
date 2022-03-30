@@ -5,10 +5,15 @@ import { getAuthor, getCountry, getBook } from "../../apiCalls";
 export default function Author() {
   const author = getAuthor(parseInt(useParams().authorId, 10));
   const country = getCountry(author.author_country_id);
-  const arr = author.author_books.replace("[","").replace("]","").split(", ");
-  for(let i = 0; i < arr.length; i += 1) {
-    console.log(getBook(arr[i]).book_title);
+  const arr = author.author_books.replace("[", "").replace("]", "").split(", ");
+  const books = new Array(arr.length);
+  for (let i = 0; i < arr.length; i += 1) {
+    books[i] = getBook(arr[i]);
   }
+  const categories = new Set();
+  books.forEach((book) => {
+    categories.add(book.book_categories);
+  });
 
   return (
     <Container>
@@ -16,32 +21,21 @@ export default function Author() {
       <h3>
         {" "}
         Nationality:{" "}
-        <Link to={`https://api.bookrus.me/country/${author.author_country_id}`}>
+        <Link to={`/countries/${author.author_country_id}`}>
           {country.country_name}
         </Link>
       </h3>
-      <h3>
-        Books:
-        <p>
-          {
-            arr
-             .map((id) => (getBook(id).book_title))
-          }
-        </p>
-        {arr.map((id) => (
-          <Link to={`https://api.bookrus.me/book/${id}`}>
-            {getBook(id).book_title}
-          </Link>
+      <h3>Books:</h3>
+      <p>
+        {books.map((book) => (
+          <Link to={`/books/${book.book_id}`}>{`${book.book_title}, `}</Link>
         ))}
-      </h3>
+      </p>
       <h6>
         <Row>
-          {/* <Col>
-            Genres:{" "}
-            {author.author_books.map((ids, index) => (
-              <p>{}</p>
-            ))}
-          </Col> */}
+          <Col>
+            Genres: <p>{categories}</p>
+          </Col>
           <Col>Born: {author.author_birth_date}</Col>
           <Col>Died: {author.author_death_date}</Col>
           <Col>Total Works: {author.author_work_count}</Col>
