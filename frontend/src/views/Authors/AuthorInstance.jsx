@@ -5,10 +5,15 @@ import { getAuthor, getCountry, getBook } from "../../apiCalls";
 export default function Author() {
   const author = getAuthor(parseInt(useParams().authorId, 10));
   const country = getCountry(author.author_country_id);
-  const arr = author.author_books.replace("[", "").replace("]", "").split(", ");
-  const books = new Array(arr.length);
-  for (let i = 0; i < arr.length; i += 1) {
-    books[i] = getBook(arr[i]);
+  let bookArr;
+  if (author.author_books != null) {
+    bookArr = author.author_books.replace("[", "").replace("]", "").split(", ");
+  } else {
+    bookArr = [];
+  }
+  const books = new Array(bookArr.length);
+  for (let i = 0; i < bookArr.length; i += 1) {
+    books[i] = getBook(bookArr[i]);
   }
   const categories = new Set();
   books.forEach((book) => {
