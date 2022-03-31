@@ -366,7 +366,7 @@ export default function About() {
         style={{ justifyContent: "space-evenly" }}
       >
         {baseUserData.map((dev) => (
-          <Col>
+          <Col key={dev.name}>
             <Card>
               <Card.Img
                 variant="top"
@@ -420,7 +420,7 @@ export default function About() {
       <h2>Data Sources/APIs:</h2>
       <Row xs={2} md={4} className="g-4">
         {dataSources.map((source) => (
-          <Col>
+          <Col key={source.name}>
             <Card style={{ width: "9rem" }}>
               <Card.Img variant="top" src={source.image} />
               <Card.Body>
@@ -438,7 +438,11 @@ export default function About() {
       <h2>Tools:</h2>
       <Row xs={2} md={5} className="g-4">
         {tools.slice(0, tools.length / 2).map((source) => (
-          <Col className="cards" style={{ justifyContent: "space-evenly" }}>
+          <Col
+            key={source.name}
+            className="cards"
+            style={{ justifyContent: "space-evenly" }}
+          >
             <Card style={{ width: "9rem" }}>
               <Card.Img variant="top" src={source.image} />
               <Card.Body>
@@ -453,7 +457,11 @@ export default function About() {
           </Col>
         ))}
         {tools.slice(tools.length / 2).map((source) => (
-          <Col className="cards" style={{ justifyContent: "space-evenly" }}>
+          <Col
+            key={source.name}
+            className="cards"
+            style={{ justifyContent: "space-evenly" }}
+          >
             <Card style={{ width: "9rem" }}>
               <Card.Img variant="top" src={source.image} />
               <Card.Body>
