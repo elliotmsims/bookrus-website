@@ -26,13 +26,15 @@ frontend_gui_test:
   stage: test
   script:
   - cd frontend
-  - pip install -r selenium
+  - apt-get install python3-pip
+  - pip3 install -r selenium
   - python3 guitests.py
 
 backend_unit_tests:
   stage: test
   script:
     - cd backend
-    - pip install -r requirements.txt
+    - apt-get install python3-pip
+    - pip3 install -r requirements.txt
     - python3 tests.py
 
