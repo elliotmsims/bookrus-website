@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCountries } from "../../apiCalls";
+import blankCountryPic from "../../assets/blankcountryimg.jpg";
 import MyPagination from "../../components/pagination/Pagination";
 
 export default function Countries() {
@@ -33,6 +34,14 @@ export default function Countries() {
         <Row style={{ justifyContent: "center" }} xs={2} md={4}>
           {countries.map((item) => {
             const country = item.attributes;
+            Object.keys(country).forEach((k) => {
+              if (!country[k]) {
+                country[k] = "N/A";
+              }
+            });
+            if (country.country_image === "N/A") {
+              country.country_image = blankCountryPic;
+            }
             return (
               <Row>
                 <Card style={{ width: "18rem", border: "1px solid white" }}>
@@ -54,7 +63,7 @@ export default function Countries() {
                           Region: {country.country_region}
                         </ListGroupItem>
                         <ListGroupItem>
-                          Capital: {country.country_capital_city}
+                          Population: {country.country_population}
                         </ListGroupItem>
                         <ListGroupItem>
                           Latitude: {country.country_lat}

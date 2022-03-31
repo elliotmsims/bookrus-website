@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuthors, getCountry } from "../../apiCalls";
+import { getAuthors } from "../../apiCalls";
 import blankProfilePic from "../../assets/blankprofile.png";
 import MyPagination from "../../components/pagination/Pagination";
 // import "./styles.css";
@@ -33,16 +33,14 @@ export default function Authors() {
         <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {authors.map((item) => {
             const author = item.attributes;
-            if (!author.author_birth_date) {
-              author.author_birth_date = "Unknown";
-            }
-            if (!author.author_death_date) {
-              author.author_death_date = "Unknown";
-            }
-            if (!author.author_image) {
+            Object.keys(author).forEach((k) => {
+              if (!author[k]) {
+                author[k] = "N/A";
+              }
+            });
+            if (author.author_image === "N/A") {
               author.author_image = blankProfilePic;
             }
-            const country = getCountry(author.author_country_id);
             return (
               <Row>
                 <Card style={{ width: "18rem", border: "1px solid white" }}>
@@ -61,16 +59,16 @@ export default function Authors() {
                     <Card.Text>
                       <ListGroup>
                         <ListGroupItem>
+                          Best Work: {author.author_top_work}
+                        </ListGroupItem>
+                        <ListGroupItem>
                           Work Count: {author.author_work_count}
                         </ListGroupItem>
                         <ListGroupItem>
-                          Birth: {author.author_birth_date}
+                          Main Genre: {author.author_genre}
                         </ListGroupItem>
                         <ListGroupItem>
-                          Death: {author.author_death_date}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Nationality: {country.country_name}
+                          Nationality: {author.author_nationality}
                         </ListGroupItem>
                       </ListGroup>
                     </Card.Text>

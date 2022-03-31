@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="main">
       <div className="home-bg" style={{ backgroundImage: `url(${splashArt})` }}>
-        <Container style={{ maxWidth: "70%" }}>
+        <Container style={{ maxWidth: "100%" }}>
           <div className="bg-text">
             Information about your favorite stories, all in one place
           </div>

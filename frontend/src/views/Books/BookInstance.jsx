@@ -32,7 +32,7 @@ export default function Book() {
           <Col>Pages: {book.book_pages}</Col>
           <Col>Language: {book.book_language}</Col>
           <Col>Maturity: {book.book_maturity}</Col>
-          <Col>Date Published: {book.published}</Col>
+          <Col>Date Published: {book.book_published}</Col>
         </Row>
       </h6>
       <h3>Synopsis:</h3>

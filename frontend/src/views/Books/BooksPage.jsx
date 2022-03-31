@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBooks } from "../../apiCalls";
+import blankBookPic from "../../assets/blankbookimg.jpg";
 import MyPagination from "../../components/pagination/Pagination";
 
 export default function Books() {
@@ -33,6 +34,14 @@ export default function Books() {
         <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {books.map((item) => {
             const book = item.attributes;
+            Object.keys(book).forEach((k) => {
+              if (!book[k]) {
+                book[k] = "N/A";
+              }
+            });
+            if (book.book_image === "N/A") {
+              book.book_image = blankBookPic;
+            }
             return (
               <Row>
                 <Card style={{ width: "18rem", border: "1px solid white" }}>
@@ -54,7 +63,7 @@ export default function Books() {
                           Author: {book.book_author}
                         </ListGroupItem>
                         <ListGroupItem>
-                          Publication Date: {book.book_published}
+                          Date Publication: {book.book_published}
                         </ListGroupItem>
                         <ListGroupItem>
                           Language: {book.book_language}

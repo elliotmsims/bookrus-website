@@ -41,11 +41,11 @@ export default function Author() {
       </p>
       <h6>
         <Row>
-          <Col> Genre: {author.author_genre} </Col>
+          <Col>Best Work: {author.author_top_work}</Col>
+          <Col>Work Count: {author.author_work_count}</Col>
+          <Col>Main Genre: {author.author_genre} </Col>
           <Col>Born: {author.author_birth_date}</Col>
           <Col>Died: {author.author_death_date}</Col>
-          <Col>Total Works: {author.author_work_count}</Col>
-          <Col>Top Work: {author.author_top_work}</Col>
         </Row>
       </h6>
       <h3>Bio:</h3>
