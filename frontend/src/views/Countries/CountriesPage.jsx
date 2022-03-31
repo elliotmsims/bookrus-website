@@ -1,6 +1,6 @@
 import {
   Container,
-  // Col,
+  Col,
   Row,
   Card,
   ListGroup,
@@ -8,19 +8,23 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getCountries } from "../../apiCalls";
+import MyPagination from "../../components/pagination/Pagination";
 
 export default function Countries() {
-  const countries = getCountries();
+  const countries = getCountries(2);
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/countries/${id}`);
   return (
     <div className="Countries">
-      <Container>
+      <Container fluid>
         <Row>
-          <h1>Countries!</h1>
-          <h3>Number of Countries: {countries.length}</h3>
+          <Col>
+            <h1>Countries!</h1>
+            <h3>Total Countries: 218</h3>
+            <MyPagination total={218} totalPage={22} index={5} />
+          </Col>
         </Row>
-        <Row xs={1} md={4}>
+        <Row xs={2} md={4}>
           {countries.map((item) => {
             const country = item.attributes;
             return (

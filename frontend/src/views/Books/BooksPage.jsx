@@ -1,6 +1,6 @@
 import {
   Container,
-  // Col,
+  Col,
   Row,
   Card,
   ListGroup,
@@ -15,10 +15,12 @@ export default function Books() {
   const handleClick = (id) => navigate(`/books/${id}`);
   return (
     <div className="Books">
-      <Container>
+      <Container fluid>
         <Row>
-          <h1>Books!</h1>
-          <h3>Number of books: {books.length}</h3>
+          <Col>
+            <h1>Books!</h1>
+            <h3>Number of books: {books.length}</h3>
+          </Col>
         </Row>
         <Row xs={1} md={4}>
           {books.map((item) => {

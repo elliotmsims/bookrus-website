@@ -32,7 +32,6 @@ export default function Author() {
       </h3>
       <h3>Books:</h3>
       <p>
-        
         {books.map((book) => (
           <Link to={`/books/${book.book_id}`}>
             <Button variant="dark">{book.book_title}</Button>

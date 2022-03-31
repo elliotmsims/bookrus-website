@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { getAuthors, getCountry } from "../../apiCalls";
 import blankProfilePic from "../../assets/blankprofile.png";
+// import "./styles.css";
 
 export default function Authors() {
   const authors = getAuthors();
@@ -16,7 +17,7 @@ export default function Authors() {
   const handleClick = (id) => navigate(`/authors/${id}`);
   return (
     <div className="Authors">
-      <Container>
+      <Container fluid>
         <Row>
           <h1>Authors!</h1>
           <h3>Number of Authors: {authors.length}</h3>
