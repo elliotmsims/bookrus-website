@@ -38,7 +38,6 @@ export default function Country() {
     .replace("]", "")
     .split(", ");
   Object.keys(country).forEach((k) => {
-    console.log(country[k]);
     if (!country[k]) {
       country[k] = "N/A";
     }
