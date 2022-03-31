@@ -3,11 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, Column, String, Integer
 import json
 import credentials
-import wikipediaapi
-import urllib
 from os.path import exists
 import requests
-from countryinfo import CountryInfo
 
 app = Flask(__name__)
 app.debug = True
@@ -60,29 +57,24 @@ def __init__(
 
 
 db.create_all()
-wiki = wikipediaapi.Wikipedia("en")
 countries_list = []
+d = {}
+with open('country_to_authors.txt', 'r') as file:
+    for line in file:
+        (key, val) = line.split(" ", 1)
+        val = val.replace('[', '').replace(']','').split(",")
+        val = [int(num) for num in val]  
+        if key != 'None':
+            d[int(key)] = val
 for i in range(1, 219):
     country_request_url = "http://localhost:5000/country/" + str(i)
     headers = {"Accept": "application/vnd.api+json"}
     cr = requests.get(country_request_url, headers=headers)
     cdata = json.loads(cr.content.decode("utf-8"))
     new_country = Countries(**cdata["data"]["attributes"])
-    info = CountryInfo(new_country.country_name)
-    new_country.country_description = wiki.page(new_country.country_name).summary
-    try:
-        serialized = json.dumps(info.languages())
-        new_country.country_languages = serialized
-    except:
-        pass
-    try:
-        new_country.country_population = info.population()
-    except:
-        pass
-    try:
-        new_country.country_region = info.region()
-    except:
-        pass
+    if i in d:
+        serialized = json.dumps(d[i])
+        new_country.country_authors = serialized
     countries_list.append(new_country)
 
 db.session.add_all(countries_list)

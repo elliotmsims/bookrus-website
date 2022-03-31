@@ -59,6 +59,7 @@ class Author(db.Model):
     author_country_id = db.Column(db.Integer)
     author_books = db.Column(db.String())
     author_genre = db.Column(db.String())
+    author_nationality = db.Column(db.String())
 
 
 # Build database
