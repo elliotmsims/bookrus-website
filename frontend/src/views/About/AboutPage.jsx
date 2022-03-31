@@ -80,7 +80,7 @@ const allInfo = [
     "Matt594",
     matthew,
     "Heyo, my name is Matthew Escobar and I’m a junior computer science major at the University of Texas at Austin. I’m a gamer at heart and I have a passion for meeting people. I’m versed in C, Java, and Python and I aspire to use my CS skills through artificial intelligence.",
-    0,
+    6,
     "Frontend"
   ),
   new Member(
@@ -88,7 +88,7 @@ const allInfo = [
     "willeng37",
     william,
     "I’m a junior CS major at the University of Texas at Austin. Outside of school, I like to play video games, cook and juggle. I have experience with Java, C, and Python, but am constantly seeking to learn more outside of my expertise.",
-    0,
+    28,
     "Frontend"
   ),
 ];
@@ -220,8 +220,6 @@ export default function About() {
   const [baseUserData] = useState(allInfo);
   const [commitData, setCommitData] = useState(0);
   const [issueData, setIssueData] = useState(0);
-  const [unitData] = useState(0);
-
   useEffect(() => {
     const getCommits = async () => {
       await axios
@@ -411,7 +409,7 @@ export default function About() {
         <Col>
           <Card className="text-center">
             <Card.Body>
-              <Card.Title>Total Unit Tests: {unitData}</Card.Title>
+              <Card.Title>Total Unit Tests: 34</Card.Title>
             </Card.Body>
           </Card>
         </Col>

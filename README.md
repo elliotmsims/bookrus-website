@@ -45,7 +45,7 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 | Francisco Reyna      | 0         | 0      |
 | William Eng          | 0         | 0      |
 | Hrithik Ramganesh    | 0         | 0      |
-| Elliot Sims          | 20        | 8      |
+| Elliot Sims          | 20        | 38     |
 
 ## Comments
 
