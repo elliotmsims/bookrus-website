@@ -33,6 +33,10 @@ export default function Country() {
       j += 1;
     }
   }
+  const languages = country.country_languages
+    .replace("[", "")
+    .replace("]", "")
+    .split(", ");
   return (
     <Container>
       <h1>Country: {country.country_name}</h1>
@@ -56,12 +60,19 @@ export default function Country() {
         <Row>
           <Col>Region: {country.country_region}</Col>
           <Col>Capital: {country.country_capital_city}</Col>
+          <Col>Population: {country.country_population}</Col>
           <Col>Longitude: {country.country_long}</Col>
           <Col>Latitude: {country.country_lat}</Col>
           <Col>Demonym: {country.country_demonym}</Col>
+          <Col>Languages: 
+            {languages.map((language) => (
+                <p>{language}</p>
+            ))}
+          </Col>
         </Row>
       </h6>
-      {/* NEED A DESCRIPTION 😱 */}
+      <h3>Description:</h3>
+      <p>{country.country_description}</p>
       <img
         src={country.country_image}
         alt={country.country_name}

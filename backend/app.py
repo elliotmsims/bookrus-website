@@ -39,6 +39,9 @@ class Country(db.Model):
     country_demonym = db.Column(db.String())
     country_image = db.Column(db.String())
     country_authors = db.Column(db.String())
+    country_description = db.Column(db.String())
+    country_languages = db.Column(db.String())
+    country_population = db.Column(db.Integer)
 
 # Define Author table/data model
 class Author(db.Model):
@@ -52,6 +55,7 @@ class Author(db.Model):
     author_image = db.Column(db.String())
     author_country_id = db.Column(db.Integer)
     author_books = db.Column(db.String())
+    author_genre = db.Column(db.String())
 
 # Build database
 db.create_all()

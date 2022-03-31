@@ -15,11 +15,6 @@ export default function Author() {
   for (let i = 0; i < bookArr.length; i += 1) {
     books[i] = getBook(bookArr[i]);
   }
-  const categories = new Set();
-  books.forEach((book) => {
-    categories.add(book.book_categories);
-  });
-
   return (
     <Container>
       <h1>Author: {author.author_name}</h1>
@@ -40,9 +35,7 @@ export default function Author() {
       </p>
       <h6>
         <Row>
-          <Col>
-            Genres: <p>{categories}</p>
-          </Col>
+          <Col> Genre: {author.author_genre} </Col>
           <Col>Born: {author.author_birth_date}</Col>
           <Col>Died: {author.author_death_date}</Col>
           <Col>Total Works: {author.author_work_count}</Col>
