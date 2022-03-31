@@ -1,6 +1,3 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-
 export function getCountry(countryId) {
   const request = new XMLHttpRequest();
   request.open("GET", `https://api.bookrus.me/country/${countryId}`, false);
@@ -15,21 +12,17 @@ export function getCountry(countryId) {
   return country;
 }
 
-export function getCountries() {
-  const [countries, setCountries] = useState(0);
-  useEffect(() => {
-    const get = async () => {
-      await axios
-        .get(`https://api.bookrus.me/country`, {
-          headers: { Accept: "application/vnd.api+json" },
-        })
-        .then((response) => response.data)
-        .then((data) => {
-          setCountries(data.data);
-        });
-    };
-    get();
-  }, []);
+export function getCountries(index) {
+  const request = new XMLHttpRequest();
+  request.open("GET", `https://api.bookrus.me/country?page=${index}`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let countries = null;
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+    countries = response.data;
+  }
   return countries;
 }
 
@@ -47,21 +40,17 @@ export function getBook(bookId) {
   return book;
 }
 
-export function getBooks() {
-  const [books, setBooks] = useState(0);
-  useEffect(() => {
-    const get = async () => {
-      await axios
-        .get(`https://api.bookrus.me/book`, {
-          headers: { Accept: "application/vnd.api+json" },
-        })
-        .then((response) => response.data)
-        .then((data) => {
-          setBooks(data.data);
-        });
-    };
-    get();
-  }, []);
+export function getBooks(index) {
+  const request = new XMLHttpRequest();
+  request.open("GET", `https://api.bookrus.me/book?page=${index}`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let books = null;
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+    books = response.data;
+  }
   return books;
 }
 
@@ -79,20 +68,16 @@ export function getAuthor(authorId) {
   return author;
 }
 
-export function getAuthors() {
-  const [authors, setAuthors] = useState(0);
-  useEffect(() => {
-    const get = async () => {
-      await axios
-        .get(`https://api.bookrus.me/author`, {
-          headers: { Accept: "application/vnd.api+json" },
-        })
-        .then((response) => response.data)
-        .then((data) => {
-          setAuthors(data.data);
-        });
-    };
-    get();
-  }, []);
+export function getAuthors(index) {
+  const request = new XMLHttpRequest();
+  request.open("GET", `https://api.bookrus.me/author?page=${index}`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let authors = null;
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+    authors = response.data;
+  }
   return authors;
 }

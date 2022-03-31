@@ -1,55 +1,66 @@
 import {
   Container,
-  Col,
+  // Col,
   Row,
   Card,
-  // ListGroup,
-  // Button,
-  // ListGroupItem,
+  ListGroup,
+  ListGroupItem,
 } from "react-bootstrap";
-// import { Outlet, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getBooks } from "../../apiCalls";
 
 export default function Books() {
   const books = getBooks();
-  const arr = [];
-  Object.keys(books).forEach((index) => {
-    arr.push(books[index].attributes);
-  });
+  const navigate = useNavigate();
+  const handleClick = (id) => navigate(`/books/${id}`);
   return (
     <div className="Books">
       <Container>
-        <h1>Books!</h1>
-        <h3>Number of authors: {books.length}</h3>
+        <Row>
+          <h1>Books!</h1>
+          <h3>Number of books: {books.length}</h3>
+        </Row>
         <Row xs={1} md={4}>
-          {arr.map((book) => (
-            <Col>
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={book.book_image} />
-                <Card.Body>
-                  <Card.Title>{book.book_title}</Card.Title>
-                  {/* <Card.Text>
-                    <ListGroup>
-                      <ListGroupItem>Born: {author.born}</ListGroupItem>
-                      <ListGroupItem>Sex: {author.sex}</ListGroupItem>
-                      <ListGroupItem>
-                        Famous Book: {author.books[0]}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        Birthplace:
-                        {ModelsJson.countries[author.nationalityId].name}
-                      </ListGroupItem>
-                    </ListGroup>
-                  </Card.Text>
-                  <Link to={`/authors/${index}`}>
-                    <Button variant="primary">
-                      Learn about {author.author}
-                    </Button>
-                  </Link> */}
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+          {books.map((item) => {
+            const book = item.attributes;
+            return (
+              <Row>
+                <Card style={{ width: "18rem", border: "1px solid white" }}>
+                  <button
+                    type="button"
+                    onClick={() => handleClick(book.book_id)}
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={book.book_image}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </button>
+                  <Card.Body>
+                    <Card.Title>{book.book_title}</Card.Title>
+                    <Card.Text>
+                      <ListGroup>
+                        <ListGroupItem>
+                          Author: {book.book_author}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Publication Date: {book.book_published}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Language: {book.book_language}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Genre: {book.book_categories}
+                        </ListGroupItem>
+                        <ListGroupItem>Length: {book.book_pages}</ListGroupItem>
+                      </ListGroup>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                <br />
+              </Row>
+            );
+          })}
         </Row>
       </Container>
     </div>
