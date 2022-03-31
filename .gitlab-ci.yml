@@ -24,17 +24,17 @@ postman_test:
 
 frontend_gui_test:
   stage: test
+  image: python:latest
   script:
   - cd frontend
-  - apt-get install python3-pip
   - pip3 install -r selenium
   - python3 guitests.py
 
 backend_unit_tests:
   stage: test
+  image: python:latest
   script:
     - cd backend
-    - apt-get install python3-pip
     - pip3 install -r requirements.txt
     - python3 tests.py
 
