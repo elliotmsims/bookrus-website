@@ -30,14 +30,14 @@ export default function Authors() {
             setCurrentPage={setCurrentPage}
           />
         </Row>
-        <Row xs={1} md={4}>
+        <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {authors.map((item) => {
             const author = item.attributes;
             if (!author.author_birth_date) {
-              author.author_birth_date = "unkown";
+              author.author_birth_date = "Unknown";
             }
             if (!author.author_death_date) {
-              author.author_death_date = "unkown";
+              author.author_death_date = "Unknown";
             }
             if (!author.author_image) {
               author.author_image = blankProfilePic;
