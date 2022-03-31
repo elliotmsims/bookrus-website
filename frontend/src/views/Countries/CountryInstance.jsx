@@ -37,6 +37,12 @@ export default function Country() {
     .replace("[", "")
     .replace("]", "")
     .split(", ");
+  Object.keys(country).forEach((k) => {
+    console.log(country[k]);
+    if (!country[k]) {
+      country[k] = "N/A";
+    }
+  });
   return (
     <Container>
       <h1>Country: {country.country_name}</h1>

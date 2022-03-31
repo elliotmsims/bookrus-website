@@ -5,6 +5,11 @@ import { getCountry, getBook } from "../../apiCalls";
 export default function Book() {
   const book = getBook(useParams().bookId);
   const country = getCountry(book.book_country_id);
+  Object.keys(book).forEach((k) => {
+    if (!book[k]) {
+      book[k] = "N/A";
+    }
+  });
 
   return (
     <Container>
