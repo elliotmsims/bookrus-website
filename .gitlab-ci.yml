@@ -24,15 +24,15 @@ postman_test:
 
 frontend_gui_test:
   stage: test
-  image: python:latest
+  image: python:3.6-stretch
   script:
   - cd frontend
-  - pip3 install -r selenium
+  - pip3 install selenium
   - python3 guitests.py
 
 backend_unit_tests:
   stage: test
-  image: python:latest
+  image: python:3.6-stretch
   script:
     - cd backend
     - pip3 install -r requirements.txt
