@@ -8,16 +8,33 @@ cache:
   paths:
     - frontend/node_modules/
 
-build_front_end:
+frontend_build:
   stage: build
   script:
     - cd frontend
     - npm install
     - CI=false npm run-script build
 
-test_postman:
+postman_test:
   stage: test
   script:
     - npm install -g newman
     - cd backend
     - newman run collection.json
+
+frontend_gui_test:
+  stage: test
+  image: python:3.6-stretch
+  script:
+  - cd frontend
+  - pip3 install selenium
+  - python3 guitests.py
+
+backend_unit_tests:
+  stage: test
+  image: python:3.6-stretch
+  script:
+    - cd backend
+    - pip3 install -r requirements.txt
+    - python3 tests.py
+
