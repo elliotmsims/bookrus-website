@@ -6,13 +6,17 @@ import {
   ListGroup,
   ListGroupItem,
 } from "react-bootstrap";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuthors, getCountry } from "../../apiCalls";
 import blankProfilePic from "../../assets/blankprofile.png";
+import MyPagination from "../../components/pagination/Pagination";
 // import "./styles.css";
 
 export default function Authors() {
-  const authors = getAuthors();
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalInstances = 4392;
+  const authors = getAuthors(currentPage);
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/authors/${id}`);
   return (
@@ -20,7 +24,11 @@ export default function Authors() {
       <Container fluid>
         <Row>
           <h1>Authors!</h1>
-          <h3>Number of Authors: {authors.length}</h3>
+          <MyPagination
+            totalInstances={totalInstances}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </Row>
         <Row xs={1} md={4}>
           {authors.map((item) => {

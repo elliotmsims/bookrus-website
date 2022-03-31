@@ -6,11 +6,15 @@ import {
   ListGroup,
   ListGroupItem,
 } from "react-bootstrap";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBooks } from "../../apiCalls";
+import MyPagination from "../../components/pagination/Pagination";
 
 export default function Books() {
-  const books = getBooks();
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalInstances = 13600;
+  const books = getBooks(currentPage);
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/books/${id}`);
   return (
@@ -19,7 +23,11 @@ export default function Books() {
         <Row>
           <Col>
             <h1>Books!</h1>
-            <h3>Number of books: {books.length}</h3>
+            <MyPagination
+              totalInstances={totalInstances}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </Col>
         </Row>
         <Row xs={1} md={4}>

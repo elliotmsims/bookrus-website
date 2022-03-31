@@ -6,12 +6,15 @@ import {
   ListGroup,
   ListGroupItem,
 } from "react-bootstrap";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCountries } from "../../apiCalls";
 import MyPagination from "../../components/pagination/Pagination";
 
 export default function Countries() {
-  const countries = getCountries(2);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalInstances = 218;
+  const countries = getCountries(currentPage);
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/countries/${id}`);
   return (
@@ -20,8 +23,11 @@ export default function Countries() {
         <Row>
           <Col>
             <h1>Countries!</h1>
-            <h3>Total Countries: 218</h3>
-            <MyPagination total={218} totalPage={22} index={5} />
+            <MyPagination
+              totalInstances={totalInstances}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </Col>
         </Row>
         <Row xs={2} md={4}>
