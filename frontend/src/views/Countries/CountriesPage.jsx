@@ -30,7 +30,7 @@ export default function Countries() {
             />
           </Col>
         </Row>
-        <Row xs={2} md={4}>
+        <Row style={{ justifyContent: "center" }} xs={2} md={4}>
           {countries.map((item) => {
             const country = item.attributes;
             return (

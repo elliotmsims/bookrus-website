@@ -30,7 +30,7 @@ export default function Books() {
             />
           </Col>
         </Row>
-        <Row xs={1} md={4}>
+        <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {books.map((item) => {
             const book = item.attributes;
             return (

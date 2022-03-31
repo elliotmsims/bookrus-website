@@ -47,9 +47,9 @@ export default function Home() {
             style={{ justifyContent: "space-evenly" }}
           >
             {models.entry.map((item) => (
-              <Col>
+              <Col key={item.name}>
                 <Card>
-                  <Card.Img class="card-img" variant="top" src={item.img} />
+                  <Card.Img className="card-img" variant="top" src={item.img} />
                   <Card.Body>
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>{item.desc}</Card.Text>

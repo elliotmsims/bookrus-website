@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { getAuthor, getCountry, getBook } from "../../apiCalls";
+import blankProfilePic from "../../assets/blankprofile.png";
 
 export default function Author() {
   const author = getAuthor(useParams().authorId);
@@ -15,6 +16,11 @@ export default function Author() {
   for (let i = 0; i < bookArr.length; i += 1) {
     books[i] = getBook(bookArr[i]);
   }
+  Object.keys(author).forEach((k) => {
+    if (!author[k]) {
+      author[k] = "N/A";
+    }
+  });
   return (
     <Container>
       <h1>Author: {author.author_name}</h1>
@@ -46,7 +52,7 @@ export default function Author() {
       <p>{author.author_bio}</p>
       <img
         src={author.author_image}
-        alt={author.author_name}
+        alt={blankProfilePic}
         width="180"
         height="256"
       />
