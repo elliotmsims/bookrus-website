@@ -11,10 +11,11 @@ from countryinfo import CountryInfo
 
 app = Flask(__name__)
 app.debug = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # Schema: "postgres+psycopg2://<USERNAME>:<PASSWORD>@<IP_ADDRESS>:<PORT>/<DATABASE_NAME>"
-app.config['SQLALCHEMY_DATABASE_URI'] = credentials.db_login
+app.config["SQLALCHEMY_DATABASE_URI"] = credentials.db_login
 db = SQLAlchemy(app)
+
 
 class Countries(db.Model):
     country_id = db.Column(db.Integer, primary_key=True)
@@ -28,7 +29,19 @@ class Countries(db.Model):
     country_authors = db.Column(db.String())
     country_books = db.Column(db.String())
 
-def __init__(self, country_name="NaN", country_region="NaN", capital_city="NaN", country_lat=0.0, country_long=0.0, country_demonym="NaN", country_image="NaN", country_authors="NaN", country_books="NaN"):
+
+def __init__(
+    self,
+    country_name="NaN",
+    country_region="NaN",
+    capital_city="NaN",
+    country_lat=0.0,
+    country_long=0.0,
+    country_demonym="NaN",
+    country_image="NaN",
+    country_authors="NaN",
+    country_books="NaN",
+):
     self.country_name = country_name
     self.country_region = country_region
     self.country_capital_city = capital_city
@@ -39,23 +52,24 @@ def __init__(self, country_name="NaN", country_region="NaN", capital_city="NaN",
     self.country_authors = country_authors
     self.country_books = country_books
 
+
 db.create_all()
 
 countries_list = []
 d = {}
-with open('countries_to_books.txt', 'r') as file:
+with open("countries_to_books.txt", "r") as file:
     for line in file:
         (key, val) = line.split(" ", 1)
-        val = val.replace('[', '').replace(']','').split(",")
-        val = [int(num) for num in val]  
-        if key != 'None':
+        val = val.replace("[", "").replace("]", "").split(",")
+        val = [int(num) for num in val]
+        if key != "None":
             d[int(key)] = val
-for i in range(1, 219): 
-    country_request_url = 'http://localhost:5000/api/country/' + str(i)
-    headers = {'Accept': 'application/vnd.api+json'}
+for i in range(1, 219):
+    country_request_url = "http://localhost:5000/api/country/" + str(i)
+    headers = {"Accept": "application/vnd.api+json"}
     cr = requests.get(country_request_url, headers=headers)
-    cdata = json.loads(cr.content.decode('utf-8'))
-    new_country = Countries(**cdata['data']['attributes'])
+    cdata = json.loads(cr.content.decode("utf-8"))
+    new_country = Countries(**cdata["data"]["attributes"])
     if i in d:
         serialized = json.dumps(d[i])
         new_country.country_books = serialized
