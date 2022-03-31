@@ -64,9 +64,10 @@ export default function Country() {
           <Col>Longitude: {country.country_long}</Col>
           <Col>Latitude: {country.country_lat}</Col>
           <Col>Demonym: {country.country_demonym}</Col>
-          <Col>Languages: 
+          <Col>
+            Languages:
             {languages.map((language) => (
-                <p>{language}</p>
+              <p>{language}</p>
             ))}
           </Col>
         </Row>

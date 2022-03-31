@@ -17,8 +17,7 @@ build_front_end:
 
 test_postman:
   stage: test
-  before_script:
+  script:
     - npm install -g newman
     - cd backend
-  script:
     - newman run collection.json
