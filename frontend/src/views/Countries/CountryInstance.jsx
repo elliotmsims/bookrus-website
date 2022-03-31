@@ -1,10 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import { getAuthor, getCountry, getBook } from "../../apiCalls";
+import { getAuthor, getCountry } from "../../apiCalls";
 
 export default function Country() {
-  const country = getCountry(parseInt(useParams().countryId, 10));
-  console.log(country);
+  const country = getCountry(useParams().countryId);
   let arr;
   if (country.country_authors != null) {
     arr = country.country_authors.replace("[", "").replace("]", "").split(", ");
@@ -15,8 +14,6 @@ export default function Country() {
   for (let i = 0; i < arr.length; i += 1) {
     authors[i] = getAuthor(arr[i]);
   }
-  console.log(authors);
-  console.log(country.country_name);
   return (
     <Container>
       <h1>Country: {country.country_name}</h1>

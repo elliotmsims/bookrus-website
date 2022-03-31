@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { getAuthor, getCountry, getBook } from "../../apiCalls";
 
 export default function Author() {
-  const author = getAuthor(parseInt(useParams().authorId, 10));
+  const author = getAuthor(useParams().authorId);
   const country = getCountry(author.author_country_id);
   const arr = author.author_books.replace("[", "").replace("]", "").split(", ");
   const books = new Array(arr.length);

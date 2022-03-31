@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { getCountry, getBook } from "../../apiCalls";
 
 export default function Book() {
-  const book = getBook(parseInt(useParams().bookId, 10));
+  const book = getBook(useParams().bookId);
   const country = getCountry(book.book_country_id);
 
   return (
