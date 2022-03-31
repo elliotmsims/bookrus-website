@@ -27,7 +27,7 @@ db = SQLAlchemy(app)
 #   assuming authors-countries is done
 
 # Define Author table/data model
-class Author(db.Model):
+class Authors(db.Model):
     author_id = db.Column(db.Integer, primary_key=True)
     author_name = db.Column(db.String())
     author_birth_date = db.Column(db.String())
@@ -37,6 +37,9 @@ class Author(db.Model):
     author_bio = db.Column(db.String())
     author_image = db.Column(db.String())
     author_country_id = db.Column(db.Integer)
+    author_books = db.Column(db.String())
+    author_genre = db.Column(db.String())
+    author_nationality = db.Column(db.String())
 
 
 def __init__(
@@ -49,6 +52,9 @@ def __init__(
     author_bio="NaN",
     author_image="NaN",
     author_country_id=0,
+    author_books="NaN",
+    author_genre="NaN",
+    author_nationality="NaN"
 ):
     self.author_name = author_name
     self.author_birth_date = author_birth_date
@@ -58,6 +64,9 @@ def __init__(
     self.author_bio = author_bio
     self.author_image = author_image
     self.author_country_id = author_country_id
+    self.author_books = author_books
+    self.author_genre = author_genre
+    self.author_nationality = author_nationality
 
 
 def check_categories_keyword(page, keyword):
@@ -71,31 +80,26 @@ db.create_all()
 id_to_country = {}
 country_to_authors = {}
 for i in range(1, 219):
-    country_request_url = "http://localhost:5000/api/country/" + str(i)
+    country_request_url = "http://localhost:5000/country/" + str(i)
     headers = {"Accept": "application/vnd.api+json"}
     cr = requests.get(country_request_url, headers=headers)
     cdata = json.loads(cr.content.decode("utf-8"))
-    country = CountryInfo(cdata["data"]["attributes"]["country_name"])
-    demonym = None
-    try:
-        demonym = country.demonym()
-    except:
-        demonym = cdata["data"]["attributes"]["country_name"]
-    id_to_country[i] = demonym
+    id_to_country[i] = cdata["data"]["attributes"]["country_demonym"]
 authors_list = []
 wiki = wikipediaapi.Wikipedia("en")
-for i in range(1, 4394):
-    author_request_url = "http://localhost:5000/api/author/" + str(i)
+for i in range(4301, 4393):
+    author_request_url = "http://localhost:5000/author/" + str(i)
     headers = {"Accept": "application/vnd.api+json"}
     ar = requests.get(author_request_url, headers=headers)
     adata = json.loads(ar.content.decode("utf-8"))
-    new_author = Author(**adata["data"]["attributes"])
+    new_author = Authors(**adata["data"]["attributes"])
     # Get Country ID
     page = wiki.page(adata["data"]["attributes"]["author_name"])
     categories = page.categories
     for j in id_to_country:
-        if check_categories_keyword(page, id_to_country[j]):
+        if id_to_country[j] != None and check_categories_keyword(page, id_to_country[j]):
             new_author.author_country_id = j
+            new_author.author_nationality = id_to_country[j]
             if j not in country_to_authors:
                 country_to_authors[j] = []
             country_to_authors[j].append(new_author.author_id)
