@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { getCountry, getBook } from "../../apiCalls";
 
@@ -11,12 +11,14 @@ export default function Book() {
       <h1>Book: {book.book_title}</h1>
       <h3>
         Author:{" "}
-        <Link to={`/authors/${book.book_author_id}`}>{book.book_author}</Link>
+        <Link to={`/authors/${book.book_author_id}`}>
+          <Button variant="dark">{book.book_author}</Button>
+        </Link>
       </h3>
       <h3>
         Author Nationality:{" "}
         <Link to={`/countries/${book.book_country_id}`}>
-          {country.country_name}
+          <Button variant="dark">{country.country_name}</Button>
         </Link>
       </h3>
       <h6>

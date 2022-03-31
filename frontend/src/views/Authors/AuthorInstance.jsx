@@ -1,14 +1,19 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { getAuthor, getCountry, getBook } from "../../apiCalls";
 
 export default function Author() {
   const author = getAuthor(useParams().authorId);
   const country = getCountry(author.author_country_id);
-  const arr = author.author_books.replace("[", "").replace("]", "").split(", ");
-  const books = new Array(arr.length);
-  for (let i = 0; i < arr.length; i += 1) {
-    books[i] = getBook(arr[i]);
+  let bookArr;
+  if (author.author_books != null) {
+    bookArr = author.author_books.replace("[", "").replace("]", "").split(", ");
+  } else {
+    bookArr = [];
+  }
+  const books = new Array(bookArr.length);
+  for (let i = 0; i < bookArr.length; i += 1) {
+    books[i] = getBook(bookArr[i]);
   }
   const categories = new Set();
   books.forEach((book) => {
@@ -22,13 +27,16 @@ export default function Author() {
         {" "}
         Nationality:{" "}
         <Link to={`/countries/${author.author_country_id}`}>
-          {country.country_name}
+          <Button variant="dark">{country.country_name}</Button>
         </Link>
       </h3>
       <h3>Books:</h3>
       <p>
+        
         {books.map((book) => (
-          <Link to={`/books/${book.book_id}`}>{`${book.book_title}, `}</Link>
+          <Link to={`/books/${book.book_id}`}>
+            <Button variant="dark">{book.book_title}</Button>
+          </Link>
         ))}
       </p>
       <h6>
