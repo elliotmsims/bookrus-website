@@ -1,6 +1,6 @@
 import {
   Container,
-  // Col,
+  Col,
   Row,
   Card,
   ListGroup,
@@ -23,13 +23,18 @@ export default function Authors() {
     <div className="Authors">
       <Container fluid>
         <Row>
-          <h1>Authors!</h1>
-          <MyPagination
-            totalInstances={totalInstances}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+          <h1>Authors</h1>
         </Row>
+        <Row>
+          <Col>
+            <MyPagination
+              totalInstances={totalInstances}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </Col>
+        </Row>
+        <br />
         <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {authors.map((item) => {
             const author = item.attributes;

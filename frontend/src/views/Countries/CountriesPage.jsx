@@ -22,8 +22,10 @@ export default function Countries() {
     <div className="Countries">
       <Container fluid>
         <Row>
+          <h1>Countries</h1>
+        </Row>
+        <Row>
           <Col>
-            <h1>Countries!</h1>
             <MyPagination
               totalInstances={totalInstances}
               currentPage={currentPage}
@@ -31,6 +33,7 @@ export default function Countries() {
             />
           </Col>
         </Row>
+        <br />
         <Row style={{ justifyContent: "center" }} xs={2} md={4}>
           {countries.map((item) => {
             const country = item.attributes;

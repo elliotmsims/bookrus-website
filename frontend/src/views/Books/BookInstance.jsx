@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { getCountry, getBook } from "../../apiCalls";
+import blankBookPic from "../../assets/blankbookimg.jpg";
 
 export default function Book() {
   const book = getBook(useParams().bookId);
@@ -8,6 +9,9 @@ export default function Book() {
   Object.keys(book).forEach((k) => {
     if (!book[k]) {
       book[k] = "N/A";
+    }
+    if (book.book_image === "N/A") {
+      book.book_image = blankBookPic;
     }
   });
 
@@ -17,13 +21,13 @@ export default function Book() {
       <h3>
         Author:{" "}
         <Link to={`/authors/${book.book_author_id}`}>
-          <Button variant="dark">{book.book_author}</Button>
+          <Button variant="outline-dark">{book.book_author}</Button>
         </Link>
       </h3>
       <h3>
         Author Nationality:{" "}
         <Link to={`/countries/${book.book_country_id}`}>
-          <Button variant="dark">{country.country_name}</Button>
+          <Button variant="outline-dark">{country.country_name}</Button>
         </Link>
       </h3>
       <h6>

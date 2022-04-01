@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { getAuthor, getCountry, getBook } from "../../apiCalls";
+import blankCountryPic from "../../assets/blankcountryimg.jpg";
 
 export default function Country() {
   const country = getCountry(parseInt(useParams().countryId, 10));
@@ -41,23 +42,26 @@ export default function Country() {
     if (!country[k]) {
       country[k] = "N/A";
     }
+    if (country.country_image === "N/A") {
+      country.country_image = blankCountryPic;
+    }
   });
   return (
     <Container>
       <h1>Country: {country.country_name}</h1>
       <h3>
-        Authors:
+        Authors:{" "}
         {authors.map((author) => (
           <Link to={`/authors/${author.author_id}`}>
-            <Button variant="dark">{`${author.author_name}`}</Button>
+            <Button variant="outline-dark">{`${author.author_name}`}</Button>
           </Link>
         ))}
       </h3>
       <h3>
-        Books:
+        Books:{" "}
         {books.map((book) => (
           <Link to={`/books/${book.book_id}`}>
-            <Button variant="dark">{`${book.book_title}`}</Button>
+            <Button variant="outline-dark">{`${book.book_title}`}</Button>
           </Link>
         ))}
       </h3>

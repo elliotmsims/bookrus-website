@@ -22,8 +22,10 @@ export default function Books() {
     <div className="Books">
       <Container fluid>
         <Row>
+          <h1>Books</h1>
+        </Row>
+        <Row>
           <Col>
-            <h1>Books!</h1>
             <MyPagination
               totalInstances={totalInstances}
               currentPage={currentPage}
@@ -31,6 +33,7 @@ export default function Books() {
             />
           </Col>
         </Row>
+        <br />
         <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {books.map((item) => {
             const book = item.attributes;

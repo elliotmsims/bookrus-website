@@ -1,4 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
+import { Container, Row, Col } from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
 
 export default function MyPagination(props) {
@@ -12,26 +13,33 @@ export default function MyPagination(props) {
   const handleNext = () => props.setCurrentPage(currentPage + 1);
   const handleLast = () => props.setCurrentPage(totalPages);
   return (
-    <>
-      <Pagination>
-        <Pagination.First disabled={currentPage <= 1} onClick={handleFirst} />
-        <Pagination.Prev disabled={currentPage <= 1} onClick={handlePrev} />
-        <Pagination.Item active>{currentPage}</Pagination.Item>
-        <Pagination.Next
-          disabled={currentPage >= totalPages}
-          onClick={handleNext}
-        />
-        <Pagination.Last
-          disabled={currentPage >= totalPages}
-          onClick={handleLast}
-        />
-      </Pagination>
-      <div>
-        <p>
-          {start}–{end} of {props.totalInstances} | Page {currentPage} of{" "}
-          {totalPages}
-        </p>
-      </div>
-    </>
+    <Container>
+      <Row xs="auto">
+        <Col>
+          <Pagination>
+            <Pagination.First
+              disabled={currentPage <= 1}
+              onClick={handleFirst}
+            />
+            <Pagination.Prev disabled={currentPage <= 1} onClick={handlePrev} />
+            <Pagination.Item active>{currentPage}</Pagination.Item>
+            <Pagination.Next
+              disabled={currentPage >= totalPages}
+              onClick={handleNext}
+            />
+            <Pagination.Last
+              disabled={currentPage >= totalPages}
+              onClick={handleLast}
+            />
+          </Pagination>
+        </Col>
+        <Col>
+          <b>
+            {start}–{end} of {props.totalInstances} | Page {currentPage} of{" "}
+            {totalPages}
+          </b>
+        </Col>
+      </Row>
+    </Container>
   );
 }

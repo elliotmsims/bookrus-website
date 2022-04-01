@@ -20,6 +20,9 @@ export default function Author() {
     if (!author[k]) {
       author[k] = "N/A";
     }
+    if (author.author_image === "N/A") {
+      author.author_image = blankProfilePic;
+    }
   });
   return (
     <Container>
@@ -28,14 +31,14 @@ export default function Author() {
         {" "}
         Nationality:{" "}
         <Link to={`/countries/${author.author_country_id}`}>
-          <Button variant="dark">{country.country_name}</Button>
+          <Button variant="outline-dark">{country.country_name}</Button>
         </Link>
       </h3>
       <h3>Books:</h3>
       <p>
         {books.map((book) => (
           <Link to={`/books/${book.book_id}`}>
-            <Button variant="dark">{book.book_title}</Button>
+            <Button variant="outline-dark">{book.book_title}</Button>
           </Link>
         ))}
       </p>
