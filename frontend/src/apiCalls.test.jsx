@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Jest test file for apiCalls
 const api = require("./apiCalls");
 
