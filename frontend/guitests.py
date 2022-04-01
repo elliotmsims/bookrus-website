@@ -19,9 +19,9 @@ class TestFrontendGui(unittest.TestCase):
         # Disable images
         chrome_prefs["profile.default_content_settings"] = {"images": 2}
         return webdriver.Chrome(options=chrome_options)
-    
+
     def testNavBarListing(self):
-        expected_navbar = ['about', 'books', 'authors', 'countries']
+        expected_navbar = ["about", "books", "authors", "countries"]
         driver = self.createDriver()
         driver.get(self.url)
         # Check if navbar buttons are listed
@@ -43,16 +43,16 @@ class TestFrontendGui(unittest.TestCase):
         option = navbar[0]
         option_text = option.text.lower()
         option.click()
-        self.assertEqual(driver.current_url, self.url + '/' + option_text)
+        self.assertEqual(driver.current_url, self.url + "/" + option_text)
         driver.quit()
 
     def testAboutNavigation(self):
         driver = self.createDriver()
         driver.get(self.url + "/about")
         # Check for naked links (non-hyperlinks)
-        links = driver.find_elements(by=By.TAG_NAME, value='a')
+        links = driver.find_elements(by=By.TAG_NAME, value="a")
         for link in links:
-            self.assertNotEqual(link.get_attribute('href'), link.text)
+            self.assertNotEqual(link.get_attribute("href"), link.text)
         driver.quit()
 
     def testBookNavigation(self):
@@ -61,11 +61,10 @@ class TestFrontendGui(unittest.TestCase):
         driver.implicitly_wait(5)
         driver.get(self.url + "/books")
         # Check that the number of books listed is not 0
-        count_elem = driver.find_element(by=By.TAG_NAME, value='h3')
-        if count_elem.text.startswith('Number of'):
-            pattern = re.search('\d', count_elem.text)
-            book_count = pattern.group(0)
-            self.assertNotEqual(book_count, '0')
+        count_elem = driver.find_element(by=By.TAG_NAME, value="b")
+        pattern = re.findall("[0-9]+", count_elem.text)
+        count = pattern[2]
+        self.assertNotEqual(count, "0")
         driver.quit()
 
     def testBookCardNavigation(self):
@@ -76,8 +75,8 @@ class TestFrontendGui(unittest.TestCase):
         driver.implicitly_wait(5)
         driver.get(listing_url)
         # Check that the instances listed have a button to instance page
-        card_elem = driver.find_element(by=By.CLASS_NAME, value='card')
-        button_elem = card_elem.find_element(by=By.TAG_NAME, value='button')
+        card_elem = driver.find_element(by=By.CLASS_NAME, value="card")
+        button_elem = card_elem.find_element(by=By.TAG_NAME, value="button")
         driver.execute_script("arguments[0].scrollIntoView();", button_elem)
         driver.execute_script("arguments[0].click();", button_elem)
         self.assertNotEqual(driver.current_url, listing_url)
@@ -89,9 +88,9 @@ class TestFrontendGui(unittest.TestCase):
         driver.implicitly_wait(5)
         driver.get(self.url + "/books/1")
         # Check that the author linked is named
-        author_elem = driver.find_element(by=By.TAG_NAME, value='h3')
-        author_link = author_elem.find_element(by=By.TAG_NAME, value='a')
-        self.assertNotEqual(author_link.text, '')
+        author_elem = driver.find_element(by=By.TAG_NAME, value="h3")
+        author_link = author_elem.find_element(by=By.TAG_NAME, value="a")
+        self.assertNotEqual(author_link.text, "")
         driver.quit()
 
     def testAuthorNavigation(self):
@@ -100,11 +99,10 @@ class TestFrontendGui(unittest.TestCase):
         driver.implicitly_wait(5)
         driver.get(self.url + "/books")
         # Check that the number of authors listed is not 0
-        count_elem = driver.find_element(by=By.TAG_NAME, value='h3')
-        if count_elem.text.startswith('Number of'):
-            pattern = re.search('\d', count_elem.text)
-            book_count = pattern.group(0)
-            self.assertNotEqual(book_count, '0')
+        count_elem = driver.find_element(by=By.TAG_NAME, value="b")
+        pattern = re.findall("[0-9]+", count_elem.text)
+        count = pattern[2]
+        self.assertNotEqual(count, "0")
         driver.quit()
 
     def testAuthorCardNavigation(self):
@@ -114,8 +112,8 @@ class TestFrontendGui(unittest.TestCase):
         driver.implicitly_wait(5)
         driver.get(listing_url)
         # Check that the instances listed have a button to instance page
-        card_elem = driver.find_element(by=By.CLASS_NAME, value='card')
-        button_elem = card_elem.find_element(by=By.TAG_NAME, value='button')
+        card_elem = driver.find_element(by=By.CLASS_NAME, value="card")
+        button_elem = card_elem.find_element(by=By.TAG_NAME, value="button")
         driver.execute_script("arguments[0].scrollIntoView();", button_elem)
         driver.execute_script("arguments[0].click();", button_elem)
         self.assertNotEqual(driver.current_url, listing_url)
@@ -127,9 +125,9 @@ class TestFrontendGui(unittest.TestCase):
         driver.implicitly_wait(5)
         driver.get(self.url + "/authors/1")
         # Check that the nationality linked is named
-        author_elem = driver.find_element(by=By.TAG_NAME, value='h3')
-        author_link = author_elem.find_element(by=By.TAG_NAME, value='a')
-        self.assertNotEqual(author_link.text, '')
+        author_elem = driver.find_element(by=By.TAG_NAME, value="h3")
+        author_link = author_elem.find_element(by=By.TAG_NAME, value="a")
+        self.assertNotEqual(author_link.text, "")
         driver.quit()
 
     def testCountryNavigation(self):
@@ -138,11 +136,10 @@ class TestFrontendGui(unittest.TestCase):
         driver.implicitly_wait(5)
         driver.get(self.url + "/countries")
         # Check that the number of countries listed is not 0
-        count_elem = driver.find_element(by=By.TAG_NAME, value='h3')
-        if count_elem.text.startswith('Number of'):
-            pattern = re.search('\d', count_elem.text)
-            count = pattern.group(0)
-            self.assertNotEqual(count, '0')
+        count_elem = driver.find_element(by=By.TAG_NAME, value="b")
+        pattern = re.findall("[0-9]+", count_elem.text)
+        count = pattern[2]
+        self.assertNotEqual(count, "0")
         driver.quit()
 
     def testCountryCardNavigation(self):
@@ -152,8 +149,8 @@ class TestFrontendGui(unittest.TestCase):
         driver.implicitly_wait(5)
         driver.get(listing_url)
         # Check that the instances listed have a button to instance page
-        card_elem = driver.find_element(by=By.CLASS_NAME, value='card')
-        button_elem = card_elem.find_element(by=By.TAG_NAME, value='button')
+        card_elem = driver.find_element(by=By.CLASS_NAME, value="card")
+        button_elem = card_elem.find_element(by=By.TAG_NAME, value="button")
         driver.execute_script("arguments[0].scrollIntoView();", button_elem)
         driver.execute_script("arguments[0].click();", button_elem)
         self.assertNotEqual(driver.current_url, listing_url)
@@ -163,12 +160,13 @@ class TestFrontendGui(unittest.TestCase):
         driver = self.createDriver()
         # Wait 5 seconds before checking listings
         driver.implicitly_wait(5)
-        driver.get(self.url + "/countries/1")
+        driver.get(self.url + "/countries/2")
         # Check that at least 1 author linked is named
-        author_elem = driver.find_element(by=By.TAG_NAME, value='h3')
-        author_link = author_elem.find_element(by=By.TAG_NAME, value='a')
-        self.assertNotEqual(author_link.text, '')
+        author_elem = driver.find_element(by=By.TAG_NAME, value="h3")
+        author_link = author_elem.find_element(by=By.TAG_NAME, value="a")
+        self.assertNotEqual(author_link.text, "")
         driver.quit()
+
 
 if __name__ == "__main__":
     unittest.main()
