@@ -107,7 +107,7 @@ const dataSources = [
     image: gbooks,
   },
   {
-    name: "World Bank Country/Region API",
+    name: "World Bank API",
     url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/898590-country-api-queries",
     description: "Gives country info including their region",
     image: wbank,
@@ -426,24 +426,33 @@ export default function About() {
           </Col>
         </Row>
         <br />
-        <h2>Data Sources/APIs:</h2>
+        <h2>Data Sources/APIs</h2>
         <br />
-        <Row xs={2} md={4} className="g-4">
+        <Row
+          md="auto"
+          className="mx-auto"
+          style={{ justifyContent: "space-evenly" }}
+        >
           {dataSources.map((source) => (
             <Col key={source.name}>
-              <Card style={{ width: "9rem", border: "1px solid white" }}>
+              <Card
+                className="text-center"
+                style={{ width: "12rem", border: "1px solid white" }}
+              >
                 <Card.Img
                   variant="bot"
                   className="about-img"
                   src={source.image}
-                  style={{ height: 150 }}
+                  style={{ height: 200 }}
                 />
                 <Card.Body>
                   <Card.Title>{source.name}</Card.Title>
-                  <Card.Subtitle className="text-muted">
-                    {source.description}
-                  </Card.Subtitle>
-                  <Button variant="dark" href={source.url} target="_blank">
+                  <Card.Text>{source.description}</Card.Text>
+                  <Button
+                    variant="outline-dark"
+                    href={source.url}
+                    target="_blank"
+                  >
                     More Info
                   </Button>
                 </Card.Body>
@@ -452,50 +461,37 @@ export default function About() {
           ))}
         </Row>
         <br />
-        <h2>Tools:</h2>
+        <h2>Tools</h2>
         <br />
-        <Row xs={2} md={5} className="g-4">
-          {tools.slice(0, tools.length / 2).map((source) => (
+        <Row
+          md="auto"
+          className="mx-auto"
+          style={{ justifyContent: "space-evenly" }}
+        >
+          {tools.map((source) => (
             <Col
               key={source.name}
               className="cards"
               style={{ justifyContent: "space-evenly" }}
             >
-              <Card style={{ width: "9rem", border: "1px solid white" }}>
+              <Card
+                className="text-center"
+                style={{ width: "12rem", border: "1px solid white" }}
+              >
                 <Card.Img
                   variant="bot"
                   className="about-img"
                   src={source.image}
-                  style={{ height: 150 }}
+                  style={{ height: 200 }}
                 />
                 <Card.Body>
                   <Card.Title>{source.name}</Card.Title>
                   <Card.Text>{source.description}</Card.Text>
-                  <Button variant="dark" href={source.url} target="_blank">
-                    More Info
-                  </Button>
-                </Card.Body>
-              </Card>
-              <br />
-            </Col>
-          ))}
-          {tools.slice(tools.length / 2).map((source) => (
-            <Col
-              key={source.name}
-              className="cards"
-              style={{ justifyContent: "space-evenly" }}
-            >
-              <Card style={{ width: "9rem", border: "1px solid white" }}>
-                <Card.Img
-                  variant="bot"
-                  className="about-img"
-                  src={source.image}
-                  style={{ height: 150 }}
-                />
-                <Card.Body>
-                  <Card.Title>{source.name}</Card.Title>
-                  <Card.Text>{source.description}</Card.Text>
-                  <Button variant="dark" href={source.url} target="_blank">
+                  <Button
+                    variant="outline-dark"
+                    href={source.url}
+                    target="_blank"
+                  >
                     More Info
                   </Button>
                 </Card.Body>
