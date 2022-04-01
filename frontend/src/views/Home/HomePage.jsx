@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="main">
       <div className="home-bg" style={{ backgroundImage: `url(${splashArt})` }}>
-        <Container style={{ maxWidth: "70%" }}>
+        <Container style={{ maxWidth: "100%" }}>
           <div className="bg-text">
             Information about your favorite stories, all in one place
           </div>
@@ -47,9 +47,9 @@ export default function Home() {
             style={{ justifyContent: "space-evenly" }}
           >
             {models.entry.map((item) => (
-              <Col>
+              <Col key={item.name}>
                 <Card>
-                  <Card.Img class="card-img" variant="top" src={item.img} />
+                  <Card.Img className="card-img" variant="top" src={item.img} />
                   <Card.Body>
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>{item.desc}</Card.Text>

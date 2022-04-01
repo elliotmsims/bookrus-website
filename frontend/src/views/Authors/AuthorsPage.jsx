@@ -1,51 +1,84 @@
 import {
   Container,
-  // Row,
   // Col,
-  // Card,
-  // ListGroup,
-  // Button,
-  // ListGroupItem,
+  Row,
+  Card,
+  ListGroup,
+  ListGroupItem,
 } from "react-bootstrap";
-// import { Outlet, Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAuthors } from "../../apiCalls";
+import blankProfilePic from "../../assets/blankprofile.png";
+import MyPagination from "../../components/pagination/Pagination";
+// import "./styles.css";
 
 export default function Authors() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalInstances = 4392;
+  const authors = getAuthors(currentPage);
+  const navigate = useNavigate();
+  const handleClick = (id) => navigate(`/authors/${id}`);
   return (
     <div className="Authors">
-      <Container>
-        <h1>Authors!</h1>
-
-        <h3>Number of authors: 0</h3>
-        {/* <Row xs={1} md={4}>
-          {ModelsJson.authors.map((author, index) => (
-            <Col>
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={author.image} />
-                <Card.Body>
-                  <Card.Title>{author.author}</Card.Title>
-                  <Card.Text>
-                    <ListGroup>
-                      <ListGroupItem>Born: {author.born}</ListGroupItem>
-                      <ListGroupItem>Sex: {author.sex}</ListGroupItem>
-                      <ListGroupItem>
-                        Famous Book: {author.books[0]}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        Birthplace:
-                        {ModelsJson.countries[author.nationalityId].name}
-                      </ListGroupItem>
-                    </ListGroup>
-                  </Card.Text>
-                  <Link to={`/authors/${index}`}>
-                    <Button variant="primary">
-                      Learn about {author.author}
-                    </Button>
-                  </Link>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row> */}
+      <Container fluid>
+        <Row>
+          <h1>Authors!</h1>
+          <MyPagination
+            totalInstances={totalInstances}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </Row>
+        <Row style={{ justifyContent: "center" }} xs={1} md={4}>
+          {authors.map((item) => {
+            const author = item.attributes;
+            Object.keys(author).forEach((k) => {
+              if (!author[k]) {
+                author[k] = "N/A";
+              }
+            });
+            if (author.author_image === "N/A") {
+              author.author_image = blankProfilePic;
+            }
+            return (
+              <Row>
+                <Card style={{ width: "18rem", border: "1px solid white" }}>
+                  <button
+                    type="button"
+                    onClick={() => handleClick(author.author_id)}
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={author.author_image}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </button>
+                  <Card.Body>
+                    <Card.Title>{author.author_name}</Card.Title>
+                    <Card.Text>
+                      <ListGroup variant="flush">
+                        <ListGroupItem>
+                          Best Work: {author.author_top_work}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Work Count: {author.author_work_count}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Main Genre: {author.author_genre}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Nationality: {author.author_nationality}
+                        </ListGroupItem>
+                      </ListGroup>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                <br />
+              </Row>
+            );
+          })}
+        </Row>
       </Container>
     </div>
   );

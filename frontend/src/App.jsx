@@ -8,6 +8,7 @@ import Authors from "./views/Authors/AuthorsPage";
 import Author from "./views/Authors/AuthorInstance";
 import Countries from "./views/Countries/CountriesPage";
 import Country from "./views/Countries/CountryInstance";
+import ErrorPage from "./views/Error/ErrorPage";
 import "./App.scss";
 
 export default function App() {
@@ -16,30 +17,9 @@ export default function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/books/0"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <h1>There&apos;s nothing here!</h1>
-            </main>
-          }
-        />
-        <Route
-          path="authors/0"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <h1>There&apos;s nothing here!</h1>
-            </main>
-          }
-        />
-        <Route
-          path="countries/0"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <h1>There&apos;s nothing here!</h1>
-            </main>
-          }
-        />
+        <Route path="/books/0" element={<ErrorPage />} />
+        <Route path="authors/0" element={<ErrorPage />} />
+        <Route path="countries/0" element={<ErrorPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/books" element={<Books />} />
         <Route path="/books/:bookId" element={<Book />} />
@@ -47,17 +27,8 @@ export default function App() {
         <Route path="/authors/:authorId" element={<Author />} />
         <Route path="/countries" element={<Countries />} />
         <Route path="/countries/:countryId" element={<Country />} />
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <h1>There&apos;s nothing here!</h1>
-            </main>
-          }
-        />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
 }
-
-/* do we need Outlet? */

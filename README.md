@@ -41,11 +41,10 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 
 | Name                 | Estimated | Actual |
 | -------------------- | --------- | ------ |
-| Matthew Escobar      | 0         | 0      |
-| Francisco Reyna      | 0         | 0      |
-| William Eng          | 0         | 0      |
-| Hrithik Ramganesh    | 20        | 6      |
-| Elliot Sims          | 20        | 8      |
+| Matthew Escobar      | 20        | 40     |
+| William Eng          | 20        | 40     |
+| Hrithik Ramganesh    | 20        | 30      |
+| Elliot Sims          | 20        | 38     |
 
 ## Comments
 

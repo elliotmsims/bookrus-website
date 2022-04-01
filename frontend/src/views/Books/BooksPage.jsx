@@ -1,50 +1,86 @@
 import {
   Container,
-  // Row,
-  // Card,
-  // ListGroup,
-  // Button,
-  // ListGroupItem,
+  Col,
+  Row,
+  Card,
+  ListGroup,
+  ListGroupItem,
 } from "react-bootstrap";
-// import { Outlet, Link } from "react-router-dom";
-import getBooks from "../../api/getBooks";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getBooks } from "../../apiCalls";
+import blankBookPic from "../../assets/blankbookimg.jpg";
+import MyPagination from "../../components/pagination/Pagination";
 
 export default function Books() {
-  const books = getBooks();
-  console.log(books);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalInstances = 13600;
+  const books = getBooks(currentPage);
+  const navigate = useNavigate();
+  const handleClick = (id) => navigate(`/books/${id}`);
   return (
     <div className="Books">
-      <Container>
-        <h1>Books!</h1>
-        <h3>Number of books: 0</h3>
-        {/* <Row xs={1} md={4}>
-          {ModelsJson.books.map((book, index) => (
-            <Row>
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={book.image} />
-                <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <Card.Text>
-                    <ListGroup>
-                      <ListGroupItem>
-                        Author:{" "}
-                        <Link to={`/authors/${book.authorId}`}>
-                          {book.author}
-                        </Link>
-                      </ListGroupItem>
-                      <ListGroupItem>Genre: {book.genre}</ListGroupItem>
-                      <ListGroupItem>Pages: {book.length}</ListGroupItem>
-                      <ListGroupItem>Language: {book.language}</ListGroupItem>
-                    </ListGroup>
-                  </Card.Text>
-                  <Link to={`/books/${index}`}>
-                    <Button variant="primary">Learn about {book.title}</Button>
-                  </Link>
-                </Card.Body>
-              </Card>
-            </Row>
-          ))}
-        </Row> */}
+      <Container fluid>
+        <Row>
+          <Col>
+            <h1>Books!</h1>
+            <MyPagination
+              totalInstances={totalInstances}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </Col>
+        </Row>
+        <Row style={{ justifyContent: "center" }} xs={1} md={4}>
+          {books.map((item) => {
+            const book = item.attributes;
+            Object.keys(book).forEach((k) => {
+              if (!book[k]) {
+                book[k] = "N/A";
+              }
+            });
+            if (book.book_image === "N/A") {
+              book.book_image = blankBookPic;
+            }
+            return (
+              <Row>
+                <Card style={{ width: "18rem", border: "1px solid white" }}>
+                  <button
+                    type="button"
+                    onClick={() => handleClick(book.book_id)}
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={book.book_image}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </button>
+                  <Card.Body>
+                    <Card.Title>{book.book_title}</Card.Title>
+                    <Card.Text>
+                      <ListGroup variant="flush">
+                        <ListGroupItem>
+                          Author: {book.book_author}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Date Publication: {book.book_published}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Language: {book.book_language}
+                        </ListGroupItem>
+                        <ListGroupItem>
+                          Genre: {book.book_categories}
+                        </ListGroupItem>
+                        <ListGroupItem>Length: {book.book_pages}</ListGroupItem>
+                      </ListGroup>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                <br />
+              </Row>
+            );
+          })}
+        </Row>
       </Container>
     </div>
   );

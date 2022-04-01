@@ -2,14 +2,15 @@ from flask import Flask
 from flask_restless import APIManager
 from flask_sqlalchemy import SQLAlchemy
 import data.credentials
+
 # from data.countries import Country
 # from data.books import Book
 # from data.authors import Author
 
 app = Flask(__name__)
 app.debug = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = data.credentials.db_login
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = data.credentials.db_login
 db = SQLAlchemy(app)
 
 # Define Book table/data model
@@ -28,6 +29,7 @@ class Book(db.Model):
     book_image = db.Column(db.String())
     book_country_id = db.Column(db.Integer)
 
+
 # Define Country table/data model
 class Country(db.Model):
     country_id = db.Column(db.Integer, primary_key=True)
@@ -39,6 +41,10 @@ class Country(db.Model):
     country_demonym = db.Column(db.String())
     country_image = db.Column(db.String())
     country_authors = db.Column(db.String())
+    country_description = db.Column(db.String())
+    country_languages = db.Column(db.String())
+    country_population = db.Column(db.Integer)
+
 
 # Define Author table/data model
 class Author(db.Model):
@@ -51,30 +57,43 @@ class Author(db.Model):
     author_bio = db.Column(db.String())
     author_image = db.Column(db.String())
     author_country_id = db.Column(db.Integer)
+    author_books = db.Column(db.String())
+    author_genre = db.Column(db.String())
+    author_nationality = db.Column(db.String())
+
 
 # Build database
 db.create_all()
 
 # Method to add CORS headers to all api sessions
 def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
+
 # Define database API system here, accessible at /api/[modelname]/[number]
-methods = ['GET']
+methods = ["GET"]
 
 manager = APIManager(app, session=db.session)
-book_blueprint = manager.create_api_blueprint('book', Book, methods=methods, url_prefix='/')
-country_blueprint = manager.create_api_blueprint('country', Country, methods=methods, url_prefix='/')
-author_blueprint = manager.create_api_blueprint('author', Author, methods=methods, url_prefix='/')
+book_blueprint = manager.create_api_blueprint(
+    "book", Book, methods=methods, url_prefix="/"
+)
+country_blueprint = manager.create_api_blueprint(
+    "country", Country, methods=methods, url_prefix="/"
+)
+author_blueprint = manager.create_api_blueprint(
+    "author", Author, methods=methods, url_prefix="/"
+)
 blueprints = (book_blueprint, country_blueprint, author_blueprint)
 for blueprint in blueprints:
     blueprint.after_request(add_cors_headers)
     app.register_blueprint(blueprint)
 
+
 @app.route("/")
 def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
