@@ -57,7 +57,7 @@ export default function Authors() {
                   <Card.Body>
                     <Card.Title>{author.author_name}</Card.Title>
                     <Card.Text>
-                      <ListGroup>
+                      <ListGroup variant="flush">
                         <ListGroupItem>
                           Best Work: {author.author_top_work}
                         </ListGroupItem>

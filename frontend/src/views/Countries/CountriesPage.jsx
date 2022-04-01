@@ -58,7 +58,7 @@ export default function Countries() {
                   <Card.Body>
                     <Card.Title>{country.country_name}</Card.Title>
                     <Card.Text>
-                      <ListGroup>
+                      <ListGroup variant="flush">
                         <ListGroupItem>
                           Region: {country.country_region}
                         </ListGroupItem>

@@ -37,6 +37,12 @@ import reactr from "../../assets/tools-images/reactr.png";
 import sqla from "../../assets/tools-images/sqla.png";
 import "./styles.css";
 
+const lightbackground = {
+  backgroundColor: "white",
+};
+
+// "#997554"
+
 class Member {
   constructor(name, username, image, bio, unittests, role) {
     this.name = name;
@@ -266,214 +272,239 @@ export default function About() {
     getIssues();
   }, []);
   return (
-    <Container>
-      <br />
-      <h2>Project Info:</h2>
-      <Row>
-        <Accordion>
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>Objective</Accordion.Header>
-            <Accordion.Body>
-              BooksRUs exists to emphasize the literary contributions of
-              different cultures around the world. The app will include
-              information regarding famous publications around the globe, their
-              authors, and the countries they hale from. The vision of BooksRUs
-              is to connect and spread knowledge from distant lifestyles and
-              faraway populations to others through sharing inspiring stories,
-              insightful biographies, and cross-country cultural exchange. This
-              is because, ultimately, the more learned we are of each other, the
-              more mindful we are of the ways the world work.
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="1">
-            <Accordion.Header>Integration</Accordion.Header>
-            <Accordion.Body>
-              Connecting books to their authors is not too interesting. However,
-              once we integrated the author&apos;s country into the data model,
-              we discovered how location and culture influences their writing.
-              This additional context provides a deeper understanding between
-              the reader and the book. Our website hopes to display these
-              relationships and help readers learn more about their favoriate
-              books/authors.
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="2">
-            <Accordion.Header>Phase Leaders</Accordion.Header>
-            <Accordion.Body>
-              <Table striped bordered hover variant="dark">
-                <thead>
-                  <tr>
-                    <th>Phase #</th>
-                    <th>Name</th>
-                    <th>GitLab ID</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Matthew Escobar</td>
-                    <td>@matt594</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>William Eng</td>
-                    <td>@willeng37</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Elliot Sims</td>
-                    <td>@elliotsims</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Hrithik Ramganesh</td>
-                    <td>@hrithikr</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="3">
-            <Accordion.Header>Documentation</Accordion.Header>
-            <Accordion.Body>
-              <div className="d-grid gap-2">
-                <Button
-                  variant="outline-dark"
-                  href="https://documenter.getpostman.com/view/19701903/UVkvJYLx"
-                  target="_blank"
-                >
-                  API documentation from Postman
-                </Button>
-                <Button
-                  variant="outline-dark"
-                  href="https://gitlab.com/10AMGroup11/bookrus"
-                  target="_blank"
-                >
-                  Source code from Gitlab
-                </Button>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </Row>
-      <br />
-      <h2>The Team:</h2>
-      <Row
-        md={3}
-        className="mx-auto"
-        style={{ justifyContent: "space-evenly" }}
-      >
-        {baseUserData.map((dev) => (
-          <Col key={dev.name}>
-            <Card>
-              <Card.Img
-                variant="top"
-                src={dev.image}
-                style={{ textAlign: "center" }}
-              />
+    <div style={lightbackground}>
+      <Container>
+        <br />
+        <h2>Project Info</h2>
+        <Row>
+          <Accordion flush alwaysOpen>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Objective</Accordion.Header>
+              <Accordion.Body>
+                BooksRUs exists to emphasize the literary contributions of
+                different cultures around the world. The app will include
+                information regarding famous publications around the globe,
+                their authors, and the countries they hale from. The vision of
+                BooksRUs is to connect and spread knowledge from distant
+                lifestyles and faraway populations to others through sharing
+                inspiring stories, insightful biographies, and cross-country
+                cultural exchange. This is because, ultimately, the more learned
+                we are of each other, the more mindful we are of the ways the
+                world work.
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header>Integration</Accordion.Header>
+              <Accordion.Body>
+                Connecting books to their authors is not too interesting.
+                However, once we integrated the author&apos;s country into the
+                data model, we discovered how location and culture influences
+                their writing. This additional context provides a deeper
+                understanding between the reader and the book. Our website hopes
+                to display these relationships and help readers learn more about
+                their favoriate books/authors.
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="2">
+              <Accordion.Header>Phase Leaders</Accordion.Header>
+              <Accordion.Body>
+                <Table striped bordered hover variant="dark">
+                  <thead>
+                    <tr>
+                      <th>Phase #</th>
+                      <th>Name</th>
+                      <th>GitLab ID</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Matthew Escobar</td>
+                      <td>@matt594</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>William Eng</td>
+                      <td>@willeng37</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Elliot Sims</td>
+                      <td>@elliotsims</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>Hrithik Ramganesh</td>
+                      <td>@hrithikr</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="3">
+              <Accordion.Header>Documentation</Accordion.Header>
+              <Accordion.Body>
+                <div className="d-grid gap-2">
+                  <Button
+                    variant="outline-dark"
+                    href="https://documenter.getpostman.com/view/19701903/UVkvJYLx"
+                    target="_blank"
+                  >
+                    API documentation from Postman
+                  </Button>
+                  <Button
+                    variant="outline-dark"
+                    href="https://gitlab.com/10AMGroup11/bookrus"
+                    target="_blank"
+                  >
+                    Source code from Gitlab
+                  </Button>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Row>
+        <h2>The Team</h2>
+        <br />
+        <Row
+          md={3}
+          className="mx-auto"
+          style={{ justifyContent: "space-evenly" }}
+        >
+          {baseUserData.map((dev) => (
+            <Col key={dev.name}>
+              <Card style={{ border: "1px solid white" }}>
+                <Card.Img
+                  className="about-img"
+                  variant="bot"
+                  src={dev.image}
+                  style={{ height: 370 }}
+                />
+                <Card.Body>
+                  <Card.Title>{dev.name}</Card.Title>
+                  <Card.Subtitle className="text-muted">
+                    {dev.role}
+                  </Card.Subtitle>
+                  <br />
+                  <Card.Subtitle className="text-muted">
+                    GitLab: {dev.username}
+                  </Card.Subtitle>
+                  <Card.Text>{dev.bio}</Card.Text>
+                  <ListGroup variant="flush">
+                    <ListGroupItem>Commits: {dev.commits}</ListGroupItem>
+                    <ListGroupItem>Issues: {dev.issues}</ListGroupItem>
+                    <ListGroupItem>Tests: {dev.unittests}</ListGroupItem>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+          ))}
+        </Row>
+        <br />
+        <Row>
+          <Col>
+            <Card className="text-center">
               <Card.Body>
-                <Card.Title>{dev.name}</Card.Title>
-                <Card.Subtitle className="text-muted">{dev.role}</Card.Subtitle>
-                <br />
-                <Card.Subtitle className="text-muted">
-                  GitLab: {dev.username}
-                </Card.Subtitle>
-                <Card.Text>{dev.bio}</Card.Text>
-              </Card.Body>
-              <ListGroup>
-                <ListGroupItem>Commits: {dev.commits}</ListGroupItem>
-                <ListGroupItem>Issues: {dev.issues}</ListGroupItem>
-                <ListGroupItem>Tests: {dev.unittests}</ListGroupItem>
-              </ListGroup>
-            </Card>
-            <br />
-          </Col>
-        ))}
-      </Row>
-      <br />
-      <Row>
-        <Col>
-          <Card className="text-center">
-            <Card.Body>
-              <Card.Title>Total Commits: {commitData}</Card.Title>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card className="text-center">
-            <Card.Body>
-              <Card.Title>Total Issues: {issueData}</Card.Title>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card className="text-center">
-            <Card.Body>
-              <Card.Title>Total Unit Tests: 34</Card.Title>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <br />
-      <h2>Data Sources/APIs:</h2>
-      <Row xs={2} md={4} className="g-4">
-        {dataSources.map((source) => (
-          <Col key={source.name}>
-            <Card style={{ width: "9rem" }}>
-              <Card.Img variant="top" src={source.image} />
-              <Card.Body>
-                <Card.Title>{source.name}</Card.Title>
-                <Card.Text>{source.description}</Card.Text>
-                <Button variant="dark" href={source.url} target="_blank">
-                  More Info
-                </Button>
+                <Card.Title>Total Commits: {commitData}</Card.Title>
               </Card.Body>
             </Card>
           </Col>
-        ))}
-      </Row>
-      <br />
-      <h2>Tools:</h2>
-      <Row xs={2} md={5} className="g-4">
-        {tools.slice(0, tools.length / 2).map((source) => (
-          <Col
-            key={source.name}
-            className="cards"
-            style={{ justifyContent: "space-evenly" }}
-          >
-            <Card style={{ width: "9rem" }}>
-              <Card.Img variant="top" src={source.image} />
+          <Col>
+            <Card className="text-center">
               <Card.Body>
-                <Card.Title>{source.name}</Card.Title>
-                <Card.Text>{source.description}</Card.Text>
-                <Button variant="dark" href={source.url} target="_blank">
-                  More Info
-                </Button>
+                <Card.Title>Total Issues: {issueData}</Card.Title>
               </Card.Body>
             </Card>
-            <br />
           </Col>
-        ))}
-        {tools.slice(tools.length / 2).map((source) => (
-          <Col
-            key={source.name}
-            className="cards"
-            style={{ justifyContent: "space-evenly" }}
-          >
-            <Card style={{ width: "9rem" }}>
-              <Card.Img variant="top" src={source.image} />
+          <Col>
+            <Card className="text-center">
               <Card.Body>
-                <Card.Title>{source.name}</Card.Title>
-                <Card.Text>{source.description}</Card.Text>
-                <Button variant="dark" href={source.url} target="_blank">
-                  More Info
-                </Button>
+                <Card.Title>Total Unit Tests: 34</Card.Title>
               </Card.Body>
             </Card>
-            <br />
           </Col>
-        ))}
-      </Row>
-    </Container>
+        </Row>
+        <br />
+        <h2>Data Sources/APIs:</h2>
+        <br />
+        <Row xs={2} md={4} className="g-4">
+          {dataSources.map((source) => (
+            <Col key={source.name}>
+              <Card style={{ width: "9rem", border: "1px solid white" }}>
+                <Card.Img
+                  variant="bot"
+                  className="about-img"
+                  src={source.image}
+                  style={{ height: 150 }}
+                />
+                <Card.Body>
+                  <Card.Title>{source.name}</Card.Title>
+                  <Card.Subtitle className="text-muted">
+                    {source.description}
+                  </Card.Subtitle>
+                  <Button variant="dark" href={source.url} target="_blank">
+                    More Info
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+        <br />
+        <h2>Tools:</h2>
+        <br />
+        <Row xs={2} md={5} className="g-4">
+          {tools.slice(0, tools.length / 2).map((source) => (
+            <Col
+              key={source.name}
+              className="cards"
+              style={{ justifyContent: "space-evenly" }}
+            >
+              <Card style={{ width: "9rem", border: "1px solid white" }}>
+                <Card.Img
+                  variant="bot"
+                  className="about-img"
+                  src={source.image}
+                  style={{ height: 150 }}
+                />
+                <Card.Body>
+                  <Card.Title>{source.name}</Card.Title>
+                  <Card.Text>{source.description}</Card.Text>
+                  <Button variant="dark" href={source.url} target="_blank">
+                    More Info
+                  </Button>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+          ))}
+          {tools.slice(tools.length / 2).map((source) => (
+            <Col
+              key={source.name}
+              className="cards"
+              style={{ justifyContent: "space-evenly" }}
+            >
+              <Card style={{ width: "9rem", border: "1px solid white" }}>
+                <Card.Img
+                  variant="bot"
+                  className="about-img"
+                  src={source.image}
+                  style={{ height: 150 }}
+                />
+                <Card.Body>
+                  <Card.Title>{source.name}</Card.Title>
+                  <Card.Text>{source.description}</Card.Text>
+                  <Button variant="dark" href={source.url} target="_blank">
+                    More Info
+                  </Button>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </div>
   );
 }

@@ -58,7 +58,7 @@ export default function Books() {
                   <Card.Body>
                     <Card.Title>{book.book_title}</Card.Title>
                     <Card.Text>
-                      <ListGroup>
+                      <ListGroup variant="flush">
                         <ListGroupItem>
                           Author: {book.book_author}
                         </ListGroupItem>
