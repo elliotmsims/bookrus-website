@@ -1,43 +1,34 @@
-import React from "react";
-import { Route, Routes, Outlet } from "react-router-dom";
-// test
-import Navigation from "./components/NavBar";
-import Home from "./components/Home";
-import About from "./components/About";
-import Models from "./components/Models";
-import { Books, Book } from "./components/Books";
-import { Authors, Author } from "./components/Authors";
-import { Countries, Country } from "./components/Countries";
+import { Route, Routes } from "react-router-dom";
+import Navigation from "./components/navigation/NavBar";
+import Home from "./views/Home/HomePage";
+import About from "./views/About/AboutPage";
+import Books from "./views/Books/BooksPage";
+import Book from "./views/Books/BookInstance";
+import Authors from "./views/Authors/AuthorsPage";
+import Author from "./views/Authors/AuthorInstance";
+import Countries from "./views/Countries/CountriesPage";
+import Country from "./views/Countries/CountryInstance";
+import ErrorPage from "./views/Error/ErrorPage";
+import "./App.scss";
 
 export default function App() {
   return (
-    <div className="App">
+    <>
       <Navigation />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/books/0" element={<ErrorPage />} />
+        <Route path="authors/0" element={<ErrorPage />} />
+        <Route path="countries/0" element={<ErrorPage />} />
         <Route path="/about" element={<About />} />
-        <Route path="/books" element={<Models />}>
-          <Route path=":bookId" element={<Book />} />
-          <Route index element={<Books />} />
-        </Route>
-        <Route path="/authors" element={<Models />}>
-          <Route path=":authorId" element={<Author />} />
-          <Route index element={<Authors />} />
-        </Route>
-        <Route path="/countries" element={<Models />}>
-          <Route path=":countryId" element={<Country />} />
-          <Route index element={<Countries />} />
-        </Route>
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>There&apos;s nothing here!</p>
-            </main>
-          }
-        />
+        <Route path="/books" element={<Books />} />
+        <Route path="/books/:bookId" element={<Book />} />
+        <Route path="/authors" element={<Authors />} />
+        <Route path="/authors/:authorId" element={<Author />} />
+        <Route path="/countries" element={<Countries />} />
+        <Route path="/countries/:countryId" element={<Country />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
-      <Outlet />
-    </div>
+    </>
   );
 }

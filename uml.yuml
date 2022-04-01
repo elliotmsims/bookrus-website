@@ -1,0 +1,14 @@
+[Book|+book_id: int;+book_title: string;+book_author: string;+book_author_id: int;+book_published: string;+book_pages: int;+book_maturity: string;+book_language: string; +book_categories: string;+book_description: string;+book_image: string;+book_country_id: int]
+
+[Author|+author_id: int;+author_name: string;+author_birth_date: string;+author_death_date: string;+author_top_work: string;+author_work_count: int;+author_bio: string;+author_image: string;+author_country_id: int;+author_books: string (1..*)]
+
+[Country|+country_id: int;+country_name: string;+country_region: string;+country_capital_city: string;+country_lat: float;+country_long: float;+country_demonym: string;+country_image: string;+country_authors: string;+country_books: string (0..*)]
+
+[Book]-1..1>[Author]
+[Book]<1..*-[Author]
+[Country]<1..1-[Author]
+[Country]-0..*>[Author]
+[Country]-0..*>[Book]
+[Country]<1..1-[Book]
+
+[note: Directed arrows indicate a HAS-A relationship]
