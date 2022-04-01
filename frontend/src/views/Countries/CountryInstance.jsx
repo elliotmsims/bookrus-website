@@ -34,10 +34,13 @@ export default function Country() {
       j += 1;
     }
   }
-  const languages = country.country_languages
-    .replace("[", "")
-    .replace("]", "")
-    .split(", ");
+  let languages = [];
+  if (country.country_languages != null) {
+    languages = country.country_languages
+      .replace("[", "")
+      .replace("]", "")
+      .split(", ");
+  }
   Object.keys(country).forEach((k) => {
     if (!country[k]) {
       country[k] = "N/A";
