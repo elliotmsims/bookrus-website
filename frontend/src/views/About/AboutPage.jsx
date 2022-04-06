@@ -308,7 +308,7 @@ export default function About() {
             <Accordion.Item eventKey="2">
               <Accordion.Header>Phase Leaders</Accordion.Header>
               <Accordion.Body>
-                <Table striped bordered hover variant="dark">
+                <Table striped borderless hover variant="dark">
                   <thead>
                     <tr>
                       <th>Phase #</th>

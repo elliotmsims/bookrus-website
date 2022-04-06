@@ -2,14 +2,15 @@ import {
   Container,
   Col,
   Row,
-  Card,
-  ListGroup,
-  ListGroupItem,
+  // Card,
+  // ListGroup,
+  // ListGroupItem,
+  Table,
 } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuthors } from "../../apiCalls";
-import blankProfilePic from "../../assets/blankprofile.png";
+// import blankProfilePic from "../../assets/blankprofile.png";
 import MyPagination from "../../components/pagination/Pagination";
 // import "./styles.css";
 
@@ -35,19 +36,42 @@ export default function Authors() {
           </Col>
         </Row>
         <br />
-        <Row style={{ justifyContent: "center" }} xs={1} md={4}>
-          {authors.map((item) => {
-            const author = item.attributes;
-            Object.keys(author).forEach((k) => {
-              if (!author[k]) {
-                author[k] = "N/A";
-              }
-            });
-            if (author.author_image === "N/A") {
-              author.author_image = blankProfilePic;
-            }
-            return (
-              <Row>
+        <Table striped borderless hover variant="dark">
+          <thead>
+            <tr>
+              <th>Author Name</th>
+              <th>Best Work</th>
+              <th>Work Count</th>
+              <th>Main Genre</th>
+              <th>Nationality</th>
+            </tr>
+          </thead>
+          <tbody>
+            {authors.map((item) => {
+              const author = item.attributes;
+              Object.keys(author).forEach((k) => {
+                if (!author[k]) {
+                  author[k] = "N/A";
+                }
+              });
+              return (
+                <tr onClick={() => handleClick(author.author_id)}>
+                  <td>{author.author_name}</td>
+                  <td>{author.author_top_work}</td>
+                  <td>{author.author_work_count}</td>
+                  <td>{author.author_genre}</td>
+                  <td>{author.author_nationality}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Container>
+    </div>
+  );
+}
+
+/* <Row>
                 <Card style={{ width: "18rem", border: "1px solid white" }}>
                   <button
                     type="button"
@@ -80,11 +104,4 @@ export default function Authors() {
                   </Card.Body>
                 </Card>
                 <br />
-              </Row>
-            );
-          })}
-        </Row>
-      </Container>
-    </div>
-  );
-}
+              </Row> */
