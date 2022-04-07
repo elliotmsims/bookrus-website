@@ -1,7 +1,6 @@
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
 from flask import jsonify
-from flask_restless import APIManager
 
 # Build database
 db.create_all()

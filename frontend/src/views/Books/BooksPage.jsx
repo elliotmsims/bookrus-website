@@ -36,7 +36,7 @@ export default function Books() {
         <br />
         <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {books.map((item) => {
-            const book = item.attributes;
+            const book = item;
             Object.keys(book).forEach((k) => {
               if (!book[k]) {
                 book[k] = "N/A";
