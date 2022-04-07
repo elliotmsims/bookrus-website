@@ -69,24 +69,47 @@ def __init__(
 
 db.create_all()
 
+authors_to_books = {}
 book_list = []
-for i in range(1, 33699):
+with open('authors_to_books.txt', 'r') as file:
+    for line in file:
+        (key, val) = line.split(" ", 1)
+        val = val.replace('[', '').replace(']','').split(",")
+        val = [int(num) for num in val]  
+        if key != 'None':
+            authors_to_books[int(key)] = val
+
+# 18300-18400
+for i in range(18300, 18400):
     book_request_url = "http://localhost:5000/book/" + str(i)
     headers = {"Accept": "application/vnd.api+json"}
     br = requests.get(book_request_url, headers=headers)
     bdata = json.loads(br.content.decode("utf-8"))
-    author_request_url = "http://localhost:5000/author/" + str(
-        bdata["data"]["attributes"]["book_author_id"]
-    )
-    ar = requests.get(author_request_url, headers=headers)
-    adata = json.loads(ar.content.decode("utf-8"))
+    # author_request_url = "http://localhost:5000/author/" + str(
+    #     bdata["data"]["attributes"]["book_author_id"]
+    # )
+    # ar = requests.get(author_request_url, headers=headers)
+    # adata = json.loads(ar.content.decode("utf-8"))
     new_book = Books2(
         **bdata["data"]["attributes"]
     )
-    new_book.book_country_id = book_country_id=adata["data"]["attributes"]["author_country_id"]
-    book_list.append(new_book)
-    if len(book_list) % 100 == 0:
-        db.session.add_all(book_list)
-        db.session.commit()
-db.session.add_all(book_list)
-db.session.commit()
+    if new_book.book_author_id not in authors_to_books:
+        authors_to_books[new_book.book_author_id] = []
+    authors_to_books[new_book.book_author_id].append(new_book.book_id) 
+    # new_book.book_country_id = book_country_id=adata["data"]["attributes"]["author_country_id"]
+    # book_list.append(new_book)
+    # if len(book_list) % 100 == 0:
+    #     db.session.add_all(book_list)
+    #     db.session.commit()
+    if i % 100 == 0:
+        with open("authors_to_books.txt", "w") as file:
+          for key in authors_to_books:
+              print(key, authors_to_books[key], file=file)
+
+with open("authors_to_books.txt", "w") as file:
+    for key in authors_to_books:
+        print(key, authors_to_books[key], file=file)
+    
+
+# db.session.add_all(book_list)
+# db.session.commit()

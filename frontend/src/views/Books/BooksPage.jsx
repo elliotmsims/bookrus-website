@@ -14,7 +14,7 @@ import MyPagination from "../../components/pagination/Pagination";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalInstances = 13600;
+  const totalInstances = 42618;
   const books = getBooks(currentPage);
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/books/${id}`);
