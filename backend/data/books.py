@@ -70,7 +70,7 @@ def __init__(
 db.create_all()
 
 # Get API request
-offset = 25898
+offset = 40698
 count = 0
 book_list = []
 # for i in range(5101, 13601):
@@ -84,7 +84,7 @@ book_list = []
 #         print('Appending db...')
 #         db.session.add_all(book_list)
 #         db.session.commit()
-for i in range(2620, 4393):
+for i in range(4199, 4393):
     author_request_url = "http://localhost:5000/author/" + str(i)
     headers = {"Accept": "application/vnd.api+json"}
     ar = requests.get(author_request_url, headers=headers)

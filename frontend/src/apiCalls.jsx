@@ -3,13 +3,11 @@ export function getCountry(countryId) {
   request.open("GET", `https://api.bookrus.me/country/${countryId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
-  let country = null;
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    country = response.data.attributes;
   }
-  return country;
+  return response;
 }
 
 export function getCountries(index) {
@@ -25,7 +23,7 @@ export function getCountries(index) {
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    countries = response.data;
+    countries = response.countries;
   }
   return countries;
 }
@@ -35,13 +33,11 @@ export function getBook(bookId) {
   request.open("GET", `https://api.bookrus.me/book/${bookId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
-  let book = null;
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    book = response.data.attributes;
   }
-  return book;
+  return response;
 }
 
 export function getBooks(index) {
@@ -57,7 +53,7 @@ export function getBooks(index) {
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    books = response.data;
+    books = response.books;
   }
   return books;
 }
@@ -67,13 +63,11 @@ export function getAuthor(authorId) {
   request.open("GET", `https://api.bookrus.me/author/${authorId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
-  let author = null;
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    author = response.data.attributes;
   }
-  return author;
+  return response;
 }
 
 export function getAuthors(index) {
@@ -89,7 +83,7 @@ export function getAuthors(index) {
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    authors = response.data;
+    authors = response.authors;
   }
   return authors;
 }
