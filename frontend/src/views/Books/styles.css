@@ -3,4 +3,16 @@
     top: 50%;
     left: 50%;
   }
+
+.card {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    width: 18rem;
+    border: 1px solid white
+}
+
+.card:hover {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.1)
+}
   
