@@ -48,7 +48,7 @@ export default function Authors() {
           </thead>
           <tbody>
             {authors.map((item) => {
-              const author = item.attributes;
+              const author = item;
               Object.keys(author).forEach((k) => {
                 if (!author[k]) {
                   author[k] = "N/A";
