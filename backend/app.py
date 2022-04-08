@@ -39,7 +39,7 @@ def hello_world2():
 
 @app.route("/country")
 def get_countries():
-    query = db.session.query(Country)
+    query = db.session.query(Country).paginate(page=1, per_page=10, error_out=False).items
     result = country_schema.dump(query, many=True)
 
     return jsonify(
@@ -56,7 +56,7 @@ def get_country(id):
 
 @app.route("/book")
 def get_books():
-    query = db.session.query(Book)
+    query = db.session.query(Book).paginate(page=1, per_page=10, error_out=False).items
     result = book_schema.dump(query, many=True)
 
     return jsonify(
@@ -74,7 +74,7 @@ def get_book(id):
 
 @app.route("/author")
 def get_authors():
-    query = db.session.query(Author)
+    query = db.session.query(Author).paginate(page=1, per_page=10, error_out=False).items
     result = author_schema.dump(query, many=True)
 
     return jsonify(
