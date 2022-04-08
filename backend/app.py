@@ -32,15 +32,10 @@ db.create_all()
 def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
-@app.route("/cowboy")
-def hello_world2():
-    return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
-
 @app.route("/country")
 def get_countries():
     query = db.session.query(Country).paginate(page=1, per_page=10, error_out=False).items
     result = country_schema.dump(query, many=True)
-
     return jsonify(
         {
             "countries": result
@@ -57,7 +52,6 @@ def get_country(id):
 def get_books():
     query = db.session.query(Book).paginate(page=1, per_page=10, error_out=False).items
     result = book_schema.dump(query, many=True)
-
     return jsonify(
         {
             "books": result
@@ -75,7 +69,6 @@ def get_book(id):
 def get_authors():
     query = db.session.query(Author).paginate(page=1, per_page=10, error_out=False).items
     result = author_schema.dump(query, many=True)
-
     return jsonify(
         {
             "authors": result
@@ -88,6 +81,11 @@ def get_author(id):
     result = author_schema.dump(query, many=True)[0]
     return jsonify(result)
 
+@app.route("/author/<int:id>")
+def get_author_filter(id):
+    query = db.session.query(Author).filter_by(author_id=id)
+    result = author_schema.dump(query, many=True)[0]
+    return jsonify(result)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
