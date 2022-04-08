@@ -1,6 +1,6 @@
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
-from flask import jsonify
+from flask import jsonify, request
 
 # Build database
 db.create_all()
@@ -34,7 +34,8 @@ def hello_world():
 
 @app.route("/country")
 def get_countries():
-    query = db.session.query(Country).paginate(page=1, per_page=10, error_out=False).items
+    page = request.args.get("page[number]", type=int)
+    query = db.session.query(Country).paginate(page=page, per_page=10, error_out=False).items
     result = country_schema.dump(query, many=True)
     return jsonify(
         {
@@ -50,7 +51,8 @@ def get_country(id):
 
 @app.route("/book")
 def get_books():
-    query = db.session.query(Book).paginate(page=1, per_page=10, error_out=False).items
+    page = request.args.get("page[number]", type=int)
+    query = db.session.query(Book).paginate(page=page, per_page=10, error_out=False).items
     result = book_schema.dump(query, many=True)
     return jsonify(
         {
@@ -67,7 +69,8 @@ def get_book(id):
 
 @app.route("/author")
 def get_authors():
-    query = db.session.query(Author).paginate(page=1, per_page=10, error_out=False).items
+    page = request.args.get("page[number]", type=int)
+    query = db.session.query(Author).paginate(page=page, per_page=10, error_out=False).items
     result = author_schema.dump(query, many=True)
     return jsonify(
         {
