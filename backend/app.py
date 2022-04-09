@@ -34,9 +34,15 @@ def hello_world():
 
 @app.route("/country")
 def get_countries():
+    # sort will contain a string with the attribute to be sorted by
+    sort = request.args.get("sort_by")
+    query = db.session.query(Country)
+    # Sort only if attribute exists as a column name
+    if sort is not None and getattr(Country, sort, None) is not None:
+        query = query.order_by(getattr(Country, sort))
     page = request.args.get("page[number]", type=int)
-    query = db.session.query(Country).paginate(page=page, per_page=10, error_out=False).items
-    result = country_schema.dump(query, many=True)
+    end_query = query.paginate(page=page, per_page=10, error_out=False).items
+    result = country_schema.dump(end_query, many=True)
     return jsonify(
         {
             "countries": result
@@ -51,9 +57,15 @@ def get_country(id):
 
 @app.route("/book")
 def get_books():
+    # sort will contain a string with the attribute to be sorted by
+    sort = request.args.get("sort_by")
+    query = db.session.query(Book)
+    # Sort only if attribute exists as a column name
+    if sort is not None and getattr(Book, sort, None) is not None:
+        query = query.order_by(getattr(Book, sort))
     page = request.args.get("page[number]", type=int)
-    query = db.session.query(Book).paginate(page=page, per_page=10, error_out=False).items
-    result = book_schema.dump(query, many=True)
+    end_query = query.paginate(page=page, per_page=10, error_out=False).items
+    result = book_schema.dump(end_query, many=True)
     return jsonify(
         {
             "books": result
@@ -69,9 +81,15 @@ def get_book(id):
 
 @app.route("/author")
 def get_authors():
+    # sort will contain a string with the attribute to be sorted by
+    sort = request.args.get("sort_by")
+    query = db.session.query(Author)
+    # Sort only if attribute exists as a column name
+    if sort is not None and getattr(Author, sort, None) is not None:
+        query = query.order_by(getattr(Author, sort))
     page = request.args.get("page[number]", type=int)
-    query = db.session.query(Author).paginate(page=page, per_page=10, error_out=False).items
-    result = author_schema.dump(query, many=True)
+    end_query = query.paginate(page=page, per_page=10, error_out=False).items
+    result = author_schema.dump(end_query, many=True)
     return jsonify(
         {
             "authors": result
