@@ -1,6 +1,11 @@
+const deployLink = "https://api.bookrus.me";
+const localLink = "http://localhost:5000";
+const testing = false;
+
 export function getCountry(countryId) {
   const request = new XMLHttpRequest();
-  request.open("GET", `https://api.bookrus.me/country/${countryId}`, false);
+  const link = testing ? localLink : deployLink;
+  request.open("GET", `${link}/country/${countryId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -12,25 +17,21 @@ export function getCountry(countryId) {
 
 export function getCountries(index) {
   const request = new XMLHttpRequest();
-  request.open(
-    "GET",
-    `https://api.bookrus.me/country?page[number]=${index}`,
-    false
-  );
+  const link = testing ? localLink : deployLink;
+  request.open("GET", `${link}/country?page[number]=${index}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
-  let countries = null;
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    countries = response.countries;
   }
-  return countries;
+  return response;
 }
 
 export function getBook(bookId) {
   const request = new XMLHttpRequest();
-  request.open("GET", `https://api.bookrus.me/book/${bookId}`, false);
+  const link = testing ? localLink : deployLink;
+  request.open("GET", `${link}/book/${bookId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -42,25 +43,21 @@ export function getBook(bookId) {
 
 export function getBooks(index) {
   const request = new XMLHttpRequest();
-  request.open(
-    "GET",
-    `https://api.bookrus.me/book?page[number]=${index}`,
-    false
-  );
+  const link = testing ? localLink : deployLink;
+  request.open("GET", `${link}/book?page[number]=${index}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
-  let books = null;
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    books = response.books;
   }
-  return books;
+  return response;
 }
 
 export function getAuthor(authorId) {
   const request = new XMLHttpRequest();
-  request.open("GET", `https://api.bookrus.me/author/${authorId}`, false);
+  const link = testing ? localLink : deployLink;
+  request.open("GET", `${link}/author/${authorId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -72,18 +69,13 @@ export function getAuthor(authorId) {
 
 export function getAuthors(index) {
   const request = new XMLHttpRequest();
-  request.open(
-    "GET",
-    `https://api.bookrus.me/author?page[number]=${index}`,
-    false
-  );
+  const link = testing ? localLink : deployLink;
+  request.open("GET", `${link}/author?page[number]=${index}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
-  let authors = null;
   let response = null;
   if (request.status === 200) {
     response = JSON.parse(request.responseText);
-    authors = response.authors;
   }
-  return authors;
+  return response;
 }

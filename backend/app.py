@@ -97,12 +97,6 @@ def get_authors():
     )
 
 @app.route("/author/<int:id>")
-def get_author(id):
-    query = db.session.query(Author).filter_by(author_id=id)
-    result = author_schema.dump(query, many=True)[0]
-    return jsonify(result)
-
-@app.route("/author/<int:id>")
 def get_author_filter(id):
     query = db.session.query(Author).filter_by(author_id=id)
     result = author_schema.dump(query, many=True)[0]

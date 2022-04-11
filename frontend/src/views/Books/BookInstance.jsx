@@ -4,8 +4,8 @@ import { getCountry, getBook } from "../../apiCalls";
 import blankBookPic from "../../assets/blankbookimg.jpg";
 
 export default function Book() {
-  const book = getBook(useParams().bookId);
-  const country = getCountry(book.book_country_id);
+  const book = getBook(useParams().bookId).data.attributes;
+  const country = getCountry(book.book_country_id).data.attributes;
   Object.keys(book).forEach((k) => {
     if (!book[k]) {
       book[k] = "N/A";
