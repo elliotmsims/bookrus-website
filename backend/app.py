@@ -1,6 +1,6 @@
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
-from flask import jsonify
+from flask import jsonify, request
 
 # Build database
 db.create_all()
@@ -32,15 +32,17 @@ db.create_all()
 def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
-@app.route("/cowboy")
-def hello_world2():
-    return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
-
 @app.route("/country")
 def get_countries():
-    query = db.session.query(Country).paginate(page=1, per_page=10, error_out=False).items
-    result = country_schema.dump(query, many=True)
-
+    # sort will contain a string with the attribute to be sorted by
+    sort = request.args.get("sort_by")
+    query = db.session.query(Country)
+    # Sort only if attribute exists as a column name
+    if sort is not None and getattr(Country, sort, None) is not None:
+        query = query.order_by(getattr(Country, sort))
+    page = request.args.get("page[number]", type=int)
+    end_query = query.paginate(page=page, per_page=10, error_out=False).items
+    result = country_schema.dump(end_query, many=True)
     return jsonify(
         {
             "countries": result
@@ -55,9 +57,15 @@ def get_country(id):
 
 @app.route("/book")
 def get_books():
-    query = db.session.query(Book).paginate(page=1, per_page=10, error_out=False).items
-    result = book_schema.dump(query, many=True)
-
+    # sort will contain a string with the attribute to be sorted by
+    sort = request.args.get("sort_by")
+    query = db.session.query(Book)
+    # Sort only if attribute exists as a column name
+    if sort is not None and getattr(Book, sort, None) is not None:
+        query = query.order_by(getattr(Book, sort))
+    page = request.args.get("page[number]", type=int)
+    end_query = query.paginate(page=page, per_page=10, error_out=False).items
+    result = book_schema.dump(end_query, many=True)
     return jsonify(
         {
             "books": result
@@ -73,9 +81,15 @@ def get_book(id):
 
 @app.route("/author")
 def get_authors():
-    query = db.session.query(Author).paginate(page=1, per_page=10, error_out=False).items
-    result = author_schema.dump(query, many=True)
-
+    # sort will contain a string with the attribute to be sorted by
+    sort = request.args.get("sort_by")
+    query = db.session.query(Author)
+    # Sort only if attribute exists as a column name
+    if sort is not None and getattr(Author, sort, None) is not None:
+        query = query.order_by(getattr(Author, sort))
+    page = request.args.get("page[number]", type=int)
+    end_query = query.paginate(page=page, per_page=10, error_out=False).items
+    result = author_schema.dump(end_query, many=True)
     return jsonify(
         {
             "authors": result
@@ -83,11 +97,10 @@ def get_authors():
     )
 
 @app.route("/author/<int:id>")
-def get_author(id):
+def get_author_filter(id):
     query = db.session.query(Author).filter_by(author_id=id)
     result = author_schema.dump(query, many=True)[0]
     return jsonify(result)
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

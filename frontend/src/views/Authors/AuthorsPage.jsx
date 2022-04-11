@@ -16,8 +16,9 @@ import MyPagination from "../../components/pagination/Pagination";
 
 export default function Authors() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalInstances = 4392;
-  const authors = getAuthors(currentPage);
+  const response = getAuthors(currentPage);
+  const totalInstances = response.meta.total;
+  const authors = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/authors/${id}`);
   return (
@@ -48,7 +49,7 @@ export default function Authors() {
           </thead>
           <tbody>
             {authors.map((item) => {
-              const author = item;
+              const author = item.attributes;
               Object.keys(author).forEach((k) => {
                 if (!author[k]) {
                   author[k] = "N/A";

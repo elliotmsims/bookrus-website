@@ -14,8 +14,9 @@ import MyPagination from "../../components/pagination/Pagination";
 
 export default function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalInstances = 218;
-  const countries = getCountries(currentPage);
+  const response = getCountries(currentPage);
+  const totalInstances = response.meta.total;
+  const countries = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/countries/${id}`);
   return (
@@ -36,7 +37,8 @@ export default function Countries() {
         <br />
         <Row style={{ justifyContent: "center" }} xs={2} md={4}>
           {countries.map((item) => {
-            const country = item;
+            const country = item.attributes;
+            console.log(country);
             Object.keys(country).forEach((k) => {
               if (!country[k]) {
                 country[k] = "N/A";

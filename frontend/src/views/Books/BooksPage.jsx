@@ -15,8 +15,9 @@ import "./styles.css";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalInstances = 42618;
-  const books = getBooks(currentPage);
+  const response = getBooks(currentPage);
+  const totalInstances = response.meta.total;
+  const books = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/books/${id}`);
   return (
@@ -37,7 +38,7 @@ export default function Books() {
         <br />
         <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {books.map((item) => {
-            const book = item;
+            const book = item.attributes;
             Object.keys(book).forEach((k) => {
               if (!book[k]) {
                 book[k] = "N/A";
