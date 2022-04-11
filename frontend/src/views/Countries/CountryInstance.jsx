@@ -6,7 +6,6 @@ import blankCountryPic from "../../assets/blankcountryimg.jpg";
 export default function Country() {
   const country = getCountry(parseInt(useParams().countryId, 10)).data
     .attributes;
-  console.log(country);
   let authorArr;
   if (country.country_authors != null) {
     authorArr = country.country_authors

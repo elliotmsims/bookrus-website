@@ -38,7 +38,6 @@ export default function Countries() {
         <Row style={{ justifyContent: "center" }} xs={2} md={4}>
           {countries.map((item) => {
             const country = item.attributes;
-            console.log(country);
             Object.keys(country).forEach((k) => {
               if (!country[k]) {
                 country[k] = "N/A";

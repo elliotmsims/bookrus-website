@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getBooks } from "../../apiCalls";
 import blankBookPic from "../../assets/blankbookimg.jpg";
 import MyPagination from "../../components/pagination/Pagination";
-import "./styles.css";
+import styles from "./styles.module.css";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,7 +49,7 @@ export default function Books() {
             }
             return (
               <Row>
-                <Card>
+                <Card className={styles.card}>
                   <button
                     type="button"
                     onClick={() => handleClick(book.book_id)}
