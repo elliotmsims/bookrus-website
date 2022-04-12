@@ -4,8 +4,7 @@ import { getAuthor, getCountry, getBook } from "../../apiCalls";
 import blankCountryPic from "../../assets/blankcountryimg.jpg";
 
 export default function Country() {
-  const country = getCountry(parseInt(useParams().countryId, 10)).data
-    .attributes;
+  const country = getCountry(parseInt(useParams().countryId, 10));
   let authorArr;
   if (country.country_authors != null) {
     authorArr = country.country_authors
@@ -18,7 +17,7 @@ export default function Country() {
   const authors =
     authorArr.length > 10 ? new Array(10) : new Array(authorArr.length);
   for (let i = 0; i < authors.length; i += 1) {
-    authors[i] = getAuthor(authorArr[i]).data.attributes;
+    authors[i] = getAuthor(authorArr[i]);
   }
   const books =
     authorArr.length > 10 ? new Array(10) : new Array(authorArr.length);
@@ -31,7 +30,7 @@ export default function Country() {
       bookArr = [];
     }
     while (j < books.length && j < bookArr.length) {
-      books[j] = getBook(bookArr[j]).data.attributes;
+      books[j] = getBook(bookArr[j]);
       j += 1;
     }
   }

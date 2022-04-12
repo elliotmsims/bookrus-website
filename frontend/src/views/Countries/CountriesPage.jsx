@@ -1,6 +1,5 @@
 import {
   Container,
-  Col,
   Row,
   Card,
   ListGroup,
@@ -10,34 +9,34 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCountries } from "../../apiCalls";
 import blankCountryPic from "../../assets/blankcountryimg.jpg";
-import MyPagination from "../../components/pagination/Pagination";
+import ModelNavigation from "../../components/model-navigation/NavBar";
+import styles from "./styles.module.css";
 
 export default function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
-  const response = getCountries(currentPage);
-  const totalInstances = response.meta.total;
+  const [sortCountries, setSortCountries] = useState(null);
+  const response = getCountries(currentPage, sortCountries);
+  const totalInstances = response.meta_total;
   const countries = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/countries/${id}`);
   return (
     <div className="Countries">
+      <br />
       <Container fluid>
-        <Row>
-          <h1>Countries</h1>
-        </Row>
-        <Row>
-          <Col>
-            <MyPagination
-              totalInstances={totalInstances}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Col>
-        </Row>
+        <ModelNavigation
+          model="Countries"
+          setSort={setSortCountries}
+          totalInstances={totalInstances}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </Container>
+      <Container>
         <br />
         <Row style={{ justifyContent: "center" }} xs={2} md={4}>
           {countries.map((item) => {
-            const country = item.attributes;
+            const country = item;
             Object.keys(country).forEach((k) => {
               if (!country[k]) {
                 country[k] = "N/A";
@@ -48,7 +47,10 @@ export default function Countries() {
             }
             return (
               <Row>
-                <Card style={{ width: "18rem", border: "1px solid white" }}>
+                <Card
+                  className={styles.card}
+                  style={{ width: "18rem", border: "1px solid white" }}
+                >
                   <button
                     type="button"
                     onClick={() => handleClick(country.country_id)}

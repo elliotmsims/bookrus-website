@@ -1,41 +1,30 @@
-import {
-  Container,
-  Col,
-  Row,
-  // Card,
-  // ListGroup,
-  // ListGroupItem,
-  Table,
-} from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuthors } from "../../apiCalls";
-// import blankProfilePic from "../../assets/blankprofile.png";
-import MyPagination from "../../components/pagination/Pagination";
-// import "./styles.css";
+import ModelNavigation from "../../components/model-navigation/NavBar";
 
 export default function Authors() {
   const [currentPage, setCurrentPage] = useState(1);
-  const response = getAuthors(currentPage);
-  const totalInstances = response.meta.total;
+  const [sortAuthors, setSortAuthors] = useState(null);
+  const response = getAuthors(currentPage, sortAuthors);
+  const totalInstances = response.meta_total;
   const authors = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/authors/${id}`);
   return (
     <div className="Authors">
+      <br />
       <Container fluid>
-        <Row>
-          <h1>Authors</h1>
-        </Row>
-        <Row>
-          <Col>
-            <MyPagination
-              totalInstances={totalInstances}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Col>
-        </Row>
+        <ModelNavigation
+          model="Authors"
+          setSort={setSortAuthors}
+          totalInstances={totalInstances}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </Container>
+      <Container>
         <br />
         <Table striped borderless hover variant="dark">
           <thead>
@@ -47,9 +36,9 @@ export default function Authors() {
               <th>Nationality</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{ cursor: "pointer" }}>
             {authors.map((item) => {
-              const author = item.attributes;
+              const author = item;
               Object.keys(author).forEach((k) => {
                 if (!author[k]) {
                   author[k] = "N/A";

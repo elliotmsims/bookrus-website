@@ -1,11 +1,11 @@
 const deployLink = "https://api.bookrus.me";
 const localLink = "http://localhost:5000";
-const testing = false;
+const testing = true;
 
 export function getCountry(countryId) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  request.open("GET", `${link}/country/${countryId}`, false);
+  request.open("GET", `${link}/countries/${countryId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -15,10 +15,14 @@ export function getCountry(countryId) {
   return response;
 }
 
-export function getCountries(index) {
+export function getCountries(index, sort) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  request.open("GET", `${link}/country?page[number]=${index}`, false);
+  let url = `${link}/countries?page=${index}`;
+  if (sort != null) {
+    url += `&sort=${sort}`;
+  }
+  request.open("GET", url, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -31,7 +35,7 @@ export function getCountries(index) {
 export function getBook(bookId) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  request.open("GET", `${link}/book/${bookId}`, false);
+  request.open("GET", `${link}/books/${bookId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -41,10 +45,14 @@ export function getBook(bookId) {
   return response;
 }
 
-export function getBooks(index) {
+export function getBooks(index, sort) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  request.open("GET", `${link}/book?page[number]=${index}`, false);
+  let url = `${link}/books?page=${index}`;
+  if (sort != null) {
+    url += `&sort=${sort}`;
+  }
+  request.open("GET", url, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -57,7 +65,7 @@ export function getBooks(index) {
 export function getAuthor(authorId) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  request.open("GET", `${link}/author/${authorId}`, false);
+  request.open("GET", `${link}/authors/${authorId}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -67,10 +75,14 @@ export function getAuthor(authorId) {
   return response;
 }
 
-export function getAuthors(index) {
+export function getAuthors(index, sort) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  request.open("GET", `${link}/author?page[number]=${index}`, false);
+  let url = `${link}/authors?page=${index}`;
+  if (sort != null) {
+    url += `&sort=${sort}`;
+  }
+  request.open("GET", url, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;

@@ -1,13 +1,13 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-import data.credentials
+from credentials import db_login
 
 app = Flask(__name__)
 CORS(app)
 app.debug = True
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = data.credentials.db_login
+app.config["SQLALCHEMY_DATABASE_URI"] = db_login
 db = SQLAlchemy(app)
 
 # Define Book table/data model

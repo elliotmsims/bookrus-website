@@ -1,6 +1,5 @@
 import {
   Container,
-  Col,
   Row,
   Card,
   ListGroup,
@@ -10,35 +9,36 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBooks } from "../../apiCalls";
 import blankBookPic from "../../assets/blankbookimg.jpg";
-import MyPagination from "../../components/pagination/Pagination";
+// import MyPagination from "../../components/pagination/Pagination";
+import ModelNavigation from "../../components/model-navigation/NavBar";
 import styles from "./styles.module.css";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
-  const response = getBooks(currentPage);
-  const totalInstances = response.meta.total;
+  // eslint-disable-next-line no-unused-vars
+  const [sortBooks, setSortBooks] = useState(null);
+  const response = getBooks(currentPage, sortBooks);
+  const totalInstances = response.meta_total;
   const books = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/books/${id}`);
   return (
     <div className="Books">
+      <br />
       <Container fluid>
-        <Row>
-          <h1>Books</h1>
-        </Row>
-        <Row>
-          <Col>
-            <MyPagination
-              totalInstances={totalInstances}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Col>
-        </Row>
+        <ModelNavigation
+          model="Books"
+          setSort={setSortBooks}
+          totalInstances={totalInstances}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </Container>
+      <Container>
         <br />
         <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {books.map((item) => {
-            const book = item.attributes;
+            const book = item;
             Object.keys(book).forEach((k) => {
               if (!book[k]) {
                 book[k] = "N/A";
@@ -49,7 +49,10 @@ export default function Books() {
             }
             return (
               <Row>
-                <Card className={styles.card}>
+                <Card
+                  className={styles.card}
+                  style={{ width: "18rem", border: "1px solid white" }}
+                >
                   <button
                     type="button"
                     onClick={() => handleClick(book.book_id)}

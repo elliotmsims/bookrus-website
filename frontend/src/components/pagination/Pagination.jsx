@@ -1,6 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import { Container, Row, Col } from "react-bootstrap";
-import Pagination from "react-bootstrap/Pagination";
+import { Container, Col, Pagination, Badge } from "react-bootstrap";
 
 export default function MyPagination(props) {
   // eslint-disable-next-line prefer-destructuring
@@ -14,32 +13,27 @@ export default function MyPagination(props) {
   const handleLast = () => props.setCurrentPage(totalPages);
   return (
     <Container>
-      <Row xs="auto">
-        <Col>
-          <Pagination>
-            <Pagination.First
-              disabled={currentPage <= 1}
-              onClick={handleFirst}
-            />
-            <Pagination.Prev disabled={currentPage <= 1} onClick={handlePrev} />
-            <Pagination.Item active>{currentPage}</Pagination.Item>
-            <Pagination.Next
-              disabled={currentPage >= totalPages}
-              onClick={handleNext}
-            />
-            <Pagination.Last
-              disabled={currentPage >= totalPages}
-              onClick={handleLast}
-            />
-          </Pagination>
-        </Col>
-        <Col>
-          <b>
-            {start}–{end} of {props.totalInstances} | Page {currentPage} of{" "}
-            {totalPages}
-          </b>
-        </Col>
-      </Row>
+      <Col className="d-flex justify-content-center">
+        <Pagination>
+          <Pagination.First disabled={currentPage <= 1} onClick={handleFirst} />
+          <Pagination.Prev disabled={currentPage <= 1} onClick={handlePrev} />
+          <Pagination.Item active>{currentPage}</Pagination.Item>
+          <Pagination.Next
+            disabled={currentPage >= totalPages}
+            onClick={handleNext}
+          />
+          <Pagination.Last
+            disabled={currentPage >= totalPages}
+            onClick={handleLast}
+          />
+        </Pagination>
+      </Col>
+      <Col className="d-flex justify-content-center">
+        <Badge pill bg="light" text="dark">
+          {start}–{end} of {props.totalInstances} | Page {currentPage} of{" "}
+          {totalPages}
+        </Badge>
+      </Col>
     </Container>
   );
 }
