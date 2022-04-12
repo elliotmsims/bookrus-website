@@ -15,8 +15,8 @@ import styles from "./styles.module.css";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
   const [sortBooks, setSortBooks] = useState(null);
+  // const [searchBooks, setSearchBooks] = useState(null);
   const response = getBooks(currentPage, sortBooks);
   const totalInstances = response.meta_total;
   const books = response.data;

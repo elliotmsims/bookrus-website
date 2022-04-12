@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
-import { Navbar, Container, Nav } from "react-bootstrap";
-import SortDropdown from "../sorting/SortDropdown";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import SortDropdown from "../sort/SortDropdown";
+import SearchBar from "../search/SearchBar";
 import MyPagination from "../pagination/Pagination";
 
 export default function ModelNavigation(props) {
@@ -12,7 +13,9 @@ export default function ModelNavigation(props) {
         <Navbar.Collapse id="navbar-dark-example">
           <Nav className="me-auto">
             <SortDropdown model={props.model} setSort={props.setSort} />
+            <SearchBar />
           </Nav>
+          <br />
           <Nav className="justify-content-end">
             <MyPagination
               totalInstances={props.totalInstances}
