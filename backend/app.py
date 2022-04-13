@@ -1,7 +1,7 @@
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
 from sqlalchemy import or_
-from flask import jsonify, request
+from flask import jsonify, request, json
 
 # Build database
 db.create_all()
@@ -11,7 +11,7 @@ def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
 @app.route("/countries")
-def get_countries():
+def get_countries(search=None, page=1):
     # sort will contain a string with the attribute to be sorted by
     # name = request.args.get("country_name")
     # region = request.args.get("country_region")
@@ -73,7 +73,7 @@ def get_country(id):
     return jsonify(result)
 
 @app.route("/books")
-def get_books():
+def get_books(search=None, page=1):
     # sort will contain a string with the attribute to be sorted by
     # title = request.args.get("book_title")
     # author = request.args.get("book_author")
