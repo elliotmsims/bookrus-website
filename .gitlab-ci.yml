@@ -52,6 +52,8 @@ frontend_gui_test:
   - python3 guitests.py
 
 backend_unit_tests:
+  variables:
+    DB_LOGIN: $DB_LOGIN
   stage: test
   image: python:3.6-stretch
   script:
