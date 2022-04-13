@@ -8,6 +8,7 @@ import Authors from "./views/Authors/AuthorsPage";
 import Author from "./views/Authors/AuthorInstance";
 import Countries from "./views/Countries/CountriesPage";
 import Country from "./views/Countries/CountryInstance";
+import SearchResults from "./views/SearchResults/SearchResultsPage";
 import ErrorPage from "./views/Error/ErrorPage";
 import "./App.scss";
 
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/authors/:authorId" element={<Author />} />
         <Route path="/countries" element={<Countries />} />
         <Route path="/countries/:countryId" element={<Country />} />
+        <Route path="/searchresults" element={<SearchResults />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

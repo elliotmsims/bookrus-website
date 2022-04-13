@@ -7,17 +7,17 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBooks } from "../../apiCalls";
+import { getBooks } from "../../services/API/apiCalls";
 import blankBookPic from "../../assets/blankbookimg.jpg";
-// import MyPagination from "../../components/pagination/Pagination";
 import ModelNavigation from "../../components/model-navigation/NavBar";
+import Highlight from "../../components/highlighting/Highlighter";
 import styles from "./styles.module.css";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBooks, setSortBooks] = useState(null);
-  // const [searchBooks, setSearchBooks] = useState(null);
-  const response = getBooks(currentPage, sortBooks);
+  const [searchBooks, setSearchBooks] = useState(null);
+  const response = getBooks(currentPage, sortBooks, searchBooks);
   const totalInstances = response.meta_total;
   const books = response.data;
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ export default function Books() {
         <ModelNavigation
           model="Books"
           setSort={setSortBooks}
+          setSearch={setSearchBooks}
           totalInstances={totalInstances}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
@@ -36,6 +37,7 @@ export default function Books() {
       </Container>
       <Container>
         <br />
+        {totalInstances === 0 && <h2>No Results</h2>}
         <Row style={{ justifyContent: "center" }} xs={1} md={4}>
           {books.map((item) => {
             const book = item;
@@ -64,7 +66,12 @@ export default function Books() {
                     />
                   </button>
                   <Card.Body>
-                    <Card.Title>{book.book_title}</Card.Title>
+                    <Card.Title>
+                      <Highlight
+                        string={book.book_title}
+                        search={searchBooks}
+                      />
+                    </Card.Title>
                     <Card.Text>
                       <ListGroup variant="flush">
                         <ListGroupItem>

@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import { getAuthor, getCountry, getBook } from "../../apiCalls";
+import { getAuthor, getCountry, getBook } from "../../services/API/apiCalls";
 import blankProfilePic from "../../assets/blankprofile.png";
 
 export default function Author() {

@@ -1,13 +1,15 @@
 import { Container, Table } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuthors } from "../../apiCalls";
+import { getAuthors } from "../../services/API/apiCalls";
 import ModelNavigation from "../../components/model-navigation/NavBar";
+import Highlight from "../../components/highlighting/Highlighter";
 
 export default function Authors() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortAuthors, setSortAuthors] = useState(null);
-  const response = getAuthors(currentPage, sortAuthors);
+  const [searchAuthors, setSearchAuthors] = useState(null);
+  const response = getAuthors(currentPage, sortAuthors, searchAuthors);
   const totalInstances = response.meta_total;
   const authors = response.data;
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ export default function Authors() {
         <ModelNavigation
           model="Authors"
           setSort={setSortAuthors}
+          setSearch={setSearchAuthors}
           totalInstances={totalInstances}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
@@ -26,6 +29,7 @@ export default function Authors() {
       </Container>
       <Container>
         <br />
+        {totalInstances === 0 && <h2>No Results</h2>}
         <Table striped borderless hover variant="dark">
           <thead>
             <tr>
@@ -46,7 +50,12 @@ export default function Authors() {
               });
               return (
                 <tr onClick={() => handleClick(author.author_id)}>
-                  <td>{author.author_name}</td>
+                  <td>
+                    <Highlight
+                      string={author.author_name}
+                      search={searchAuthors}
+                    />
+                  </td>
                   <td>{author.author_top_work}</td>
                   <td>{author.author_work_count}</td>
                   <td>{author.author_genre}</td>

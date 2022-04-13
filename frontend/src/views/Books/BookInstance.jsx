@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import { getCountry, getBook } from "../../apiCalls";
+import { getCountry, getBook } from "../../services/API/apiCalls";
 import blankBookPic from "../../assets/blankbookimg.jpg";
 
 export default function Book() {

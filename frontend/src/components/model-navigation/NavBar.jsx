@@ -11,10 +11,12 @@ export default function ModelNavigation(props) {
         <Navbar.Brand>{props.model}</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-dark-example" />
         <Navbar.Collapse id="navbar-dark-example">
-          <Nav className="me-auto">
-            <SortDropdown model={props.model} setSort={props.setSort} />
-            <SearchBar />
-          </Nav>
+          {props.model !== "Search Results" && (
+            <Nav className="me-auto">
+              <SortDropdown model={props.model} setSort={props.setSort} />
+              <SearchBar model={props.model} setSearch={props.setSearch} />
+            </Nav>
+          )}
           <br />
           <Nav className="justify-content-end">
             <MyPagination

@@ -7,7 +7,7 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCountries } from "../../apiCalls";
+import { getCountries } from "../../services/API/apiCalls";
 import blankCountryPic from "../../assets/blankcountryimg.jpg";
 import ModelNavigation from "../../components/model-navigation/NavBar";
 import styles from "./styles.module.css";
@@ -15,7 +15,8 @@ import styles from "./styles.module.css";
 export default function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortCountries, setSortCountries] = useState(null);
-  const response = getCountries(currentPage, sortCountries);
+  const [searchCountries, setSearchCountries] = useState(null);
+  const response = getCountries(currentPage, sortCountries, searchCountries);
   const totalInstances = response.meta_total;
   const countries = response.data;
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export default function Countries() {
         <ModelNavigation
           model="Countries"
           setSort={setSortCountries}
+          setSearch={setSearchCountries}
           totalInstances={totalInstances}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
@@ -34,6 +36,7 @@ export default function Countries() {
       </Container>
       <Container>
         <br />
+        {totalInstances === 0 && <h2>No Results</h2>}
         <Row style={{ justifyContent: "center" }} xs={2} md={4}>
           {countries.map((item) => {
             const country = item;

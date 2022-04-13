@@ -1,12 +1,15 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable react/destructuring-assignment */
 import { Container, Col, Pagination, Badge } from "react-bootstrap";
 
 export default function MyPagination(props) {
-  // eslint-disable-next-line prefer-destructuring
   const currentPage = props.currentPage;
   const totalPages = Math.ceil(props.totalInstances / 10);
-  const end = 10 * props.currentPage;
+  let end = 10 * props.currentPage;
   const start = end - 9;
+  if (currentPage === totalPages) {
+    end = props.totalInstances;
+  }
   const handleFirst = () => props.setCurrentPage(1);
   const handlePrev = () => props.setCurrentPage(currentPage - 1);
   const handleNext = () => props.setCurrentPage(currentPage + 1);
