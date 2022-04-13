@@ -61,7 +61,7 @@ backend_unit_tests:
     # Add credentials
     - cd data
     - touch credentials.py
-    - echo "db_login = '$DB_LOGIN'" >> credentials.py
+    - echo "db_login = '"$DB_LOGIN"'" >> credentials.py
     - cd ..
 
     - python3 tests.py
