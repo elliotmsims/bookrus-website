@@ -57,5 +57,12 @@ backend_unit_tests:
   script:
     - cd backend
     - pip3 install -r requirements.txt
+
+    # Add credentials
+    - cd data
+    - touch credentials.py
+    - echo "db_login = '$DB_LOGIN'" >> credentials.py
+    - cd ..
+
     - python3 tests.py
 
