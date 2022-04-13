@@ -1,7 +1,7 @@
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
 from sqlalchemy import or_
-from flask import jsonify, request
+from flask import jsonify, request, json
 
 # Build database
 db.create_all()
@@ -11,7 +11,7 @@ def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
 @app.route("/countries")
-def get_countries():
+def get_countries(search=None, page=1):
     # sort will contain a string with the attribute to be sorted by
     name = request.args.get("country_name")
     region = request.args.get("country_region")
@@ -38,13 +38,15 @@ def get_countries():
             description = "%" + languages + "%"
             query = query.filter(Country.country_languages.like(languages))
     else:
-        search = "%" + search + "%"
-        query = query.filter(or_(Country.country_name.like(search),
-        Country.country_region.like(search),
-        Country.country_capital_city.like(search),
-        Country.country_description.like(search),
-        Country.country_languages.like(search),
-        Country.country_demonym.like(search)))
+        terms = search.split()
+        for search in terms:
+            search = "%" + search + "%"
+            query = query.filter(or_(Country.country_name.like(search),
+            Country.country_region.like(search),
+            Country.country_capital_city.like(search),
+            Country.country_description.like(search),
+            Country.country_languages.like(search),
+            Country.country_demonym.like(search)))
     # Sort only if attribute exists as a column name
     if sort is not None:
         sort = sort.replace("-", "_")
@@ -68,7 +70,7 @@ def get_country(id):
     return jsonify(result)
 
 @app.route("/books")
-def get_books():
+def get_books(search=None, page=1):
     # sort will contain a string with the attribute to be sorted by
     title = request.args.get("book_title")
     author = request.args.get("book_author")
@@ -99,14 +101,16 @@ def get_books():
             description = "%" + maturity + "%"
             query = query.filter(Book.book_maturity.like(maturity))
     else:
-        search = "%" + search + "%"
-        query = query.filter(or_(Book.book_title.like(search),
-        Book.book_author.like(search),
-        Book.book_categories.like(search),
-        Book.book_published.like(search),
-        Book.book_language.like(search),
-        Book.book_maturity.like(search),
-        Book.book_description.like(search)))
+        terms = search.split()
+        for search in terms:
+            search = "%" + search + "%"
+            query = query.filter(or_(Book.book_title.like(search),
+            Book.book_author.like(search),
+            Book.book_categories.like(search),
+            Book.book_published.like(search),
+            Book.book_language.like(search),
+            Book.book_maturity.like(search),
+            Book.book_description.like(search)))
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Book, sort, None) is not None:
@@ -135,7 +139,7 @@ def get_author(id):
     return jsonify(result)
 
 @app.route("/authors")
-def get_authors():
+def get_authors(search=None, page=1):
     name = request.args.get("author_name")
     nationality = request.args.get("author_nationality")
     genre = request.args.get("author_genre")
@@ -160,14 +164,16 @@ def get_authors():
             bio = "%" + bio + "%"
             query = query.filter(Author.author_bio.like(bio))
     else:
-        search = "%" + search + "%"
-        query = query.filter(or_(Author.author_name.like(search),
-        Author.author_birth_date.like(search),
-        Author.author_death_date.like(search),
-        Author.author_top_work.like(search),
-        Author.author_bio.like(search),
-        Author.author_nationality.like(search),
-        Author.author_genre.like(search)))
+        terms = search.split()
+        for search in terms:
+            search = "%" + search + "%"
+            query = query.filter(or_(Author.author_name.like(search),
+            Author.author_birth_date.like(search),
+            Author.author_death_date.like(search),
+            Author.author_top_work.like(search),
+            Author.author_bio.like(search),
+            Author.author_nationality.like(search),
+            Author.author_genre.like(search)))
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Author, sort, None) is not None:
@@ -180,6 +186,19 @@ def get_authors():
         {
             "data": result,
             "meta_total": count
+        }
+    )
+
+@app.route("/search")
+def get_search():
+    search = request.args.get("search")
+    author_result = json.loads(get_authors(search).data)
+    country_result = json.loads(get_countries(search).data)
+    books_result = json.loads(get_books(search).data)
+    return jsonify(
+        {
+            "data": [author_result['data'], country_result['data'], books_result['data']],
+            "meta_total": author_result['meta_total'] + country_result['meta_total'] + books_result['meta_total']
         }
     )
 

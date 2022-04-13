@@ -15,10 +15,38 @@ export function getCountry(countryId) {
   return response;
 }
 
-export function getCountries(index, sort) {
+export function getCountries(
+  index,
+  sort,
+  countryName = null,
+  countryRegion = null,
+  countryCapitalCity = null,
+  countryDescription = null,
+  countryLanguages = null,
+  search = null
+) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
   let url = `${link}/countries?page=${index}`;
+  if (search != null) {
+    url += `&search=${search}`;
+  } else {
+    if (countryName != null) {
+      url += `&countryName=${countryName}`;
+    }
+    if (countryRegion != null) {
+      url += `&countryRegion=${countryRegion}`;
+    }
+    if (countryCapitalCity != null) {
+      url += `&countryCapitalCity=${countryCapitalCity}`;
+    }
+    if (countryDescription != null) {
+      url += `&countryDescription=${countryDescription}`;
+    }
+    if (countryLanguages != null) {
+      url += `&countryLanguages=${countryLanguages}`;
+    }
+  }
   if (sort != null) {
     url += `&sort=${sort}`;
   }
@@ -45,10 +73,42 @@ export function getBook(bookId) {
   return response;
 }
 
-export function getBooks(index, sort) {
+export function getBooks(
+  index,
+  sort,
+  bookTitle = null,
+  bookAuthor = null,
+  bookPages = null,
+  bookMaturity = null,
+  bookDescription = null,
+  bookCategory = null,
+  search = null
+) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
   let url = `${link}/books?page=${index}`;
+  if (search != null) {
+    url += `&search=${search}`;
+  } else {
+    if (bookTitle != null) {
+      url += `&book_title=${bookTitle}`;
+    }
+    if (bookAuthor != null) {
+      url += `&book_author=${bookAuthor}`;
+    }
+    if (bookPages != null) {
+      url += `&book_pages=${bookPages}`;
+    }
+    if (bookMaturity != null) {
+      url += `&book_maturity=${bookMaturity}`;
+    }
+    if (bookDescription != null) {
+      url += `&book_description=${bookDescription}`;
+    }
+    if (bookCategory != null) {
+      url += `&book_category=${bookCategory}`;
+    }
+  }
   if (sort != null) {
     url += `&sort=${sort}`;
   }
@@ -75,10 +135,55 @@ export function getAuthor(authorId) {
   return response;
 }
 
-export function getAuthors(index, sort) {
+// export function getAuthors(index, sort) {
+//   const request = new XMLHttpRequest();
+//   const link = testing ? localLink : deployLink;
+//   let url = `${link}/authors?page=${index}`;
+//   if (sort != null) {
+//     url += `&sort=${sort}`;
+//   }
+//   request.open("GET", url, false);
+//   request.setRequestHeader("Accept", "application/vnd.api+json");
+//   request.send();
+//   let response = null;
+//   if (request.status === 200) {
+//     response = JSON.parse(request.responseText);
+//   }
+//   return response;
+// }
+
+export function getAuthors(
+  index,
+  sort,
+  authorName = null,
+  authorNationality = null,
+  authorGenre = null,
+  authorWorkCount = null,
+  authorBio = null,
+  search = null
+) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
   let url = `${link}/authors?page=${index}`;
+  if (search != null) {
+    url += `&search=${search}`;
+  } else {
+    if (authorName != null) {
+      url += `&author_name=${authorName}`;
+    }
+    if (authorNationality != null) {
+      url += `&author_nationality=${authorNationality}`;
+    }
+    if (authorGenre != null) {
+      url += `&author_genre=${authorGenre}`;
+    }
+    if (authorWorkCount != null) {
+      url += `&author_work_count=${authorWorkCount}`;
+    }
+    if (authorBio != null) {
+      url += `&author_bio=${authorBio}`;
+    }
+  }
   if (sort != null) {
     url += `&sort=${sort}`;
   }
@@ -91,40 +196,3 @@ export function getAuthors(index, sort) {
   }
   return response;
 }
-
-export function getAuthorFiltered(author_name=null,
-  author_nationality=null,
-  author_genre=null,
-  author_work_count=null,
-  author_bio=null,
-  index, 
-  sort) {
-    const request = new XMLHttpRequest();
-    const link = testing ? localLink : deployLink;
-    let url = `${link}/authors?page=${index}`;
-    if (author_name != null) {
-      url += `&author_name=${author_name}`;
-    }
-    if (author_nationality != null) {
-      url += `&author_nationality=${author_nationality}`;
-    }
-    if (author_genre != null) {
-      url += `&author_genre=${author_genre}`;
-    }
-    if (author_work_count != null) {
-      url += `&author_work_count=${author_work_count}`;
-    }
-    if (author_bio != null) {
-      url += `&author_bio=${author_bio}`;
-    }
-    if (sort != null) {
-      url += `&sort=${sort}`;
-    }
-    request.open("GET", url, false);
-    request.setRequestHeader("Accept", "application/vnd.api+json");
-    request.send();
-    if (request.status === 200) {
-      response = JSON.parse(request.responseText);
-    }
-    return response;
-  }
