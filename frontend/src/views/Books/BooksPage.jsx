@@ -15,9 +15,10 @@ import styles from "./styles.module.css";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [numResults, setNumResults] = useState(10);
   const [sortBooks, setSortBooks] = useState(null);
   const [searchBooks, setSearchBooks] = useState(null);
-  const response = getBooks(currentPage, sortBooks, searchBooks);
+  const response = getBooks(currentPage, numResults, sortBooks, searchBooks);
   const totalInstances = response.meta_total;
   const books = response.data;
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ export default function Books() {
           totalInstances={totalInstances}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          numResults={numResults}
+          setNumResults={setNumResults}
         />
       </Container>
       <Container>

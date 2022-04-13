@@ -7,9 +7,15 @@ import Highlight from "../../components/highlighting/Highlighter";
 
 export default function Authors() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [numResults, setNumResults] = useState(10);
   const [sortAuthors, setSortAuthors] = useState(null);
   const [searchAuthors, setSearchAuthors] = useState(null);
-  const response = getAuthors(currentPage, sortAuthors, searchAuthors);
+  const response = getAuthors(
+    currentPage,
+    numResults,
+    sortAuthors,
+    searchAuthors
+  );
   const totalInstances = response.meta_total;
   const authors = response.data;
   const navigate = useNavigate();
@@ -25,6 +31,8 @@ export default function Authors() {
           totalInstances={totalInstances}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          numResults={numResults}
+          setNumResults={setNumResults}
         />
       </Container>
       <Container>

@@ -23,6 +23,8 @@ export default function ModelNavigation(props) {
               totalInstances={props.totalInstances}
               currentPage={props.currentPage}
               setCurrentPage={props.setCurrentPage}
+              numResults={props.numResults}
+              setNumResults={props.setNumResults}
             />
           </Nav>
         </Navbar.Collapse>

@@ -14,9 +14,15 @@ import styles from "./styles.module.css";
 
 export default function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [numResults, setNumResults] = useState(10);
   const [sortCountries, setSortCountries] = useState(null);
   const [searchCountries, setSearchCountries] = useState(null);
-  const response = getCountries(currentPage, sortCountries, searchCountries);
+  const response = getCountries(
+    currentPage,
+    numResults,
+    sortCountries,
+    searchCountries
+  );
   const totalInstances = response.meta_total;
   const countries = response.data;
   const navigate = useNavigate();
@@ -32,6 +38,8 @@ export default function Countries() {
           totalInstances={totalInstances}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          numResults={numResults}
+          setNumResults={setNumResults}
         />
       </Container>
       <Container>
