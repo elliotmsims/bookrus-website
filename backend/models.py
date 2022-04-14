@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from credentials import db_login
+from data.credentials import db_login
 
 app = Flask(__name__)
 CORS(app)
