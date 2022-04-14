@@ -31,19 +31,19 @@ export default function ModelCards(props) {
           return (
             <Row>
               <Card
+                onClick={() => props.handleClick(card[specialAttributes.id])}
                 className={styles.card}
                 style={{ width: "18rem", border: "1px solid white" }}
               >
-                <button
-                  type="button"
-                  onClick={() => props.handleClick(card[specialAttributes.id])}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={card[specialAttributes.image]}
-                    style={{ cursor: "pointer" }}
-                  />
-                </button>
+                <Card.Img
+                  variant="top"
+                  src={card[specialAttributes.image]}
+                  style={{
+                    cursor: "pointer",
+                    border: "3px solid #000",
+                    padding: "0",
+                  }}
+                />
                 <Card.Body>
                   <Card.Title>
                     <Highlight

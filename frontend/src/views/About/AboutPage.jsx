@@ -274,8 +274,7 @@ export default function About() {
   return (
     <div style={lightbackground}>
       <Container>
-        <br />
-        <h2>Project Info</h2>
+        <h1>Project Info</h1>
         <Row>
           <Accordion flush alwaysOpen>
             <Accordion.Item eventKey="0">
