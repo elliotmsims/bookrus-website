@@ -60,7 +60,7 @@ export default function Country() {
         }}
         height={300}
         width="100%"
-        zoom={3}
+        zoom={4}
       />
       <h3>
         Authors:{" "}
@@ -83,8 +83,6 @@ export default function Country() {
           <Col>Region: {country.country_region}</Col>
           <Col>Capital: {country.country_capital_city}</Col>
           <Col>Population: {country.country_population}</Col>
-          <Col>Longitude: {country.country_long}</Col>
-          <Col>Latitude: {country.country_lat}</Col>
           <Col>Demonym: {country.country_demonym}</Col>
           <Col>
             Languages:
