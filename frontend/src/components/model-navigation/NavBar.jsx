@@ -15,7 +15,7 @@ export default function ModelNavigation(props) {
             <SortDropdown model={props.modelName} setSort={props.setSort} />
             <SearchBar
               placeholder={`Find ${props.modelName}`}
-              setSearch={props.setSearch}
+              handleSearch={(val) => props.setSearch(val)}
             />
           </Nav>
           <br />

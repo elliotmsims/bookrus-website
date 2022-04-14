@@ -1,6 +1,5 @@
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authorImage from "../../assets/home-images/author.jpg";
 import bookImage from "../../assets/home-images/book.jpg";
 import countryImage from "../../assets/home-images/country.jpg";
@@ -32,6 +31,7 @@ const models = {
 };
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="main">
       <Container
@@ -45,6 +45,15 @@ export default function Home() {
       <div className="bottom">
         <br />
         <Container>
+          <Row>
+            <SearchBar
+              placeholder="Find Authors, Books, and Countries"
+              handleSearch={(val) =>
+                navigate("/search", { state: { search: val } })
+              }
+            />
+          </Row>
+          <br />
           <Row
             md={3}
             className="dev_cards"

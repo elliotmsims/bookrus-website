@@ -13,7 +13,7 @@ export default function SearchBar(props) {
         aria-label="Search"
         onChange={(e) => setValue(e.target.value)}
       />
-      <Button variant="outline-light" onClick={() => props.setSearch(value)}>
+      <Button variant="outline-light" onClick={() => props.handleSearch(value)}>
         Search
       </Button>
     </Form>
