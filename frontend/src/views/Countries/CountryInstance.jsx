@@ -87,13 +87,17 @@ export default function Country() {
         <Row>
           <Col>Region: {country.country_region}</Col>
           <Col>Capital: {country.country_capital_city}</Col>
-          <Col>Population: {country.country_population.toLocaleString("en-US")}</Col>
+          <Col>
+            Population: {country.country_population.toLocaleString("en-US")}
+          </Col>
           <Col>Demonym: {country.country_demonym}</Col>
           <Col>Total Authors: {authorArr.length}</Col>
           <Col>
             Languages:
             {languages.map((language) => (
-              <p>{languageNames.of(language.replace('"', "").replace('"', ""))}</p>
+              <p>
+                {languageNames.of(language.replace('"', "").replace('"', ""))}
+              </p>
             ))}
           </Col>
         </Row>

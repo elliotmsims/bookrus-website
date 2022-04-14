@@ -45,7 +45,9 @@ export default function Author() {
       <h6>
         <Row>
           <Col>Best Work: {author.author_top_work}</Col>
-          <Col>Work Count: {author.author_work_count.toLocaleString("en-US")}</Col>
+          <Col>
+            Work Count: {author.author_work_count.toLocaleString("en-US")}
+          </Col>
           <Col>Main Genre: {author.author_genre} </Col>
           <Col>Born: {author.author_birth_date}</Col>
           <Col>Died: {author.author_death_date}</Col>
