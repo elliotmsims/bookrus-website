@@ -2,7 +2,6 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { getAuthor, getCountry, getBook } from "../../services/API/apiCalls";
 import blankCountryPic from "../../assets/blankcountryimg.jpg";
-import Map from "../../components/map/Map";
 
 export default function Country() {
   const country = getCountry(parseInt(useParams().countryId, 10));
@@ -53,14 +52,17 @@ export default function Country() {
   return (
     <Container>
       <h1>Country: {country.country_name}</h1>
-      <Map
-        location={{
-          lat: country.country_lat,
-          lng: country.country_long,
-        }}
-        height={300}
+      <iframe
+        title="map"
         width="100%"
-        zoom={4}
+        height="450"
+        style={{ border: "0" }}
+        loading="lazy"
+        allowFullScreen
+        src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
+          " ",
+          "+"
+        )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
       />
       <h3>
         Authors:{" "}
@@ -99,18 +101,6 @@ export default function Country() {
         alt={country.country_name}
         width="512"
         height="512"
-      />
-      <iframe
-        title="map"
-        width="600"
-        height="450"
-        style={{ border: "0" }}
-        loading="lazy"
-        allowFullScreen
-        src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
-          " ",
-          "+"
-        )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
       />
     </Container>
   );

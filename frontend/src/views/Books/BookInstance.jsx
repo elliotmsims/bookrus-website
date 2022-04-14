@@ -42,6 +42,18 @@ export default function Book() {
       <h3>Synopsis:</h3>
       <p>{book.book_description}</p>
       <img src={book.book_image} alt={book.book_title} />
+      <iframe
+        title="map"
+        width="600"
+        height="450"
+        style={{ border: "0" }}
+        loading="lazy"
+        allowFullScreen
+        src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
+          " ",
+          "+"
+        )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
+      />
     </Container>
   );
 }

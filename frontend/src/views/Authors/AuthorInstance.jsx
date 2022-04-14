@@ -59,6 +59,18 @@ export default function Author() {
         width="180"
         height="256"
       />
+      <iframe
+        title="map"
+        width="450"
+        height="450"
+        style={{ border: "0" }}
+        loading="lazy"
+        allowFullScreen
+        src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
+          " ",
+          "+"
+        )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
+      />
     </Container>
   );
 }
