@@ -12,7 +12,7 @@ export default function SearchNavigation(props) {
           <Nav className="me-auto">
             <SearchBar
               placeholder={props.placeholder}
-              setSearch={props.setSearch}
+              handleSearch={(val) => props.setSearch(val)}
             />
           </Nav>
           <Badge bg="dark" text="light">

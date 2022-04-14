@@ -1,6 +1,6 @@
 import { Button, Container, Row, Tabs, Tab } from "react-bootstrap";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   getBooks,
   getAuthors,
@@ -16,6 +16,12 @@ export default function Search() {
   const [currentPageA, setCurrentPageA] = useState(1);
   const [currentPageC, setCurrentPageC] = useState(1);
   const [globalSearch, setGlobalSearch] = useState(null);
+  const { state } = useLocation();
+  useEffect(() => {
+    if (state != null) {
+      setGlobalSearch(state.search);
+    }
+  }, [globalSearch]);
   const navigate = useNavigate();
   const models = {
     Books: {
