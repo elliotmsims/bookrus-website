@@ -45,7 +45,13 @@ export default function ModelCards(props) {
                   />
                 </button>
                 <Card.Body>
-                  <Card.Title>{card[specialAttributes.name]}</Card.Title>
+                  <Card.Title>
+                    <Highlight
+                      value={card[specialAttributes.name]}
+                      search={props.searchModel}
+                    />
+                    {card[specialAttributes.name]}
+                  </Card.Title>
                   <Card.Text>
                     <ListGroup variant="flush">
                       {Object.keys(props.attributes).map((k) => (

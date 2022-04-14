@@ -67,7 +67,6 @@ def get_books(search=None, arg_page=1):
         cols = [
             Book.book_title.ilike('%' + search + '%'),
             Book.book_author.ilike('%' + search + '%'),
-            Book.book_published.ilike('%' + search + '%'),
             Book.book_language.ilike('%' + search + '%'),
             Book.book_categories.ilike('%' + search + '%')]
         try:
