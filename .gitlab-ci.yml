@@ -64,7 +64,7 @@ backend_unit_tests:
     - cd data
     - touch credentials.py
     - echo -n "db_login = '" >> credentials.py
-    - echo -n "$DB_LOGIN" >> credentials.py
+    - echo -n $DB_LOGIN >> credentials.py
     - echo "'" >> credentials.py
     - cd ..
 
