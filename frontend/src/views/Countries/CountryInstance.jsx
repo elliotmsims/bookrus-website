@@ -2,6 +2,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { getAuthor, getCountry, getBook } from "../../services/API/apiCalls";
 import blankCountryPic from "../../assets/blankcountryimg.jpg";
+import Map from "../../components/map/Map";
 
 export default function Country() {
   const country = getCountry(parseInt(useParams().countryId, 10));
@@ -52,6 +53,15 @@ export default function Country() {
   return (
     <Container>
       <h1>Country: {country.country_name}</h1>
+      <Map
+        location={{
+          lat: country.country_lat,
+          lng: country.country_long,
+        }}
+        height={300}
+        width="100%"
+        zoom={3}
+      />
       <h3>
         Authors:{" "}
         {authors.map((author) => (
