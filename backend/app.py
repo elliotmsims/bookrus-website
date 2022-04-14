@@ -137,24 +137,6 @@ def get_author(id):
     result = author_schema.dump(query, many=True)[0]
     return jsonify(result)
 
-# @app.route("/search")
-# def get_search():
-#     search = request.args.get("search")
-#     author_page = request.args.get("authorpage", type=int)
-#     country_page = request.args.get("countrypage", type=int)
-#     book_page = request.args.get("bookpage", type=int)
-#     author_result = get_authors(search, author_page).get_json()
-#     country_result = get_countries(search, country_page).get_json()
-#     book_result = get_books(search, book_page).get_json()
-#     return jsonify(
-#         {
-#             "authors": author_result,
-#             "countries": country_result,
-#             "books": book_result,
-#             "meta_total": author_result["meta_total"] + country_result["meta_total"] + book_result["meta_total"]
-#         }
-#     )
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
 
