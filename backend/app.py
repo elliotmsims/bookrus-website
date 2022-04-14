@@ -20,16 +20,18 @@ def get_countries():
     search = request.args.get("search")
     query = db.session.query(Country)
     if search is not None:
-        cols = [
-            Country.country_name.ilike('%' + str(search) + '%'),
-            Country.country_region.ilike('%' + search + '%')]
+        search = search.split(" ")
+        cols = []
+        for term in search:
+            cols.append(Country.country_name.ilike('%' + str(term) + '%'))
+            cols.append(Country.country_region.ilike('%' + term + '%'))
         try:
-            cols.append(Country.country_population == int(search))
+            cols.append(Country.country_population == int(term))
         except:
             pass
         try:
-            cols.append(Country.country_lat == float(search))
-            cols.append(Country.country_long == float(search))
+            cols.append(Country.country_lat == float(term))
+            cols.append(Country.country_long == float(term))
         except:
             pass
         query = query.filter(or_(*cols))
@@ -64,13 +66,15 @@ def get_books():
     search = request.args.get("search")
     query = db.session.query(Book)
     if search is not None:
-        cols = [
-            Book.book_title.ilike('%' + search + '%'),
-            Book.book_author.ilike('%' + search + '%'),
-            Book.book_language.ilike('%' + search + '%'),
-            Book.book_categories.ilike('%' + search + '%')]
+        search = search.split(" ")
+        cols = []
+        for term in search:
+            cols.append(Book.book_title.ilike('%' + term + '%'))
+            cols.append(Book.book_author.ilike('%' + term + '%'))
+            cols.append(Book.book_language.ilike('%' + term + '%'))
+            cols.append(Book.book_categories.ilike('%' + term + '%'))
         try:
-            cols.append(Book.book_pages == int(search))
+            cols.append(Book.book_pages == int(term))
         except:
             pass
         query = query.filter(or_(*cols)) 
@@ -105,13 +109,15 @@ def get_authors():
     search = request.args.get("search")
     query = db.session.query(Author)
     if search is not None:
-        cols = [
-            Author.author_name.ilike('%' + search + '%'),
-            Author.author_top_work.ilike('%' + search + '%'),
-            Author.author_genre.ilike('%' + search + '%'),
-            Author.author_nationality.ilike('%' + search + '%')]
+        search = search.split(" ")
+        cols = []
+        for term in search:
+            cols.append(Author.author_name.ilike('%' + term + '%'))
+            cols.append(Author.author_top_work.ilike('%' + term + '%'))
+            cols.append(Author.author_genre.ilike('%' + term + '%'))
+            cols.append(Author.author_nationality.ilike('%' + term + '%'))
         try:
-            cols.append(Author.author_work_count == int(search))
+            cols.append(Author.author_work_count == int(term))
         except:
             pass                
         query = query.filter(or_(*cols))

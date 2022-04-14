@@ -3,14 +3,17 @@ export default function Highlight(props) {
   if (props.search === null || props.search === "" || props.value === "N/A") {
     return <span>{props.value}</span>;
   }
+  const terms = props.search.split(" ");
   // isNumber
   if (/^[+-]?\d+(\.\d+)?$/.test(props.value)) {
-    if (String(props.value) === props.search) {
-      return <b style={{ color: "var(--logo-color)" }}>{props.value}</b>;
+    for (let i = 0; i < terms.length; i += 1) {
+      if (String(props.value) === terms[i]) {
+        return <b style={{ color: "var(--logo-color)" }}>{props.value}</b>;
+      }
     }
     return <span>{props.value}</span>;
   }
-  const regex = new RegExp(`(${props.search})`, "gi");
+  const regex = new RegExp(`(${terms.join("|")})`, "gi");
   const parts = props.value.split(regex);
   return (
     <span>
