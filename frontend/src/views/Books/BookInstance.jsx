@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { getCountry, getBook } from "../../services/API/apiCalls";
@@ -14,7 +15,6 @@ export default function Book() {
       book.book_image = blankBookPic;
     }
   });
-
   return (
     <Container>
       <h1>Book: {book.book_title}</h1>

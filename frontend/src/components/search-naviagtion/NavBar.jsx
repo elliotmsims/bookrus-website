@@ -1,8 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
-import { Navbar, Nav, Container } from "react-bootstrap";
-import SortDropdown from "../sort/SortDropdown";
+import { Navbar, Nav, Container, Badge } from "react-bootstrap";
 import SearchBar from "../search/SearchBar";
-import MyPagination from "../pagination/Pagination";
 
 export default function SearchNavigation(props) {
   return (
@@ -17,7 +15,9 @@ export default function SearchNavigation(props) {
               setSearch={props.setSearch}
             />
           </Nav>
-          <br />
+          <Badge bg="dark" text="light">
+            total results: {props.totalInstances}
+          </Badge>
         </Navbar.Collapse>
       </Container>
     </Navbar>

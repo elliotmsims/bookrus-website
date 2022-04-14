@@ -13,7 +13,7 @@ def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
 @app.route("/countries")
-def get_countries(search=None, arg_page=1):
+def get_countries():
     # name, region, population, lat, long
     limit = request.args.get("limit")
     limit = int(limit) if limit is not None else 10
@@ -40,7 +40,7 @@ def get_countries(search=None, arg_page=1):
             query = query.order_by(getattr(Country, sort))
     count = query.count()
     page = request.args.get("page", type=int)
-    if page is None: page = arg_page
+    if page is None: page = 1
     end_query = query.paginate(page=page, per_page=limit, error_out=False).items
     result = country_schema.dump(end_query, many=True)
     return jsonify(
@@ -57,7 +57,7 @@ def get_country(id):
     return jsonify(result)
 
 @app.route("/books")
-def get_books(search=None, arg_page=1):
+def get_books():
     # Searchable: Title, Author, publication, language, genre, page count
     limit = request.args.get("limit")
     limit = int(limit) if limit is not None else 10
@@ -81,7 +81,7 @@ def get_books(search=None, arg_page=1):
             query = query.order_by(getattr(Book, sort))
     count = query.count()
     page = request.args.get("page", type=int)
-    if page is None: page = arg_page
+    if page is None: page = 1
     end_query = query.paginate(page=page, per_page=limit, error_out=False).items
     result = book_schema.dump(end_query, many=True)
     return jsonify(
@@ -98,7 +98,7 @@ def get_book(id):
     return jsonify(result)
 
 @app.route("/authors")
-def get_authors(search=None, arg_page=1):
+def get_authors():
     # Name, Best work, work count, genre, nationality
     limit = request.args.get("limit")
     limit = int(limit) if limit is not None else 10
@@ -122,7 +122,7 @@ def get_authors(search=None, arg_page=1):
             query = query.order_by(getattr(Author, sort))
     count = query.count()
     page = request.args.get("page", type=int)
-    if page is None: page = arg_page
+    if page is None: page = 1
     end_query = query.paginate(page=page, per_page=limit, error_out=False).items
     result = author_schema.dump(end_query, many=True)
     return jsonify(
@@ -138,23 +138,23 @@ def get_author(id):
     result = author_schema.dump(query, many=True)[0]
     return jsonify(result)
 
-@app.route("/search")
-def get_search():
-    search = request.args.get("search")
-    author_page = request.args.get("authorpage", type=int)
-    country_page = request.args.get("countrypage", type=int)
-    book_page = request.args.get("bookpage", type=int)
-    author_result = get_authors(search, author_page).get_json()
-    country_result = get_countries(search, country_page).get_json()
-    book_result = get_books(search, book_page).get_json()
-    return jsonify(
-        {
-            "authors": author_result,
-            "countries": country_result,
-            "books": book_result,
-            "meta_total": author_result["meta_total"] + country_result["meta_total"] + book_result["meta_total"]
-        }
-    )
+# @app.route("/search")
+# def get_search():
+#     search = request.args.get("search")
+#     author_page = request.args.get("authorpage", type=int)
+#     country_page = request.args.get("countrypage", type=int)
+#     book_page = request.args.get("bookpage", type=int)
+#     author_result = get_authors(search, author_page).get_json()
+#     country_result = get_countries(search, country_page).get_json()
+#     book_result = get_books(search, book_page).get_json()
+#     return jsonify(
+#         {
+#             "authors": author_result,
+#             "countries": country_result,
+#             "books": book_result,
+#             "meta_total": author_result["meta_total"] + country_result["meta_total"] + book_result["meta_total"]
+#         }
+#     )
 
 
 if __name__ == "__main__":

@@ -4,9 +4,6 @@ import Highlight from "../highlighting/Highlighter";
 import { modelSpecialAttributes } from "../../util/constants/modelAttributes";
 
 export default function ModelTable(props) {
-  if (props.totalInstances === 0) {
-    return <h2>No Results</h2>;
-  }
   const specialAttributes = modelSpecialAttributes[props.modelName];
   return (
     <Container>
@@ -40,6 +37,9 @@ export default function ModelTable(props) {
           })}
         </tbody>
       </Table>
+      {props.totalInstances === 0 && (
+        <h2 style={{ textAlign: "center", color: "black" }}>No Results</h2>
+      )}
     </Container>
   );
 }
