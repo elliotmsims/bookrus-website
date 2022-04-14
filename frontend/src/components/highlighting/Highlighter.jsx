@@ -1,10 +1,18 @@
 /* eslint-disable react/destructuring-assignment */
 export default function Highlight(props) {
   if (props.search === null || props.search === "") {
-    return <span>{props.string}</span>;
+    return <span>{props.value}</span>;
+  }
+  // isNumber
+  console.log(props.value, props.search);
+  if (/^[+-]?\d+(\.\d+)?$/.test(props.value)) {
+    if (String(props.value) === props.search) {
+      return <b style={{ color: "var(--logo-color)" }}>{props.value}</b>;
+    }
+    return <span>{props.value}</span>;
   }
   const regex = new RegExp(`(${props.search})`, "gi");
-  const parts = props.string.split(regex);
+  const parts = props.value.split(regex);
   return (
     <span>
       {parts

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { getCountries } from "../../services/API/apiCalls";
 import blankCountryPic from "../../assets/blankcountryimg.jpg";
 import ModelNavigation from "../../components/model-navigation/NavBar";
+import Highlight from "../../components/highlighting/Highlighter";
 import styles from "./styles.module.css";
 
 export default function Countries() {
@@ -83,7 +84,11 @@ export default function Countries() {
                           Population: {country.country_population}
                         </ListGroupItem>
                         <ListGroupItem>
-                          Latitude: {country.country_lat}
+                          Latitude:{" "}
+                          <Highlight
+                            value={country.country_lat}
+                            search={searchCountries}
+                          />
                         </ListGroupItem>
                         <ListGroupItem>
                           Longitude: {country.country_long}

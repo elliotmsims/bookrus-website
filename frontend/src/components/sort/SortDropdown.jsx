@@ -4,6 +4,7 @@ import { modelAttributes } from "../../util/constants/modelAttributes";
 
 export default function SortDropdown(props) {
   const attributes = modelAttributes[props.model];
+  // Object.keys(attributes).map((k) => console.log(k));
   return (
     <NavDropdown
       id="nav-dropdown-dark-example"

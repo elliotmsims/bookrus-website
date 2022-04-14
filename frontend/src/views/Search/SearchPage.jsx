@@ -3,7 +3,7 @@ import { useState } from "react";
 import { getCountries } from "../../services/API/apiCalls";
 import ModelNavigation from "../../components/model-navigation/NavBar";
 
-export default function SearchResults() {
+export default function Search() {
   const [currentPage, setCurrentPage] = useState(1);
   // const [searchCountries, setSearchCountries] = useState(null);
   const response = getCountries(currentPage);

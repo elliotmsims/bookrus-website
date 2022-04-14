@@ -70,26 +70,45 @@ export default function Books() {
                   </button>
                   <Card.Body>
                     <Card.Title>
-                      <Highlight
-                        string={book.book_title}
-                        search={searchBooks}
-                      />
+                      <Highlight value={book.book_title} search={searchBooks} />
                     </Card.Title>
                     <Card.Text>
                       <ListGroup variant="flush">
                         <ListGroupItem>
-                          Author: {book.book_author}
+                          Author:{" "}
+                          <Highlight
+                            value={book.book_author}
+                            search={searchBooks}
+                          />
                         </ListGroupItem>
                         <ListGroupItem>
-                          Date Publication: {book.book_published}
+                          Date Publication:{" "}
+                          <Highlight
+                            value={book.book_published}
+                            search={searchBooks}
+                          />
                         </ListGroupItem>
                         <ListGroupItem>
-                          Language: {book.book_language}
+                          Language:{" "}
+                          <Highlight
+                            value={book.book_language}
+                            search={searchBooks}
+                          />
                         </ListGroupItem>
                         <ListGroupItem>
-                          Genre: {book.book_categories}
+                          Genre:{" "}
+                          <Highlight
+                            value={book.book_categories}
+                            search={searchBooks}
+                          />
                         </ListGroupItem>
-                        <ListGroupItem>Length: {book.book_pages}</ListGroupItem>
+                        <ListGroupItem>
+                          Length:{" "}
+                          <Highlight
+                            value={book.book_pages}
+                            search={searchBooks}
+                          />
+                        </ListGroupItem>
                       </ListGroup>
                     </Card.Text>
                   </Card.Body>
