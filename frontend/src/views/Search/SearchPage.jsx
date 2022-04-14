@@ -18,7 +18,7 @@ export default function Search() {
   const [globalSearch, setGlobalSearch] = useState(null);
   const { state } = useLocation();
   useEffect(() => {
-    if (state != null) {
+    if (state != null && globalSearch == null) {
       setGlobalSearch(state.search);
     }
   }, [globalSearch]);
