@@ -11,7 +11,7 @@ export default function SortDropdown(props) {
       menuVariant="dark"
     >
       {Object.keys(attributes).map((k) => (
-        <NavDropdown.Item onClick={() => props.setSort(k)}>
+        <NavDropdown.Item onClick={() => props.setSort(k.replace("_", "-"))}>
           {attributes[k]}
         </NavDropdown.Item>
       ))}

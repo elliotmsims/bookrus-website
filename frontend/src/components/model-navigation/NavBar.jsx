@@ -8,12 +8,15 @@ export default function ModelNavigation(props) {
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
       <Container>
-        <Navbar.Brand>{props.model}</Navbar.Brand>
+        <Navbar.Brand>{props.modelName}</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-dark-example" />
         <Navbar.Collapse id="navbar-dark-example">
           <Nav className="me-auto">
-            <SortDropdown model={props.model} setSort={props.setSort} />
-            <SearchBar />
+            <SortDropdown model={props.modelName} setSort={props.setSort} />
+            <SearchBar
+              placeholder={`Find ${props.modelName}`}
+              setSearch={props.setSearch}
+            />
           </Nav>
           <br />
           <Nav className="justify-content-end">
@@ -21,6 +24,8 @@ export default function ModelNavigation(props) {
               totalInstances={props.totalInstances}
               currentPage={props.currentPage}
               setCurrentPage={props.setCurrentPage}
+              numResults={props.numResults}
+              setNumResults={props.setNumResults}
             />
           </Nav>
         </Navbar.Collapse>

@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import { getAuthor, getCountry, getBook } from "../../apiCalls";
+import { getAuthor, getCountry, getBook } from "../../services/API/apiCalls";
 import blankCountryPic from "../../assets/blankcountryimg.jpg";
 
 export default function Country() {
@@ -34,6 +34,9 @@ export default function Country() {
       j += 1;
     }
   }
+  const languageNames = new Intl.DisplayNames(["en"], {
+    type: "language",
+  });
   let languages = [];
   if (country.country_languages != null) {
     languages = country.country_languages
@@ -52,6 +55,18 @@ export default function Country() {
   return (
     <Container>
       <h1>Country: {country.country_name}</h1>
+      <iframe
+        title="map"
+        width="100%"
+        height="450"
+        style={{ border: "0" }}
+        loading="lazy"
+        allowFullScreen
+        src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
+          " ",
+          "+"
+        )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
+      />
       <h3>
         Authors:{" "}
         {authors.map((author) => (
@@ -72,14 +87,17 @@ export default function Country() {
         <Row>
           <Col>Region: {country.country_region}</Col>
           <Col>Capital: {country.country_capital_city}</Col>
-          <Col>Population: {country.country_population}</Col>
-          <Col>Longitude: {country.country_long}</Col>
-          <Col>Latitude: {country.country_lat}</Col>
+          <Col>
+            Population: {country.country_population.toLocaleString("en-US")}
+          </Col>
           <Col>Demonym: {country.country_demonym}</Col>
+          <Col>Total Authors: {authorArr.length}</Col>
           <Col>
             Languages:
             {languages.map((language) => (
-              <p>{language}</p>
+              <p>
+                {languageNames.of(language.replace('"', "").replace('"', ""))}
+              </p>
             ))}
           </Col>
         </Row>
