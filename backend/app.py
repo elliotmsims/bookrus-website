@@ -1,3 +1,4 @@
+from calendar import c
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
 from sqlalchemy import or_
@@ -12,28 +13,27 @@ def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
 @app.route("/countries")
-def get_countries(search=None, search_all=False):
+def get_countries(search=None):
     # name, region, population, lat, long
     limit = request.args.get("limit")
-    if limit is not None: limit = int(limit)
+    limit = int(limit) if limit is not None else 10
     sort = request.args.get("sort")
     search = request.args.get("search")
     query = db.session.query(Country)
     if search is not None:
-        if search_all is False:
-            query = query.filter(Country.country_name.ilike('%' + search + '%'))
-        else:
-            query = query.filter(or_(Country.country_name.ilike('%' + search + '%'),
-            Country.country_region.ilike('%' + search + '%')))
-            try:
-                query = query.filter(or_(Country.country_population.ilike(int(search))))
-            except:
-                pass
-            try:
-                query = query.filter(or_(Country.country_lat.ilike(float(search))))
-                query = query.filter(or_(Country.country_long.ilike(float(search))))
-            except:
-                pass
+        cols = [
+            Country.country_name.ilike('%' + str(search) + '%'),
+            Country.country_region.ilike('%' + search + '%')]
+        try:
+            cols.append(Country.country_population == int(search))
+        except:
+            pass
+        try:
+            cols.append(Country.country_lat == float(search))
+            cols.append(Country.country_long == float(search))
+        except:
+            pass
+        query = query.filter(or_(*cols))
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Country, sort, None) is not None:
@@ -56,26 +56,25 @@ def get_country(id):
     return jsonify(result)
 
 @app.route("/books")
-def get_books(search=None, search_all=False):
+def get_books(search=None):
     # Searchable: Title, Author, publication, language, genre, page count
     limit = request.args.get("limit")
-    if limit is not None: limit = int(limit)
+    limit = int(limit) if limit is not None else 10
     sort = request.args.get("sort")
     search = request.args.get("search")
     query = db.session.query(Book)
     if search is not None:
-        if search_all is False:
-            query = query.filter(Book.book_title.ilike('%' + search + '%'))
-        else:
-            query = query.filter(or_(Book.book_title.ilike('%' + search + '%'),
+        cols = [
+            Book.book_title.ilike('%' + search + '%'),
             Book.book_author.ilike('%' + search + '%'),
             Book.book_published.ilike('%' + search + '%'),
             Book.book_language.ilike('%' + search + '%'),
-            Book.book_categories.ilike('%' + search + '%')))
-            try:
-                query = query.filter(or_(Book.book_pages.ilike(int(search))))
-            except:
-                pass
+            Book.book_categories.ilike('%' + search + '%')]
+        try:
+            cols.append(Book.book_pages == int(search))
+        except:
+            pass
+        query = query.filter(or_(*cols)) 
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Book, sort, None) is not None:
@@ -101,23 +100,21 @@ def get_book(id):
 def get_authors(search=None, search_all=False):
     # Name, Best work, work count, genre, nationality
     limit = request.args.get("limit")
-    if limit is not None: limit = int(limit)
+    limit = int(limit) if limit is not None else 10
     sort = request.args.get("sort")
     search = request.args.get("search")
     query = db.session.query(Author)
     if search is not None:
-        if search_all is False:
-            query = query.filter(Author.author_name.ilike('%' + search + '%'))
-        else:
-            query = query.filter(or_(Author.author_name.ilike('%' + search + '%'),
+        cols = [
+            Author.author_name.ilike('%' + search + '%'),
             Author.author_top_work.ilike('%' + search + '%'),
             Author.author_genre.ilike('%' + search + '%'),
-            Author.author_nationality.ilike('%' + search + '%')))
-            try:
-                query = query.filter(or_(Author.author_work_count.ilike(int(search))))
-            except:
-                pass                
-            
+            Author.author_nationality.ilike('%' + search + '%')]
+        try:
+            cols.append(Author.author_work_count == int(search))
+        except:
+            pass                
+        query = query.filter(or_(*cols))
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Author, sort, None) is not None:
@@ -142,9 +139,9 @@ def get_author(id):
 @app.route("/search")
 def get_search():
     search = request.args.get("search")
-    author_result = get_authors(search, True).get_json()
-    country_result = get_countries(search, True).get_json()
-    book_result = get_books(search, True).get_json()
+    author_result = get_authors(search).get_json()
+    country_result = get_countries(search).get_json()
+    book_result = get_books(search).get_json()
     return jsonify(
         {
             "data": [*author_result['data'], *country_result['data'], *book_result['data']],
