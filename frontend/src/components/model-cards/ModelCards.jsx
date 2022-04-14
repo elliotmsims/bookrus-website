@@ -50,7 +50,6 @@ export default function ModelCards(props) {
                       value={card[specialAttributes.name]}
                       search={props.searchModel}
                     />
-                    {card[specialAttributes.name]}
                   </Card.Title>
                   <Card.Text>
                     <ListGroup variant="flush">
