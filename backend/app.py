@@ -152,7 +152,7 @@ def get_search():
         {
             "authors": author_result,
             "countries": country_result,
-            "book_result": book_result,
+            "books": book_result,
             "meta_total": author_result["meta_total"] + country_result["meta_total"] + book_result["meta_total"]
         }
     )
