@@ -6,6 +6,9 @@ import blankBookPic from "../../assets/blankbookimg.jpg";
 export default function Book() {
   const book = getBook(useParams().bookId);
   const country = getCountry(book.book_country_id);
+  const languageNames = new Intl.DisplayNames(["en"], {
+    type: "language",
+  });
   Object.keys(book).forEach((k) => {
     if (!book[k]) {
       book[k] = "N/A";
@@ -14,7 +17,6 @@ export default function Book() {
       book.book_image = blankBookPic;
     }
   });
-
   return (
     <Container>
       <h1>Book: {book.book_title}</h1>
@@ -33,8 +35,8 @@ export default function Book() {
       <h6>
         <Row>
           <Col>Genre: {book.book_categories}</Col>
-          <Col>Pages: {book.book_pages}</Col>
-          <Col>Language: {book.book_language}</Col>
+          <Col>Pages: {book.book_pages.toLocaleString("en-US")}</Col>
+          <Col>Language: {languageNames.of(book.book_language)}</Col>
           <Col>Maturity: {book.book_maturity}</Col>
           <Col>Date Published: {book.book_published}</Col>
         </Row>

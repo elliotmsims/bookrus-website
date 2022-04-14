@@ -34,6 +34,9 @@ export default function Country() {
       j += 1;
     }
   }
+  const languageNames = new Intl.DisplayNames(["en"], {
+    type: "language",
+  });
   let languages = [];
   if (country.country_languages != null) {
     languages = country.country_languages
@@ -84,12 +87,13 @@ export default function Country() {
         <Row>
           <Col>Region: {country.country_region}</Col>
           <Col>Capital: {country.country_capital_city}</Col>
-          <Col>Population: {country.country_population}</Col>
+          <Col>Population: {country.country_population.toLocaleString("en-US")}</Col>
           <Col>Demonym: {country.country_demonym}</Col>
+          <Col>Total Authors: {authorArr.length}</Col>
           <Col>
             Languages:
             {languages.map((language) => (
-              <p>{language}</p>
+              <p>{languageNames.of(language.replace('"', "").replace('"', ""))}</p>
             ))}
           </Col>
         </Row>

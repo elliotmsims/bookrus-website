@@ -15,6 +15,9 @@ export default function Books() {
   const response = getBooks(currentPage, numResults, sortBooks, searchBooks);
   const totalInstances = response.meta_total;
   const books = response.data;
+  const languageNames = new Intl.DisplayNames(["en"], {
+    type: "language",
+  });
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/books/${id}`);
   // eslint-disable-next-line camelcase
