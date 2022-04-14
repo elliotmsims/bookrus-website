@@ -2,8 +2,7 @@ from calendar import c
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
 from sqlalchemy import or_
-from flask import jsonify, request, json
-import json
+from flask import jsonify, request
 
 # Build database
 db.create_all()
@@ -155,7 +154,6 @@ def get_author(id):
 #             "meta_total": author_result["meta_total"] + country_result["meta_total"] + book_result["meta_total"]
 #         }
 #     )
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

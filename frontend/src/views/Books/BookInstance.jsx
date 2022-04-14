@@ -7,6 +7,9 @@ import blankBookPic from "../../assets/blankbookimg.jpg";
 export default function Book() {
   const book = getBook(useParams().bookId);
   const country = getCountry(book.book_country_id);
+  const languageNames = new Intl.DisplayNames(["en"], {
+    type: "language",
+  });
   Object.keys(book).forEach((k) => {
     if (!book[k]) {
       book[k] = "N/A";
@@ -33,8 +36,8 @@ export default function Book() {
       <h6>
         <Row>
           <Col>Genre: {book.book_categories}</Col>
-          <Col>Pages: {book.book_pages}</Col>
-          <Col>Language: {book.book_language}</Col>
+          <Col>Pages: {book.book_pages.toLocaleString("en-US")}</Col>
+          <Col>Language: {languageNames.of(book.book_language)}</Col>
           <Col>Maturity: {book.book_maturity}</Col>
           <Col>Date Published: {book.book_published}</Col>
         </Row>
@@ -42,6 +45,18 @@ export default function Book() {
       <h3>Synopsis:</h3>
       <p>{book.book_description}</p>
       <img src={book.book_image} alt={book.book_title} />
+      <iframe
+        title="map"
+        width="600"
+        height="450"
+        style={{ border: "0" }}
+        loading="lazy"
+        allowFullScreen
+        src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
+          " ",
+          "+"
+        )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
+      />
     </Container>
   );
 }
