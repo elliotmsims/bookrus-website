@@ -4,7 +4,7 @@ import SortDropdown from "../sort/SortDropdown";
 import SearchBar from "../search/SearchBar";
 import MyPagination from "../pagination/Pagination";
 
-export default function ModelNavigation(props) {
+export default function SearchNavigation(props) {
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
       <Container>
@@ -12,22 +12,12 @@ export default function ModelNavigation(props) {
         <Navbar.Toggle aria-controls="navbar-dark-example" />
         <Navbar.Collapse id="navbar-dark-example">
           <Nav className="me-auto">
-            <SortDropdown model={props.modelName} setSort={props.setSort} />
             <SearchBar
-              placeholder={`Find ${props.modelName}`}
+              placeholder={props.placeholder}
               setSearch={props.setSearch}
             />
           </Nav>
           <br />
-          <Nav className="justify-content-end">
-            <MyPagination
-              totalInstances={props.totalInstances}
-              currentPage={props.currentPage}
-              setCurrentPage={props.setCurrentPage}
-              numResults={props.numResults}
-              setNumResults={props.setNumResults}
-            />
-          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

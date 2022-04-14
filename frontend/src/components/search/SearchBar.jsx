@@ -8,7 +8,7 @@ export default function SearchBar(props) {
     <Form className="d-flex">
       <FormControl
         type="search"
-        placeholder={`Find ${props.model}`}
+        placeholder={props.placeholder}
         className="me-2"
         aria-label="Search"
         onChange={(e) => setValue(e.target.value)}

@@ -32,7 +32,6 @@ const models = {
 };
 
 export default function Home() {
-  const [globalSearch, setGlobalSearch] = useState(null);
   return (
     <div className="main">
       <Container
@@ -73,8 +72,3 @@ export default function Home() {
     </div>
   );
 }
-
-// <SearchBar
-//   model="Books, Authors, and Countries"
-//   setSearch={setGlobalSearch}
-// />

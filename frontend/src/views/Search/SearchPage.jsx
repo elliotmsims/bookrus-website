@@ -1,25 +1,18 @@
 import { Container } from "react-bootstrap";
 import { useState } from "react";
 import { getCountries } from "../../services/API/apiCalls";
-import ModelNavigation from "../../components/model-navigation/NavBar";
+import SearchNavigation from "../../components/search-naviagtion/NavBar";
 
 export default function Search() {
-  const [currentPage, setCurrentPage] = useState(1);
-  // const [searchCountries, setSearchCountries] = useState(null);
-  const response = getCountries(currentPage);
-  const totalInstances = response.meta_total;
-  //   const countries = response.data;
-  //   const navigate = useNavigate();
-  //   const handleClick = (id) => navigate(`/countries/${id}`);
+  const [globalSearch, setGlobalSearch] = useState(null);
   return (
     <div className="Search Results">
       <br />
       <Container fluid>
-        <ModelNavigation
-          model="Search Results"
-          totalInstances={totalInstances}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
+        <SearchNavigation
+          modelName="Search Results"
+          placeholder="Find Books, Authors, and Countries"
+          setSearch={setGlobalSearch}
         />
       </Container>
     </div>

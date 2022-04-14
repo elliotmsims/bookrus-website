@@ -100,6 +100,18 @@ export default function Country() {
         width="512"
         height="512"
       />
+      <iframe
+        title="map"
+        width="600"
+        height="450"
+        style={{ border: "0" }}
+        loading="lazy"
+        allowFullScreen
+        src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
+          " ",
+          "+"
+        )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
+      />
     </Container>
   );
 }
