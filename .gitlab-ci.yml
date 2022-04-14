@@ -61,12 +61,10 @@ backend_unit_tests:
     - pip3 install -r requirements.txt
 
     # Add credentials
-    - cd data
     - touch credentials.py
     - echo -n "db_login = '" >> credentials.py
     - echo -n $DB_LOGIN >> credentials.py
     - echo "'" >> credentials.py
-    - cd ..
 
     - python3 tests.py
 
