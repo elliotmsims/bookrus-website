@@ -1,17 +1,11 @@
-import {
-  Container,
-  Row,
-  Card,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBooks } from "../../services/API/apiCalls";
-import blankBookPic from "../../assets/blankbookimg.jpg";
 import ModelNavigation from "../../components/model-navigation/NavBar";
-import Highlight from "../../components/highlighting/Highlighter";
-import styles from "./styles.module.css";
+import ModelCards from "../../components/model-cards/ModelCards";
+import blankBookPic from "../../assets/blankbookimg.jpg";
+import { modelAttributes } from "../../util/constants/modelAttributes";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,12 +17,14 @@ export default function Books() {
   const books = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/books/${id}`);
+  // eslint-disable-next-line camelcase
+  const attributes = (({ book_title, ...o }) => o)(modelAttributes.Books);
   return (
     <div className="Books">
       <br />
       <Container fluid>
         <ModelNavigation
-          model="Books"
+          modelName="Books"
           setSort={setSortBooks}
           setSearch={setSearchBooks}
           totalInstances={totalInstances}
@@ -38,87 +34,16 @@ export default function Books() {
           setNumResults={setNumResults}
         />
       </Container>
-      <Container>
-        <br />
-        {totalInstances === 0 && <h2>No Results</h2>}
-        <Row style={{ justifyContent: "center" }} xs={1} md={4}>
-          {books.map((item) => {
-            const book = item;
-            Object.keys(book).forEach((k) => {
-              if (!book[k]) {
-                book[k] = "N/A";
-              }
-            });
-            if (book.book_image === "N/A") {
-              book.book_image = blankBookPic;
-            }
-            return (
-              <Row>
-                <Card
-                  className={styles.card}
-                  style={{ width: "18rem", border: "1px solid white" }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleClick(book.book_id)}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={book.book_image}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </button>
-                  <Card.Body>
-                    <Card.Title>
-                      <Highlight value={book.book_title} search={searchBooks} />
-                    </Card.Title>
-                    <Card.Text>
-                      <ListGroup variant="flush">
-                        <ListGroupItem>
-                          Author:{" "}
-                          <Highlight
-                            value={book.book_author}
-                            search={searchBooks}
-                          />
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Date Publication:{" "}
-                          <Highlight
-                            value={book.book_published}
-                            search={searchBooks}
-                          />
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Language:{" "}
-                          <Highlight
-                            value={book.book_language}
-                            search={searchBooks}
-                          />
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Genre:{" "}
-                          <Highlight
-                            value={book.book_categories}
-                            search={searchBooks}
-                          />
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Length:{" "}
-                          <Highlight
-                            value={book.book_pages}
-                            search={searchBooks}
-                          />
-                        </ListGroupItem>
-                      </ListGroup>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <br />
-              </Row>
-            );
-          })}
-        </Row>
-      </Container>
+      <br />
+      <ModelCards
+        modelName="Books"
+        modelData={books}
+        totalInstances={totalInstances}
+        blankPic={blankBookPic}
+        handleClick={handleClick}
+        searchModel={searchBooks}
+        attributes={attributes}
+      />
     </div>
   );
 }

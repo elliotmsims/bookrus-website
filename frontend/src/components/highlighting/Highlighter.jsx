@@ -1,10 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 export default function Highlight(props) {
-  if (props.search === null || props.search === "") {
+  if (props.search === null || props.search === "" || props.value === "N/A") {
     return <span>{props.value}</span>;
   }
   // isNumber
-  console.log(props.value, props.search);
   if (/^[+-]?\d+(\.\d+)?$/.test(props.value)) {
     if (String(props.value) === props.search) {
       return <b style={{ color: "var(--logo-color)" }}>{props.value}</b>;

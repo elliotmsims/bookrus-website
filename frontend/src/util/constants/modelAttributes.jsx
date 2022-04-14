@@ -22,3 +22,21 @@ export const modelAttributes = {
     country_long: "Longitude",
   },
 };
+
+export const modelSpecialAttributes = {
+  Books: {
+    name: "book_title",
+    image: "book_image",
+    id: "book_id",
+  },
+  Authors: {
+    name: "author_name",
+    image: "author_image",
+    id: "author_id",
+  },
+  Countries: {
+    name: "country_name",
+    image: "country_image",
+    id: "country_id",
+  },
+};

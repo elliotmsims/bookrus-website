@@ -1,17 +1,11 @@
-import {
-  Container,
-  Row,
-  Card,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCountries } from "../../services/API/apiCalls";
-import blankCountryPic from "../../assets/blankcountryimg.jpg";
+import ModelCards from "../../components/model-cards/ModelCards";
 import ModelNavigation from "../../components/model-navigation/NavBar";
-import Highlight from "../../components/highlighting/Highlighter";
-import styles from "./styles.module.css";
+import blankCountryPic from "../../assets/blankcountryimg.jpg";
+import { modelAttributes } from "../../util/constants/modelAttributes";
 
 export default function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,12 +22,14 @@ export default function Countries() {
   const countries = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/countries/${id}`);
+  // eslint-disable-next-line camelcase
+  const attributes = (({ country_name, ...o }) => o)(modelAttributes.Countries);
   return (
     <div className="Countries">
       <br />
       <Container fluid>
         <ModelNavigation
-          model="Countries"
+          modelName="Countries"
           setSort={setSortCountries}
           setSearch={setSearchCountries}
           totalInstances={totalInstances}
@@ -43,66 +39,16 @@ export default function Countries() {
           setNumResults={setNumResults}
         />
       </Container>
-      <Container>
-        <br />
-        {totalInstances === 0 && <h2>No Results</h2>}
-        <Row style={{ justifyContent: "center" }} xs={2} md={4}>
-          {countries.map((item) => {
-            const country = item;
-            Object.keys(country).forEach((k) => {
-              if (!country[k]) {
-                country[k] = "N/A";
-              }
-            });
-            if (country.country_image === "N/A") {
-              country.country_image = blankCountryPic;
-            }
-            return (
-              <Row>
-                <Card
-                  className={styles.card}
-                  style={{ width: "18rem", border: "1px solid white" }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleClick(country.country_id)}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={country.country_image}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </button>
-                  <Card.Body>
-                    <Card.Title>{country.country_name}</Card.Title>
-                    <Card.Text>
-                      <ListGroup variant="flush">
-                        <ListGroupItem>
-                          Region: {country.country_region}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Population: {country.country_population}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Latitude:{" "}
-                          <Highlight
-                            value={country.country_lat}
-                            search={searchCountries}
-                          />
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Longitude: {country.country_long}
-                        </ListGroupItem>
-                      </ListGroup>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <br />
-              </Row>
-            );
-          })}
-        </Row>
-      </Container>
+      <br />
+      <ModelCards
+        modelName="Countries"
+        modelData={countries}
+        totalInstances={totalInstances}
+        blankPic={blankCountryPic}
+        handleClick={handleClick}
+        searchModel={searchCountries}
+        attributes={attributes}
+      />
     </div>
   );
 }

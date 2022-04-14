@@ -8,13 +8,13 @@ export default function ModelNavigation(props) {
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
       <Container>
-        <Navbar.Brand>{props.model}</Navbar.Brand>
+        <Navbar.Brand>{props.modelName}</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-dark-example" />
         <Navbar.Collapse id="navbar-dark-example">
-          {props.model !== "Search Results" && (
+          {props.modelName !== "Search Results" && (
             <Nav className="me-auto">
-              <SortDropdown model={props.model} setSort={props.setSort} />
-              <SearchBar model={props.model} setSearch={props.setSearch} />
+              <SortDropdown model={props.modelName} setSort={props.setSort} />
+              <SearchBar model={props.modelName} setSearch={props.setSearch} />
             </Nav>
           )}
           <br />

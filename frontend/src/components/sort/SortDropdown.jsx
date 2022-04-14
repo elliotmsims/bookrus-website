@@ -4,7 +4,6 @@ import { modelAttributes } from "../../util/constants/modelAttributes";
 
 export default function SortDropdown(props) {
   const attributes = modelAttributes[props.model];
-  // Object.keys(attributes).map((k) => console.log(k));
   return (
     <NavDropdown
       id="nav-dropdown-dark-example"
@@ -12,7 +11,7 @@ export default function SortDropdown(props) {
       menuVariant="dark"
     >
       {Object.keys(attributes).map((k) => (
-        <NavDropdown.Item onClick={() => props.setSort(k)}>
+        <NavDropdown.Item onClick={() => props.setSort(k.replace("_", "-"))}>
           {attributes[k]}
         </NavDropdown.Item>
       ))}
