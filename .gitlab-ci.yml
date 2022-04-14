@@ -52,10 +52,19 @@ frontend_gui_test:
   - python3 guitests.py
 
 backend_unit_tests:
+  variables:
+    DB_LOGIN: $DB_LOGIN
   stage: test
   image: python:3.6-stretch
   script:
     - cd backend
     - pip3 install -r requirements.txt
+
+    # Add credentials
+    - touch credentials.py
+    - echo -n "db_login = '" >> credentials.py
+    - echo -n $DB_LOGIN >> credentials.py
+    - echo "'" >> credentials.py
+
     - python3 tests.py
 
