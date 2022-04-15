@@ -21,7 +21,7 @@ class TestFrontendGui(unittest.TestCase):
         return webdriver.Chrome(options=chrome_options)
 
     def testNavBarListing(self):
-        expected_navbar = ["about", "books", "authors", "countries"]
+        expected_navbar = ["about", "search", "books", "authors", "countries"]
         driver = self.createDriver()
         driver.get(self.url)
         # Check if navbar buttons are listed
@@ -57,12 +57,11 @@ class TestFrontendGui(unittest.TestCase):
 
     def testBookNavigation(self):
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
         driver.get(self.url + "/books")
         # Check that the number of books listed is not 0
-        count_elem = driver.find_element(by=By.TAG_NAME, value="b")
-        pattern = re.findall("[0-9]+", count_elem.text)
+        count_elem = driver.find_element(by=By.XPATH, value="//span[@class='badge rounded-pill text-dark bg-light']")
+        count_text = count_elem.get_attribute("innerHTML")
+        pattern = re.findall("[0-9]+", count_text)
         count = pattern[2]
         self.assertNotEqual(count, "0")
         driver.quit()
@@ -71,21 +70,16 @@ class TestFrontendGui(unittest.TestCase):
         # Keep track of original URL
         listing_url = self.url + "/books"
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
         driver.get(listing_url)
         # Check that the instances listed have a button to instance page
-        card_elem = driver.find_element(by=By.CLASS_NAME, value="card")
-        button_elem = card_elem.find_element(by=By.TAG_NAME, value="button")
-        driver.execute_script("arguments[0].scrollIntoView();", button_elem)
-        driver.execute_script("arguments[0].click();", button_elem)
+        container = driver.find_element(by=By.XPATH, value="//div[@class='Books']")
+        card_elem = container.find_elements(by=By.XPATH, value="//div[@class='row row-cols-md-4 row-cols-2']//div[@class='row']")
+        card_elem[0].click()
         self.assertNotEqual(driver.current_url, listing_url)
         driver.quit()
 
     def testBookInstanceNavigation(self):
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
         driver.get(self.url + "/books/1")
         # Check that the author linked is named
         author_elem = driver.find_element(by=By.TAG_NAME, value="h3")
@@ -95,34 +89,30 @@ class TestFrontendGui(unittest.TestCase):
 
     def testAuthorNavigation(self):
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
-        driver.get(self.url + "/books")
+        driver.get(self.url + "/authors")
         # Check that the number of authors listed is not 0
-        count_elem = driver.find_element(by=By.TAG_NAME, value="b")
-        pattern = re.findall("[0-9]+", count_elem.text)
+        count_elem = driver.find_element(by=By.XPATH, value="//span[@class='badge rounded-pill text-dark bg-light']")
+        count_text = count_elem.get_attribute("innerHTML")
+        pattern = re.findall("[0-9]+", count_text)
         count = pattern[2]
         self.assertNotEqual(count, "0")
         driver.quit()
 
-    def testAuthorCardNavigation(self):
-        listing_url = self.url + "/books"
+    def testAuthorTableNavigation(self):
+        listing_url = self.url + "/authors"
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
         driver.get(listing_url)
         # Check that the instances listed have a button to instance page
-        card_elem = driver.find_element(by=By.CLASS_NAME, value="card")
-        button_elem = card_elem.find_element(by=By.TAG_NAME, value="button")
-        driver.execute_script("arguments[0].scrollIntoView();", button_elem)
-        driver.execute_script("arguments[0].click();", button_elem)
+        container = driver.find_element(by=By.XPATH, value="//div[@class='Authors']")
+        table_elem = container.find_element(by=By.TAG_NAME, value="tbody")
+        button_elem = table_elem.find_elements(by=By.TAG_NAME, value="tr")
+        driver.execute_script("arguments[0].scrollIntoView();", button_elem[0])
+        driver.execute_script("arguments[0].click();", button_elem[0])
         self.assertNotEqual(driver.current_url, listing_url)
         driver.quit()
 
     def testAuthorInstanceNavigation(self):
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
         driver.get(self.url + "/authors/1")
         # Check that the nationality linked is named
         author_elem = driver.find_element(by=By.TAG_NAME, value="h3")
@@ -132,12 +122,11 @@ class TestFrontendGui(unittest.TestCase):
 
     def testCountryNavigation(self):
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
         driver.get(self.url + "/countries")
         # Check that the number of countries listed is not 0
-        count_elem = driver.find_element(by=By.TAG_NAME, value="b")
-        pattern = re.findall("[0-9]+", count_elem.text)
+        count_elem = driver.find_element(by=By.XPATH, value="//span[@class='badge rounded-pill text-dark bg-light']")
+        count_text = count_elem.get_attribute("innerHTML")
+        pattern = re.findall("[0-9]+", count_text)
         count = pattern[2]
         self.assertNotEqual(count, "0")
         driver.quit()
@@ -145,21 +134,16 @@ class TestFrontendGui(unittest.TestCase):
     def testCountryCardNavigation(self):
         listing_url = self.url + "/countries"
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
         driver.get(listing_url)
         # Check that the instances listed have a button to instance page
-        card_elem = driver.find_element(by=By.CLASS_NAME, value="card")
-        button_elem = card_elem.find_element(by=By.TAG_NAME, value="button")
-        driver.execute_script("arguments[0].scrollIntoView();", button_elem)
-        driver.execute_script("arguments[0].click();", button_elem)
+        container = driver.find_element(by=By.XPATH, value="//div[@class='Countries']")
+        card_elem = container.find_elements(by=By.XPATH, value="//div[@class='row row-cols-md-4 row-cols-2']//div[@class='row']")
+        card_elem[0].click()
         self.assertNotEqual(driver.current_url, listing_url)
         driver.quit()
 
     def testCountryInstanceNavigation(self):
         driver = self.createDriver()
-        # Wait 5 seconds before checking listings
-        driver.implicitly_wait(5)
         driver.get(self.url + "/countries/2")
         # Check that at least 1 author linked is named
         author_elem = driver.find_element(by=By.TAG_NAME, value="h3")
