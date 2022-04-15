@@ -3,7 +3,7 @@
 const api = require("./apiCalls");
 
 test("API Call to get all countries (1st page) is successful", () => {
-  const data = api.getCountries(1).data;
+  const { data } = api.getCountries(1);
   expect(data).toBeDefined();
   expect(data).toBeInstanceOf(Array);
   expect(data.length).toBe(10);
@@ -16,7 +16,7 @@ test("API Call to get a single country instance is successful", () => {
 });
 
 test("API Call to get all authors (1st page) is successful", () => {
-  const data = api.getAuthors(1).data;
+  const { data } = api.getAuthors(1);
   expect(data).toBeDefined();
   expect(data).toBeInstanceOf(Array);
   expect(data.length).toBe(10);
@@ -29,7 +29,7 @@ test("API Call to get a single author instance is successful", () => {
 });
 
 test("API Call to get all books (1st page) is successful", () => {
-  const data = api.getBooks(1).data;
+  const { data } = api.getBooks(1);
   expect(data).toBeDefined();
   expect(data).toBeInstanceOf(Array);
   expect(data.length).toBe(10);
