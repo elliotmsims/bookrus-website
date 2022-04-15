@@ -50,7 +50,7 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 
 | Name                 | Estimated | Actual |
 | -------------------- | --------- | ------ |
-| Matthew Escobar      | 20        | 0      |
+| Matthew Escobar      | 20        | 30     |
 | William Eng          | 20        | 25     |
 | Hrithik Ramganesh    | 20        | 0      |
 | Elliot Sims          | 20        | 40     |
