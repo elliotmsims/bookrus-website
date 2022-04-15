@@ -1,6 +1,6 @@
 const deployLink = "https://api.bookrus.me";
 const localLink = "http://localhost:5000";
-const testing = true;
+const testing = false;
 
 export function getCountry(countryId) {
   const request = new XMLHttpRequest();
