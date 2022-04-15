@@ -46,6 +46,15 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 | Hrithik Ramganesh    | 20        | 30     |
 | Elliot Sims          | 20        | 38     |
 
+### Phase 3
+
+| Name                 | Estimated | Actual |
+| -------------------- | --------- | ------ |
+| Matthew Escobar      | 20        | 0      |
+| William Eng          | 20        | 0      |
+| Hrithik Ramganesh    | 20        | 0      |
+| Elliot Sims          | 20        | 40     |
+
 ## Comments
 
 Starting early is the most important thing!

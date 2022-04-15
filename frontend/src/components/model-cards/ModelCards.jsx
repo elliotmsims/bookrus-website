@@ -39,7 +39,6 @@ export default function ModelCards(props) {
                   variant="top"
                   src={card[specialAttributes.image]}
                   style={{
-                    cursor: "pointer",
                     border: "3px solid #000",
                     padding: "0",
                   }}

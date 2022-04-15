@@ -6,7 +6,9 @@ export default function SearchNavigation(props) {
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
       <Container>
-        <Navbar.Brand>{props.modelName}</Navbar.Brand>
+        <Navbar.Brand style={{ fontSize: "3em" }}>
+          {props.modelName}
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-dark-example" />
         <Navbar.Collapse id="navbar-dark-example">
           <Nav className="me-auto">
