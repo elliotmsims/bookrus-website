@@ -1,7 +1,16 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Card,
+  ListGroup,
+  ListGroupItem,
+} from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import { getCountry, getBook } from "../../apiCalls";
+import { getCountry, getBook } from "../../services/API/apiCalls";
 import blankBookPic from "../../assets/blankbookimg.jpg";
+import styles from "./styles.module.css";
 
 export default function Book() {
   const book = getBook(useParams().bookId);
@@ -14,34 +23,107 @@ export default function Book() {
       book.book_image = blankBookPic;
     }
   });
-
   return (
     <Container>
-      <h1>Book: {book.book_title}</h1>
-      <h3>
-        Author:{" "}
-        <Link to={`/authors/${book.book_author_id}`}>
-          <Button variant="outline-dark">{book.book_author}</Button>
-        </Link>
-      </h3>
-      <h3>
-        Author Nationality:{" "}
-        <Link to={`/countries/${book.book_country_id}`}>
-          <Button variant="outline-dark">{country.country_name}</Button>
-        </Link>
-      </h3>
-      <h6>
-        <Row>
-          <Col>Genre: {book.book_categories}</Col>
-          <Col>Pages: {book.book_pages}</Col>
-          <Col>Language: {book.book_language}</Col>
-          <Col>Maturity: {book.book_maturity}</Col>
-          <Col>Date Published: {book.book_published}</Col>
-        </Row>
-      </h6>
-      <h3>Synopsis:</h3>
-      <p>{book.book_description}</p>
-      <img src={book.book_image} alt={book.book_title} />
+      <Row>
+        <h1>Book: {book.book_title}</h1>
+      </Row>
+      <Row>
+        <Card
+          fluid
+          className={styles.card}
+          style={{
+            border: "3px solid #000",
+            backgroundColor: "var(--logo-color)",
+          }}
+        >
+          <Card.Body>
+            <b>{book.book_description}</b>
+          </Card.Body>
+        </Card>
+      </Row>
+      <br />
+      <Row>
+        <Col>
+          <h3>
+            Author{" "}
+            <Link to={`/authors/${book.book_author_id}`}>
+              <Button variant="outline-dark">{book.book_author}</Button>
+            </Link>
+          </h3>
+        </Col>
+        <Col>
+          <h3>
+            Author Nationality{" "}
+            <Link to={`/countries/${book.book_country_id}`}>
+              <Button variant="outline-dark">{country.country_name}</Button>
+            </Link>
+          </h3>
+        </Col>
+      </Row>
+      <br />
+      <Row>
+        <Col xs={4}>
+          <Card
+            className={styles.card}
+            style={{ width: "100%", border: "1px solid white" }}
+          >
+            <Card.Img
+              variant="bottom"
+              src={book.book_image}
+              style={{
+                width: "12rem",
+                height: "auto",
+                marginLeft: "auto",
+                marginRight: "auto",
+                border: "3px solid #000",
+                padding: "0",
+              }}
+            />
+            <Card.Body>
+              <Card.Text>
+                <ListGroup variant="flush">
+                  <ListGroupItem>
+                    <b>Language:</b> {book.book_language}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <b>Genre:</b> {book.book_categories}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <b>Length:</b> {book.book_pages}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <b>Maturity:</b> {book.book_maturity}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <b>Date Published:</b> {book.book_published}
+                  </ListGroupItem>
+                </ListGroup>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col fluid>
+          <Card
+            className={styles.card}
+            style={{ width: "100%", border: "1px solid white" }}
+          >
+            <iframe
+              title="map"
+              width="100%"
+              height="450"
+              style={{ border: "0" }}
+              loading="lazy"
+              allowFullScreen
+              src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
+                " ",
+                "+"
+              )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
+            />
+          </Card>
+        </Col>
+      </Row>
+      <br />
     </Container>
   );
 }

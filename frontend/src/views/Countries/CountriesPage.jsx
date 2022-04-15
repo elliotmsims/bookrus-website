@@ -1,89 +1,54 @@
-import {
-  Container,
-  Col,
-  Row,
-  Card,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCountries } from "../../apiCalls";
+import { getCountries } from "../../services/API/apiCalls";
+import ModelCards from "../../components/model-cards/ModelCards";
+import ModelNavigation from "../../components/model-navigation/NavBar";
 import blankCountryPic from "../../assets/blankcountryimg.jpg";
-import MyPagination from "../../components/pagination/Pagination";
+import { modelAttributes } from "../../util/constants/modelAttributes";
 
 export default function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalInstances = 218;
-  const countries = getCountries(currentPage);
+  const [numResults, setNumResults] = useState(10);
+  const [sortCountries, setSortCountries] = useState(null);
+  const [searchCountries, setSearchCountries] = useState(null);
+  const response = getCountries(
+    currentPage,
+    numResults,
+    sortCountries,
+    searchCountries
+  );
+  const totalInstances = response.meta_total;
+  const countries = response.data;
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/countries/${id}`);
+  // eslint-disable-next-line camelcase
+  const attributes = (({ country_name, ...o }) => o)(modelAttributes.Countries);
   return (
     <div className="Countries">
+      <br />
       <Container fluid>
-        <Row>
-          <h1>Countries</h1>
-        </Row>
-        <Row>
-          <Col>
-            <MyPagination
-              totalInstances={totalInstances}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Col>
-        </Row>
-        <br />
-        <Row style={{ justifyContent: "center" }} xs={2} md={4}>
-          {countries.map((item) => {
-            const country = item.attributes;
-            Object.keys(country).forEach((k) => {
-              if (!country[k]) {
-                country[k] = "N/A";
-              }
-            });
-            if (country.country_image === "N/A") {
-              country.country_image = blankCountryPic;
-            }
-            return (
-              <Row>
-                <Card style={{ width: "18rem", border: "1px solid white" }}>
-                  <button
-                    type="button"
-                    onClick={() => handleClick(country.country_id)}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={country.country_image}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </button>
-                  <Card.Body>
-                    <Card.Title>{country.country_name}</Card.Title>
-                    <Card.Text>
-                      <ListGroup variant="flush">
-                        <ListGroupItem>
-                          Region: {country.country_region}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Population: {country.country_population}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Latitude: {country.country_lat}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Longitude: {country.country_long}
-                        </ListGroupItem>
-                      </ListGroup>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <br />
-              </Row>
-            );
-          })}
-        </Row>
+        <ModelNavigation
+          modelName="Countries"
+          setSort={setSortCountries}
+          setSearch={setSearchCountries}
+          totalInstances={totalInstances}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          numResults={numResults}
+          setNumResults={setNumResults}
+        />
       </Container>
+      <br />
+      <ModelCards
+        modelName="Countries"
+        modelData={countries}
+        totalInstances={totalInstances}
+        blankPic={blankCountryPic}
+        handleClick={handleClick}
+        searchModel={searchCountries}
+        attributes={attributes}
+      />
     </div>
   );
 }

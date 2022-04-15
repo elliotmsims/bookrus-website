@@ -1,9 +1,10 @@
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authorImage from "../../assets/home-images/author.jpg";
 import bookImage from "../../assets/home-images/book.jpg";
 import countryImage from "../../assets/home-images/country.jpg";
 import splashArt from "../../assets/home-images/splash-art.jpg";
+import SearchBar from "../../components/search/SearchBar";
 import "./styles.css";
 
 const models = {
@@ -22,7 +23,7 @@ const models = {
     },
     {
       name: "Countries",
-      desc: "Explore the cultures that have inspired countless pieces of literature",
+      desc: "Explore the cultures that inspire countless pieces of literature",
       img: countryImage,
       link: "/countries",
     },
@@ -30,17 +31,29 @@ const models = {
 };
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="main">
-      <div className="home-bg" style={{ backgroundImage: `url(${splashArt})` }}>
-        <Container style={{ maxWidth: "100%" }}>
-          <div className="bg-text">
-            Information about your favorite stories, all in one place
-          </div>
-        </Container>
-      </div>
+      <Container
+        className="home-bg"
+        style={{ maxWidth: "100%", backgroundImage: `url(${splashArt})` }}
+      >
+        <div className="bg-text">
+          Information about your favorite stories, all in one place
+        </div>
+      </Container>
       <div className="bottom">
-        <Container style={{ maxWidth: "95%" }}>
+        <br />
+        <Container>
+          <Row>
+            <SearchBar
+              placeholder="Find Authors, Books, and Countries"
+              handleSearch={(val) =>
+                navigate("/search", { state: { search: val } })
+              }
+            />
+          </Row>
+          <br />
           <Row
             md={3}
             className="dev_cards"
@@ -54,7 +67,9 @@ export default function Home() {
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>{item.desc}</Card.Text>
                     <Link to={item.link}>
-                      <Button variant="dark">Learn about {item.name}</Button>
+                      <Button variant="outline-dark">
+                        Learn about {item.name}
+                      </Button>
                     </Link>
                   </Card.Body>
                 </Card>

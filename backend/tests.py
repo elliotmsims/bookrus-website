@@ -1,48 +1,53 @@
+import app
 import unittest
-import requests
-
+import json
 
 class TestFlaskBackend(unittest.TestCase):
     def setUp(self):
-        self.headers = {"Accept": "application/vnd.api+json"}
+        app.app.config["TESTING"] = True
+        self.client = app.app.test_client()
 
     def testAuthorAll(self):
-        response = requests.get("https://api.bookrus.me/author", headers=self.headers)
-        self.assertEqual(response.status_code, 200)
-        response_json = response.json()
-        self.assertEqual(len(response_json["data"]), 10)
+        with self.client:
+            response = self.client.get("/authors")
+            self.assertEqual(response.status_code, 200)
+            res_json = json.loads(response.data)
+            self.assertEqual(len(res_json["data"]), 10)
 
     def testAuthorById(self):
-        response = requests.get("https://api.bookrus.me/author/1", headers=self.headers)
-        self.assertEqual(response.status_code, 200)
-        response_json = response.json()
-        self.assertEqual(response_json["data"]["attributes"]["author_id"], 1)
+        with self.client:
+            response = self.client.get("/authors/1")
+            self.assertEqual(response.status_code, 200)
+            res_json = json.loads(response.data)
+            self.assertEqual(res_json["author_id"], 1)
 
     def testCountryAll(self):
-        response = requests.get("https://api.bookrus.me/country", headers=self.headers)
-        self.assertEqual(response.status_code, 200)
-        response_json = response.json()
-        self.assertEqual(len(response_json["data"]), 10)
+        with self.client:
+            response = self.client.get("/countries")
+            self.assertEqual(response.status_code, 200)
+            res_json = json.loads(response.data)
+            self.assertEqual(len(res_json["data"]), 10)
 
     def testCountryById(self):
-        response = requests.get(
-            "https://api.bookrus.me/country/1", headers=self.headers
-        )
-        self.assertEqual(response.status_code, 200)
-        response_json = response.json()
-        self.assertEqual(response_json["data"]["attributes"]["country_id"], 1)
+        with self.client:
+            response = self.client.get("/countries/2")
+            self.assertEqual(response.status_code, 200)
+            res_json = json.loads(response.data)
+            self.assertEqual(res_json["country_id"], 2)
 
     def testBookAll(self):
-        response = requests.get("https://api.bookrus.me/book", headers=self.headers)
-        self.assertEqual(response.status_code, 200)
-        response_json = response.json()
-        self.assertEqual(len(response_json["data"]), 10)
+        with self.client:
+            response = self.client.get("/books")
+            self.assertEqual(response.status_code, 200)
+            res_json = json.loads(response.data)
+            self.assertEqual(len(res_json["data"]), 10)
 
     def testBookById(self):
-        response = requests.get("https://api.bookrus.me/book/1", headers=self.headers)
-        self.assertEqual(response.status_code, 200)
-        response_json = response.json()
-        self.assertEqual(response_json["data"]["attributes"]["book_id"], 1)
+        with self.client:
+            response = self.client.get("/books/1")
+            self.assertEqual(response.status_code, 200)
+            res_json = json.loads(response.data)
+            self.assertEqual(res_json["book_id"], 1)
 
 
 if __name__ == "__main__":

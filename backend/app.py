@@ -1,99 +1,148 @@
-from flask import Flask
-from flask_restless import APIManager
-from flask_sqlalchemy import SQLAlchemy
-import data.credentials
-
-# from data.countries import Country
-# from data.books import Book
-# from data.authors import Author
-
-app = Flask(__name__)
-app.debug = True
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = data.credentials.db_login
-db = SQLAlchemy(app)
-
-# Define Book table/data model
-class Book(db.Model):
-    # book_id = db.Column(db.String())
-    book_id = db.Column(db.Integer, primary_key=True)
-    book_title = db.Column(db.String())
-    book_author = db.Column(db.String())
-    book_author_id = db.Column(db.Integer)
-    book_published = db.Column(db.String())
-    book_pages = db.Column(db.Integer)
-    book_maturity = db.Column(db.String())
-    book_language = db.Column(db.String())
-    book_categories = db.Column(db.String())
-    book_description = db.Column(db.String())
-    book_image = db.Column(db.String())
-    book_country_id = db.Column(db.Integer)
-
-
-# Define Country table/data model
-class Country(db.Model):
-    country_id = db.Column(db.Integer, primary_key=True)
-    country_name = db.Column(db.String())
-    country_region = db.Column(db.String())
-    country_capital_city = db.Column(db.String())
-    country_lat = db.Column(db.Float)
-    country_long = db.Column(db.Float)
-    country_demonym = db.Column(db.String())
-    country_image = db.Column(db.String())
-    country_authors = db.Column(db.String())
-    country_description = db.Column(db.String())
-    country_languages = db.Column(db.String())
-    country_population = db.Column(db.Integer)
-
-
-# Define Author table/data model
-class Author(db.Model):
-    author_id = db.Column(db.Integer, primary_key=True)
-    author_name = db.Column(db.String())
-    author_birth_date = db.Column(db.String())
-    author_death_date = db.Column(db.String())
-    author_top_work = db.Column(db.String())
-    author_work_count = db.Column(db.Integer)
-    author_bio = db.Column(db.String())
-    author_image = db.Column(db.String())
-    author_country_id = db.Column(db.Integer)
-    author_books = db.Column(db.String())
-    author_genre = db.Column(db.String())
-    author_nationality = db.Column(db.String())
-
+from calendar import c
+from models import app, db, Country, Author, Book
+from schemas import country_schema, author_schema, book_schema
+from sqlalchemy import or_
+from flask import jsonify, request
 
 # Build database
 db.create_all()
-
-# Method to add CORS headers to all api sessions
-def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    return response
-
-
-# Define database API system here, accessible at /api/[modelname]/[number]
-methods = ["GET"]
-
-manager = APIManager(app, session=db.session)
-book_blueprint = manager.create_api_blueprint(
-    "book", Book, methods=methods, url_prefix="/"
-)
-country_blueprint = manager.create_api_blueprint(
-    "country", Country, methods=methods, url_prefix="/"
-)
-author_blueprint = manager.create_api_blueprint(
-    "author", Author, methods=methods, url_prefix="/"
-)
-blueprints = (book_blueprint, country_blueprint, author_blueprint)
-for blueprint in blueprints:
-    blueprint.after_request(add_cors_headers)
-    app.register_blueprint(blueprint)
-
 
 @app.route("/")
 def hello_world():
     return '<img src="https://i.kym-cdn.com/photos/images/original/001/211/814/a1c.jpg" alt="cowboy" />'
 
+@app.route("/countries")
+def get_countries():
+    # name, region, population, lat, long
+    limit = request.args.get("limit")
+    limit = int(limit) if limit is not None else 10
+    sort = request.args.get("sort")
+    search = request.args.get("search")
+    query = db.session.query(Country)
+    if search is not None:
+        search = search.split(" ")
+        cols = []
+        for term in search:
+            cols.append(Country.country_name.ilike('%' + str(term) + '%'))
+            cols.append(Country.country_region.ilike('%' + term + '%'))
+        try:
+            cols.append(Country.country_population == int(term))
+        except:
+            pass
+        try:
+            cols.append(Country.country_lat == float(term))
+            cols.append(Country.country_long == float(term))
+        except:
+            pass
+        query = query.filter(or_(*cols))
+    if sort is not None:
+        sort = sort.replace("-", "_")
+        if getattr(Country, sort, None) is not None:
+            query = query.order_by(getattr(Country, sort))
+    count = query.count()
+    page = request.args.get("page", type=int)
+    if page is None: page = 1
+    end_query = query.paginate(page=page, per_page=limit, error_out=False).items
+    result = country_schema.dump(end_query, many=True)
+    return jsonify(
+        {
+            "data": result,
+            "meta_total": count
+        }
+    )
+
+@app.route("/countries/<int:id>")
+def get_country(id):
+    query = db.session.query(Country).filter_by(country_id=id)
+    result = country_schema.dump(query, many=True)[0]
+    return jsonify(result)
+
+@app.route("/books")
+def get_books():
+    # Searchable: Title, Author, publication, language, genre, page count
+    limit = request.args.get("limit")
+    limit = int(limit) if limit is not None else 10
+    sort = request.args.get("sort")
+    search = request.args.get("search")
+    query = db.session.query(Book)
+    if search is not None:
+        search = search.split(" ")
+        cols = []
+        for term in search:
+            cols.append(Book.book_title.ilike('%' + term + '%'))
+            cols.append(Book.book_author.ilike('%' + term + '%'))
+            cols.append(Book.book_language.ilike('%' + term + '%'))
+            cols.append(Book.book_categories.ilike('%' + term + '%'))
+        try:
+            cols.append(Book.book_pages == int(term))
+        except:
+            pass
+        query = query.filter(or_(*cols)) 
+    if sort is not None:
+        sort = sort.replace("-", "_")
+        if getattr(Book, sort, None) is not None:
+            query = query.order_by(getattr(Book, sort))
+    count = query.count()
+    page = request.args.get("page", type=int)
+    if page is None: page = 1
+    end_query = query.paginate(page=page, per_page=limit, error_out=False).items
+    result = book_schema.dump(end_query, many=True)
+    return jsonify(
+        {
+            "data": result,
+            "meta_total": count
+        }
+    )
+
+@app.route("/books/<int:id>")
+def get_book(id):
+    query = db.session.query(Book).filter_by(book_id=id)
+    result = book_schema.dump(query, many=True)[0]
+    return jsonify(result)
+
+@app.route("/authors")
+def get_authors():
+    # Name, Best work, work count, genre, nationality
+    limit = request.args.get("limit")
+    limit = int(limit) if limit is not None else 10
+    sort = request.args.get("sort")
+    search = request.args.get("search")
+    query = db.session.query(Author)
+    if search is not None:
+        search = search.split(" ")
+        cols = []
+        for term in search:
+            cols.append(Author.author_name.ilike('%' + term + '%'))
+            cols.append(Author.author_top_work.ilike('%' + term + '%'))
+            cols.append(Author.author_genre.ilike('%' + term + '%'))
+            cols.append(Author.author_nationality.ilike('%' + term + '%'))
+        try:
+            cols.append(Author.author_work_count == int(term))
+        except:
+            pass                
+        query = query.filter(or_(*cols))
+    if sort is not None:
+        sort = sort.replace("-", "_")
+        if getattr(Author, sort, None) is not None:
+            query = query.order_by(getattr(Author, sort))
+    count = query.count()
+    page = request.args.get("page", type=int)
+    if page is None: page = 1
+    end_query = query.paginate(page=page, per_page=limit, error_out=False).items
+    result = author_schema.dump(end_query, many=True)
+    return jsonify(
+        {
+            "data": result,
+            "meta_total": count
+        }
+    )
+
+@app.route("/authors/<int:id>")
+def get_author(id):
+    query = db.session.query(Author).filter_by(author_id=id)
+    result = author_schema.dump(query, many=True)[0]
+    return jsonify(result)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+

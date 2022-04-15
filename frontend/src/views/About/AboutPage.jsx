@@ -16,8 +16,6 @@ import francis from "../../assets/member-images/francis.jpg";
 import elliot from "../../assets/member-images/elliot.jpg";
 import matthew from "../../assets/member-images/matthew.jpg";
 import william from "../../assets/member-images/william.jpg";
-import postman from "../../assets/documentation-images/postman.jpg";
-import gitlab from "../../assets/documentation-images/gitlab.jpg";
 import gbooks from "../../assets/api-images/googlebooks.png";
 import wbank from "../../assets/api-images/worldbank.jpg";
 import openlib from "../../assets/api-images/openlib.jpg";
@@ -35,6 +33,8 @@ import react from "../../assets/tools-images/react.png";
 import reactb from "../../assets/tools-images/reactb.png";
 import reactr from "../../assets/tools-images/reactr.png";
 import sqla from "../../assets/tools-images/sqla.png";
+import postman from "../../assets/tools-images/postman.jpg";
+import gitlab from "../../assets/tools-images/gitlab.jpg";
 import "./styles.css";
 
 const lightbackground = {
@@ -274,8 +274,7 @@ export default function About() {
   return (
     <div style={lightbackground}>
       <Container>
-        <br />
-        <h2>Project Info</h2>
+        <h1>Project Info</h1>
         <Row>
           <Accordion flush alwaysOpen>
             <Accordion.Item eventKey="0">
@@ -308,7 +307,7 @@ export default function About() {
             <Accordion.Item eventKey="2">
               <Accordion.Header>Phase Leaders</Accordion.Header>
               <Accordion.Body>
-                <Table striped bordered hover variant="dark">
+                <Table striped borderless hover variant="dark">
                   <thead>
                     <tr>
                       <th>Phase #</th>

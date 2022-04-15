@@ -1,90 +1,52 @@
-import {
-  Container,
-  Col,
-  Row,
-  Card,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBooks } from "../../apiCalls";
+import { getBooks } from "../../services/API/apiCalls";
+import ModelNavigation from "../../components/model-navigation/NavBar";
+import ModelCards from "../../components/model-cards/ModelCards";
 import blankBookPic from "../../assets/blankbookimg.jpg";
-import MyPagination from "../../components/pagination/Pagination";
+import { modelAttributes } from "../../util/constants/modelAttributes";
 
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalInstances = 13600;
-  const books = getBooks(currentPage);
+  const [numResults, setNumResults] = useState(10);
+  const [sortBooks, setSortBooks] = useState(null);
+  const [searchBooks, setSearchBooks] = useState(null);
+  const response = getBooks(currentPage, numResults, sortBooks, searchBooks);
+  const totalInstances = response.meta_total;
+  const books = response.data;
+  const languageNames = new Intl.DisplayNames(["en"], {
+    type: "language",
+  });
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/books/${id}`);
+  // eslint-disable-next-line camelcase
+  const attributes = (({ book_title, ...o }) => o)(modelAttributes.Books);
   return (
     <div className="Books">
+      <br />
       <Container fluid>
-        <Row>
-          <h1>Books</h1>
-        </Row>
-        <Row>
-          <Col>
-            <MyPagination
-              totalInstances={totalInstances}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Col>
-        </Row>
-        <br />
-        <Row style={{ justifyContent: "center" }} xs={1} md={4}>
-          {books.map((item) => {
-            const book = item.attributes;
-            Object.keys(book).forEach((k) => {
-              if (!book[k]) {
-                book[k] = "N/A";
-              }
-            });
-            if (book.book_image === "N/A") {
-              book.book_image = blankBookPic;
-            }
-            return (
-              <Row>
-                <Card style={{ width: "18rem", border: "1px solid white" }}>
-                  <button
-                    type="button"
-                    onClick={() => handleClick(book.book_id)}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={book.book_image}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </button>
-                  <Card.Body>
-                    <Card.Title>{book.book_title}</Card.Title>
-                    <Card.Text>
-                      <ListGroup variant="flush">
-                        <ListGroupItem>
-                          Author: {book.book_author}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Date Publication: {book.book_published}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Language: {book.book_language}
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Genre: {book.book_categories}
-                        </ListGroupItem>
-                        <ListGroupItem>Length: {book.book_pages}</ListGroupItem>
-                      </ListGroup>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <br />
-              </Row>
-            );
-          })}
-        </Row>
+        <ModelNavigation
+          modelName="Books"
+          setSort={setSortBooks}
+          setSearch={setSearchBooks}
+          totalInstances={totalInstances}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          numResults={numResults}
+          setNumResults={setNumResults}
+        />
       </Container>
+      <br />
+      <ModelCards
+        modelName="Books"
+        modelData={books}
+        totalInstances={totalInstances}
+        blankPic={blankBookPic}
+        handleClick={handleClick}
+        searchModel={searchBooks}
+        attributes={attributes}
+      />
     </div>
   );
 }
