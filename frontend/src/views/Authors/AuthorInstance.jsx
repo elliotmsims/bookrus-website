@@ -55,24 +55,32 @@ export default function Author() {
       </h6>
       <h3>Bio:</h3>
       <p>{author.author_bio}</p>
-      <img
-        src={author.author_image}
-        alt={blankProfilePic}
-        width="180"
-        height="256"
-      />
-      <iframe
-        title="map"
-        width="450"
-        height="450"
-        style={{ border: "0" }}
-        loading="lazy"
-        allowFullScreen
-        src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
-          " ",
-          "+"
-        )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
-      />
+      <Row>
+        <Col>
+          <img
+            src={author.author_image}
+            alt={blankProfilePic}
+            width="317"
+            height="450"
+          />
+        </Col>
+        <Col>
+          <iframe
+            title="map"
+            width="450"
+            height="450"
+            style={{ border: "0" }}
+            loading="lazy"
+            allowFullScreen
+            src={`https://www.google.com/maps/embed/v1/place?q=${country.country_name.replace(
+              " ",
+              "+"
+            )}&key=AIzaSyC-KQ02tkt96MC7mkMTgCPLT726FOaKpMU`}
+          />
+        </Col>
+      </Row>
+      
+      
     </Container>
   );
 }
