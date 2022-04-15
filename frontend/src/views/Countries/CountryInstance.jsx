@@ -125,29 +125,29 @@ export default function Country() {
               <Card.Text>
                 <ListGroup variant="flush">
                   <ListGroupItem>
-                    <b>Region</b>: {country.country_region}
+                    <b>Region:</b> {country.country_region}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>Capital</b>: {country.country_capital_city}
+                    <b>Capital:</b> {country.country_capital_city}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>Population</b>:{" "}
+                    <b>Population:</b>{" "}
                     {country.country_population.toLocaleString("en-US")}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>Latitude</b>: {country.country_lat}
+                    <b>Latitude:</b> {country.country_lat}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>Longitude</b>: {country.country_long}
+                    <b>Longitude:</b> {country.country_long}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>Demonym</b>: {country.country_demonym}
+                    <b>Demonym:</b> {country.country_demonym}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>Total Authors</b>: {authorArr.length}
+                    <b>Total Authors:</b> {authorArr.length}
                   </ListGroupItem>
                   <ListGroupItem>
-                    <b>Languages</b>:{" "}
+                    <b>Languages:</b>{" "}
                     {languages.map((language, i) => (
                       <text>
                         {languageNames.of(
