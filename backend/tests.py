@@ -30,7 +30,7 @@ class TestFlaskBackend(unittest.TestCase):
 
     def testCountryById(self):
         with self.client:
-            response = self.client.get("/countries/1")
+            response = self.client.get("/countries/2")
             self.assertEqual(response.status_code, 200)
             res_json = json.loads(response.data)
             self.assertEqual(res_json["country_id"], 1)
