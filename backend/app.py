@@ -1,7 +1,7 @@
 from calendar import c
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 from flask import jsonify, request
 
 # Build database
@@ -105,7 +105,9 @@ def get_books():
         category = "%" + category + "%"
         query = query.filter(Book.book_categories.like(category))
     if pages is not None:
-        query = query.filter(Book.book_pages==pages)
+        pages = pages.split(":")
+        query = query.filter(and_(Book.book_pages>=int(pages[0]), 
+            Book.book_pages<=int(pages[1])))
     if maturity is not None:
         maturity = "%" + maturity + "%"
         query = query.filter(Book.book_maturity.like(maturity))
@@ -173,7 +175,9 @@ def get_authors():
         genre = "%" + genre + "%"
         query = query.filter(Author.author_genre.like(genre))
     if works is not None:
-        query = query.filter(Author.author_work_count==works)
+        works = works.split(":")
+        query = query.filter(and_(Author.author_work_count>=int(works[0]), 
+            Author.author_work_count<=int(works[1])))
 
     # searching
     if search is not None:
