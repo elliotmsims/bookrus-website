@@ -37,12 +37,6 @@ import postman from "../../assets/tools-images/postman.jpg";
 import gitlab from "../../assets/tools-images/gitlab.jpg";
 import "./styles.css";
 
-const lightbackground = {
-  backgroundColor: "white",
-};
-
-// "#997554"
-
 class Member {
   constructor(name, username, image, bio, unittests, role) {
     this.name = name;
@@ -272,7 +266,7 @@ export default function About() {
     getIssues();
   }, []);
   return (
-    <div style={lightbackground}>
+    <div style={{ backgroundColor: "white" }}>
       <Container>
         <h1>Project Info</h1>
         <Row>

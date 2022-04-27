@@ -1,7 +1,7 @@
 from calendar import c
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 from flask import jsonify, request
 
 # Build database
@@ -13,17 +13,29 @@ def hello_world():
 
 @app.route("/countries")
 def get_countries():
-    # name, region, population, lat, long
-    limit = request.args.get("limit")
-    limit = int(limit) if limit is not None else 10
+    # GET ARGS
+    # pagination
+    page = request.args.get("page", type=int)
+    limit = request.args.get("limit", type=int)
+    # sort/search
     sort = request.args.get("sort")
     search = request.args.get("search")
+    # filters (for data visualizations)
+    region = request.args.get("region") # use "and" for "&"; might have to add extra " " at end
+    population = request.args.get("population") # "a-b" format = [a, b]
+
+    # START QUERY
     query = db.session.query(Country)
+    # query2 = db.session.query(Book.book_language).distinct()
+    # for value in query2:
+    #         print(value)
+
+    # SEARCHING
     if search is not None:
         search = search.split(" ")
         cols = []
         for term in search:
-            cols.append(Country.country_name.ilike('%' + str(term) + '%'))
+            cols.append(Country.country_name.ilike('%' + term + '%'))
             cols.append(Country.country_region.ilike('%' + term + '%'))
         try:
             cols.append(Country.country_population == int(term))
@@ -35,15 +47,29 @@ def get_countries():
         except:
             pass
         query = query.filter(or_(*cols))
+
+    # SORTING
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Country, sort, None) is not None:
             query = query.order_by(getattr(Country, sort))
+
+    # FILTERING
+    if region is not None:
+        region = region.replace("and", "&")
+        query = query.filter(Country.country_region.ilike(region))
+    if population is not None:
+        range = population.split("-")
+        try:
+             query = query.filter(and_(int(range[0]) <= Country.country_population), (Country.country_population <= int(range[1])))
+        except:
+            pass
+
     count = query.count()
-    page = request.args.get("page", type=int)
-    if page is None: page = 1
-    end_query = query.paginate(page=page, per_page=limit, error_out=False).items
-    result = country_schema.dump(end_query, many=True)
+    # if no page is given, all data results returned
+    if page is not None:
+        query = query.paginate(page=page, per_page=limit, error_out=False).items
+    result = country_schema.dump(query, many=True)
     return jsonify(
         {
             "data": result,
@@ -59,12 +85,23 @@ def get_country(id):
 
 @app.route("/books")
 def get_books():
-    # Searchable: Title, Author, publication, language, genre, page count
-    limit = request.args.get("limit")
-    limit = int(limit) if limit is not None else 10
+    # GET ARGS
+    # pagination
+    page = request.args.get("page", type=int)
+    limit = request.args.get("limit", type=int)
+    # sort/search
     sort = request.args.get("sort")
     search = request.args.get("search")
+    # filters (for data visualizations)
+    language = request.args.get("language")
+    genre = request.args.get("genre") # too many genres
+    length = request.args.get("length") # "a-b" = [a, b]
+    maturity = request.args.get("maturity") # "not mature" or "mature"
+
+    # START QUERY
     query = db.session.query(Book)
+
+    # SEARCHING
     if search is not None:
         search = search.split(" ")
         cols = []
@@ -78,15 +115,33 @@ def get_books():
         except:
             pass
         query = query.filter(or_(*cols)) 
+
+    # SORTING
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Book, sort, None) is not None:
             query = query.order_by(getattr(Book, sort))
+
+    # FILTERING
+    if language is not None:
+        query = query.filter(Book.book_language.ilike(language))
+    if genre is not None:
+        query = query.filter(Book.book_categories.ilike(genre))
+    if length is not None:
+        range = length.split("-")
+        try:
+             query = query.filter(and_(int(range[0]) <= Book.book_pages), (Book.book_pages <= int(range[1])))
+        except:
+            pass
+    if maturity is not None:
+        maturity = maturity.replace(" ", "_")
+        query = query.filter(Book.book_maturity.ilike(maturity))
+
     count = query.count()
-    page = request.args.get("page", type=int)
-    if page is None: page = 1
-    end_query = query.paginate(page=page, per_page=limit, error_out=False).items
-    result = book_schema.dump(end_query, many=True)
+    # if no page is given, all data results returned
+    if page is not None:
+        query = query.paginate(page=page, per_page=limit, error_out=False).items
+    result = book_schema.dump(query, many=True)
     return jsonify(
         {
             "data": result,
@@ -102,12 +157,22 @@ def get_book(id):
 
 @app.route("/authors")
 def get_authors():
-    # Name, Best work, work count, genre, nationality
-    limit = request.args.get("limit")
-    limit = int(limit) if limit is not None else 10
+     # GET ARGS
+    # pagination
+    page = request.args.get("page", type=int)
+    limit = request.args.get("limit", type=int)
+    # sort/search
     sort = request.args.get("sort")
     search = request.args.get("search")
+    # filters (for data visualizations)
+    work_count = request.args.get("work-count") # "a-b" = [a, b]
+    main_genre = request.args.get("main-genre") # too many genres
+    nationality = request.args.get("nationality")
+
+    # START QUERY
     query = db.session.query(Author)
+
+    # SEARCHING
     if search is not None:
         search = search.split(" ")
         cols = []
@@ -121,15 +186,30 @@ def get_authors():
         except:
             pass                
         query = query.filter(or_(*cols))
+    
+    # SORTING
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Author, sort, None) is not None:
             query = query.order_by(getattr(Author, sort))
+
+    # FILTERING
+    if work_count is not None:
+        range = work_count.split("-")
+        try:
+             query = query.filter(and_(int(range[0]) <= Author.author_work_count), (Author.author_work_count <= int(range[1])))
+        except:
+            pass
+    if main_genre is not None:
+        query = query.filter(Author.author_genre.ilike(main_genre))
+    if nationality is not None:
+        query = query.filter(Author.author_nationality.ilike(nationality))
+
     count = query.count()
-    page = request.args.get("page", type=int)
-    if page is None: page = 1
-    end_query = query.paginate(page=page, per_page=limit, error_out=False).items
-    result = author_schema.dump(end_query, many=True)
+    # if no page is given, all data results returned
+    if page is not None:
+        query = query.paginate(page=page, per_page=limit, error_out=False).items
+    result = author_schema.dump(query, many=True)
     return jsonify(
         {
             "data": result,

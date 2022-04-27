@@ -15,13 +15,24 @@ export default function Navigation() {
             alt="React Bootstrap logo"
           />
         </Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="/about">About</Nav.Link>
-          <Nav.Link href="/search">Search</Nav.Link>
-          <Nav.Link href="/books">Books</Nav.Link>
-          <Nav.Link href="/authors">Authors</Nav.Link>
-          <Nav.Link href="/countries">Countries</Nav.Link>
-        </Nav>
+        <Navbar.Toggle aria-controls="navbar-dark-example" />
+        <Navbar.Collapse id="navbar-dark-example">
+          <Nav className="me-auto">
+            <Nav.Link href="/books">Books</Nav.Link>
+            <Nav.Link href="/authors">Authors</Nav.Link>
+            <div className="v1">
+              <Nav.Link href="/countries">Countries</Nav.Link>
+            </div>
+            <Nav.Link href="/visualizations">Visualizations</Nav.Link>
+            <div className="v1">
+              <Nav.Link href="/provider-visualizations">
+                Provider Visualizations
+              </Nav.Link>
+            </div>
+            <Nav.Link href="/search">Search</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
