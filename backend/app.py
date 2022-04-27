@@ -26,9 +26,6 @@ def get_countries():
 
     # START QUERY
     query = db.session.query(Country)
-    # query2 = db.session.query(Book.book_language).distinct()
-    # for value in query2:
-    #         print(value)
 
     # FILTERING
     if region is not None:
@@ -105,6 +102,7 @@ def get_books():
     if language is not None:
         query = query.filter(Book.book_language.ilike(language))
     if genre is not None:
+        genre = genre.replace("and", "&")
         query = query.filter(Book.book_categories.ilike(genre))
     if length is not None:
         range = length.split("-")
@@ -180,6 +178,7 @@ def get_authors():
         except:
             pass
     if main_genre is not None:
+        main_genre = main_genre.replace("and", "&")
         query = query.filter(Author.author_genre.ilike(main_genre))
     if nationality is not None:
         query = query.filter(Author.author_nationality.ilike(nationality))
