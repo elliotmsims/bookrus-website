@@ -1,7 +1,7 @@
 from calendar import c
 from models import app, db, Country, Author, Book
 from schemas import country_schema, author_schema, book_schema
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 from flask import jsonify, request
 
 # Build database
@@ -18,7 +18,27 @@ def get_countries():
     limit = int(limit) if limit is not None else 10
     sort = request.args.get("sort")
     search = request.args.get("search")
+    name = request.args.get("name")
+    region = request.args.get("region")
+    capital = request.args.get("capital")
+    languages = request.args.get("languages")
     query = db.session.query(Country)
+
+    # filtering
+    if name is not None:
+        name = "%" + name + "%"
+        query = query.filter(Country.country_name.like(name))
+    if region is not None:
+        region = "%" + region + "%"
+        query = query.filter(Country.country_region.like(region))
+    if capital is not None:
+        capital = "%" + capital + "%"
+        query = query.filter(Country.country_capital_city.like(capital))
+    if languages is not None:
+        languages = "%" + languages + "%"
+        query = query.filter(Country.country_languages.like(languages))
+
+    # searching
     if search is not None:
         search = search.split(" ")
         cols = []
@@ -35,10 +55,13 @@ def get_countries():
         except:
             pass
         query = query.filter(or_(*cols))
+
+    # sorting
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Country, sort, None) is not None:
             query = query.order_by(getattr(Country, sort))
+
     count = query.count()
     page = request.args.get("page", type=int)
     if page is None: page = 1
@@ -64,7 +87,32 @@ def get_books():
     limit = int(limit) if limit is not None else 10
     sort = request.args.get("sort")
     search = request.args.get("search")
+    title = request.args.get("title")
+    author = request.args.get("author")
+    pages = request.args.get("pages")
+    maturity = request.args.get("maturity")
+    category = request.args.get("category")
     query = db.session.query(Book)
+
+    # filtering
+    if title is not None:
+        title = "%" + title + "%"
+        query = query.filter(Book.book_title.like(title))
+    if author is not None:
+        author = "%" + author + "%"
+        query = query.filter(Book.book_author.like(author))
+    if category is not None:
+        category = "%" + category + "%"
+        query = query.filter(Book.book_categories.like(category))
+    if pages is not None:
+        pages = pages.split(":")
+        query = query.filter(and_(Book.book_pages>=int(pages[0]), 
+            Book.book_pages<=int(pages[1])))
+    if maturity is not None:
+        maturity = "%" + maturity + "%"
+        query = query.filter(Book.book_maturity.like(maturity))
+
+    # searching
     if search is not None:
         search = search.split(" ")
         cols = []
@@ -78,10 +126,13 @@ def get_books():
         except:
             pass
         query = query.filter(or_(*cols)) 
+
+    # sorting
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Book, sort, None) is not None:
             query = query.order_by(getattr(Book, sort))
+
     count = query.count()
     page = request.args.get("page", type=int)
     if page is None: page = 1
@@ -107,7 +158,28 @@ def get_authors():
     limit = int(limit) if limit is not None else 10
     sort = request.args.get("sort")
     search = request.args.get("search")
+    name = request.args.get("name")
+    nationality = request.args.get("nationality")
+    genre = request.args.get("genre")
+    works = request.args.get("works")
     query = db.session.query(Author)
+
+    # filtering
+    if name is not None:
+        name = "%" + name + "%"
+        query = query.filter(Author.author_name.like(name))
+    if nationality is not None:
+        nationality = "%" + nationality + "%"
+        query = query.filter(Author.author_nationality.like(nationality))
+    if genre is not None:
+        genre = "%" + genre + "%"
+        query = query.filter(Author.author_genre.like(genre))
+    if works is not None:
+        works = works.split(":")
+        query = query.filter(and_(Author.author_work_count>=int(works[0]), 
+            Author.author_work_count<=int(works[1])))
+
+    # searching
     if search is not None:
         search = search.split(" ")
         cols = []
@@ -121,10 +193,13 @@ def get_authors():
         except:
             pass                
         query = query.filter(or_(*cols))
+    
+    # sorting
     if sort is not None:
         sort = sort.replace("-", "_")
         if getattr(Author, sort, None) is not None:
             query = query.order_by(getattr(Author, sort))
+
     count = query.count()
     page = request.args.get("page", type=int)
     if page is None: page = 1
