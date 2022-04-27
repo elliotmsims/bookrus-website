@@ -26,9 +26,17 @@ def get_countries():
 
     # START QUERY
     query = db.session.query(Country)
-    # query2 = db.session.query(Book.book_language).distinct()
-    # for value in query2:
-    #         print(value)
+
+    # FILTERING
+    if region is not None:
+        region = region.replace("and", "&")
+        query = query.filter(Country.country_region.ilike(region))
+    if population is not None:
+        range = population.split("-")
+        try:
+             query = query.filter(and_(int(range[0]) <= Country.country_population), (Country.country_population <= int(range[1])))
+        except:
+            pass
 
     # SEARCHING
     if search is not None:
@@ -53,17 +61,6 @@ def get_countries():
         sort = sort.replace("-", "_")
         if getattr(Country, sort, None) is not None:
             query = query.order_by(getattr(Country, sort))
-
-    # FILTERING
-    if region is not None:
-        region = region.replace("and", "&")
-        query = query.filter(Country.country_region.ilike(region))
-    if population is not None:
-        range = population.split("-")
-        try:
-             query = query.filter(and_(int(range[0]) <= Country.country_population), (Country.country_population <= int(range[1])))
-        except:
-            pass
 
     count = query.count()
     # if no page is given, all data results returned
@@ -101,6 +98,22 @@ def get_books():
     # START QUERY
     query = db.session.query(Book)
 
+    # FILTERING
+    if language is not None:
+        query = query.filter(Book.book_language.ilike(language))
+    if genre is not None:
+        genre = genre.replace("and", "&")
+        query = query.filter(Book.book_categories.ilike(genre))
+    if length is not None:
+        range = length.split("-")
+        try:
+             query = query.filter(and_(int(range[0]) <= Book.book_pages), (Book.book_pages <= int(range[1])))
+        except:
+            pass
+    if maturity is not None:
+        maturity = maturity.replace(" ", "_")
+        query = query.filter(Book.book_maturity.ilike(maturity))
+
     # SEARCHING
     if search is not None:
         search = search.split(" ")
@@ -121,21 +134,6 @@ def get_books():
         sort = sort.replace("-", "_")
         if getattr(Book, sort, None) is not None:
             query = query.order_by(getattr(Book, sort))
-
-    # FILTERING
-    if language is not None:
-        query = query.filter(Book.book_language.ilike(language))
-    if genre is not None:
-        query = query.filter(Book.book_categories.ilike(genre))
-    if length is not None:
-        range = length.split("-")
-        try:
-             query = query.filter(and_(int(range[0]) <= Book.book_pages), (Book.book_pages <= int(range[1])))
-        except:
-            pass
-    if maturity is not None:
-        maturity = maturity.replace(" ", "_")
-        query = query.filter(Book.book_maturity.ilike(maturity))
 
     count = query.count()
     # if no page is given, all data results returned
@@ -172,6 +170,19 @@ def get_authors():
     # START QUERY
     query = db.session.query(Author)
 
+    # FILTERING
+    if work_count is not None:
+        range = work_count.split("-")
+        try:
+             query = query.filter(and_(int(range[0]) <= Author.author_work_count), (Author.author_work_count <= int(range[1])))
+        except:
+            pass
+    if main_genre is not None:
+        main_genre = main_genre.replace("and", "&")
+        query = query.filter(Author.author_genre.ilike(main_genre))
+    if nationality is not None:
+        query = query.filter(Author.author_nationality.ilike(nationality))
+
     # SEARCHING
     if search is not None:
         search = search.split(" ")
@@ -192,18 +203,6 @@ def get_authors():
         sort = sort.replace("-", "_")
         if getattr(Author, sort, None) is not None:
             query = query.order_by(getattr(Author, sort))
-
-    # FILTERING
-    if work_count is not None:
-        range = work_count.split("-")
-        try:
-             query = query.filter(and_(int(range[0]) <= Author.author_work_count), (Author.author_work_count <= int(range[1])))
-        except:
-            pass
-    if main_genre is not None:
-        query = query.filter(Author.author_genre.ilike(main_genre))
-    if nationality is not None:
-        query = query.filter(Author.author_nationality.ilike(nationality))
 
     count = query.count()
     # if no page is given, all data results returned
