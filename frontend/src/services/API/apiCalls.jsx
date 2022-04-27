@@ -1,7 +1,7 @@
 const deployLink = "https://api.bookrus.me";
 const localLink = "http://localhost:5000";
 const FAHLink = "https://api.findahome.me/";
-const testing = false;
+const testing = true;
 
 // BookRUs API Calls
 
