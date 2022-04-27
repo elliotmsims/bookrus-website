@@ -19,3 +19,7 @@
   font-family: "Roboto", sans-serif;
   color: var(--nav-hover) !important;
 }
+
+.v1 {
+  border-right: 3px solid var(--text-color);
+}

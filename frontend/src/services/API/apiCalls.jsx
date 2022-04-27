@@ -115,68 +115,68 @@ export function getAuthors(index, limit, sort, search) {
 
 // FindAHome API Calls
 
-export function fgetCountry(countryId) {
-  request.open("GET", `${FAHLink}/countries/${countryId}`, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
+// export function fgetCountry(countryId) {
+//   request.open("GET", `${FAHLink}/countries/${countryId}`, false);
+//   request.setRequestHeader("Accept", "application/vnd.api+json");
+//   request.send();
+//   let response = null;
+//   if (request.status === 200) {
+//     response = JSON.parse(request.responseText);
+//   }
+//   return response;
+// }
 
-export function fgetCountries() {
-  request.open("GET", `${FAHLink}/countries/`, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
+// export function fgetCountries() {
+//   request.open("GET", `${FAHLink}/countries/`, false);
+//   request.setRequestHeader("Accept", "application/vnd.api+json");
+//   request.send();
+//   let response = null;
+//   if (request.status === 200) {
+//     response = JSON.parse(request.responseText);
+//   }
+//   return response;
+// }
 
-export function fgetCharity(charityId) {
-  request.open("GET", `${FAHLink}/charities/${charityId}`, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
+// export function fgetCharity(charityId) {
+//   request.open("GET", `${FAHLink}/charities/${charityId}`, false);
+//   request.setRequestHeader("Accept", "application/vnd.api+json");
+//   request.send();
+//   let response = null;
+//   if (request.status === 200) {
+//     response = JSON.parse(request.responseText);
+//   }
+//   return response;
+// }
 
-export function fgetCharities() {
-  request.open("GET", `${FAHLink}/charities/`, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
+// export function fgetCharities() {
+//   request.open("GET", `${FAHLink}/charities/`, false);
+//   request.setRequestHeader("Accept", "application/vnd.api+json");
+//   request.send();
+//   let response = null;
+//   if (request.status === 200) {
+//     response = JSON.parse(request.responseText);
+//   }
+//   return response;
+// }
 
-export function fgetArticle(newsId) {
-  request.open("GET", `${FAHLink}/news/${newsId}`, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
+// export function fgetArticle(newsId) {
+//   request.open("GET", `${FAHLink}/news/${newsId}`, false);
+//   request.setRequestHeader("Accept", "application/vnd.api+json");
+//   request.send();
+//   let response = null;
+//   if (request.status === 200) {
+//     response = JSON.parse(request.responseText);
+//   }
+//   return response;
+// }
 
-export function fgetArticles() {
-  request.open("GET", `${FAHLink}/news/`, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
+// export function fgetArticles() {
+//   request.open("GET", `${FAHLink}/news/`, false);
+//   request.setRequestHeader("Accept", "application/vnd.api+json");
+//   request.send();
+//   let response = null;
+//   if (request.status === 200) {
+//     response = JSON.parse(request.responseText);
+//   }
+//   return response;
+// }

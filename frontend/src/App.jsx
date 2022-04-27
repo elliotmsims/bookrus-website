@@ -10,6 +10,8 @@ import Countries from "./views/Countries/CountriesPage";
 import Country from "./views/Countries/CountryInstance";
 import Search from "./views/Search/SearchPage";
 import ErrorPage from "./views/Error/ErrorPage";
+import Visualizations from "./views/Visualizations/VisualizationsPage";
+import ProviderVisualizations from "./views/Provider-Visualizations/ProviderVisualizationsPage";
 import "./App.scss";
 
 export default function App() {
@@ -29,6 +31,11 @@ export default function App() {
         <Route path="/countries" element={<Countries />} />
         <Route path="/countries/:countryId" element={<Country />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/visualizations" element={<Visualizations />} />
+        <Route
+          path="/provider-visualizations"
+          element={<ProviderVisualizations />}
+        />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
