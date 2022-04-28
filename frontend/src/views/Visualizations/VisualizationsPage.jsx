@@ -17,54 +17,32 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import {
+  getAuthors,
+  getCountries,
+  getBooks,
+} from "../../services/API/apiCalls";
 import styles from "./styles.module.css";
 
 // BAR CHART
-const data1 = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
+const countries = getCountries().data;
+const regions = ["Asia", "Americas", "Africa", "Europe", "Oceania"];
+const data1 = new Array(regions.length);
+for (let i = 0; i < regions.length; i += 1) {
+  const regionCountries = countries.filter(
+    (c) => c.country_region === regions[i]
+  );
+  let max = 0;
+  for (const c in Object.keys(regionCountries)) {
+    if (regionCountries[c].country_population != null)
+      max += regionCountries[c].country_population;
+  }
+  data1[i] = {
+    name: regions[i],
+    max,
+    avg: Math.floor(max / regionCountries.length),
+  };
+}
 const getPath = (x, y, width, height) => `M${x},${y + height}
           C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${
   x + width / 2
@@ -80,14 +58,34 @@ function TriangleBar(props) {
 }
 
 // PIE CHART
-const data2 = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
+const COLORS = [
+  "#FF0000",
+  "#FFA500",
+  "#BFB800",
+  "#008000",
+  "#0000ff",
+  "#4b0082",
+  "#ee82ee",
 ];
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const authors = getAuthors().data;
+const nationalities = [
+  "American",
+  "British",
+  "Australian",
+  "French",
+  "German",
+  "Korean",
+  "Indian",
+];
+const data2 = new Array(nationalities.length);
+for (let i = 0; i < nationalities.length; i += 1) {
+  data2[i] = {
+    name: nationalities[i],
+    value: Object.keys(
+      authors.filter((a) => a.author_nationality === nationalities[i])
+    ).length,
+  };
+}
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -118,44 +116,25 @@ const renderCustomizedLabel = ({
 };
 
 // RADAR CHART
-const data3 = [
-  {
-    subject: "Math",
-    A: 120,
-    B: 110,
-    fullMark: 150,
-  },
-  {
-    subject: "Chinese",
-    A: 98,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: "English",
-    A: 86,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: "Geography",
-    A: 99,
-    B: 100,
-    fullMark: 150,
-  },
-  {
-    subject: "Physics",
-    A: 85,
-    B: 90,
-    fullMark: 150,
-  },
-  {
-    subject: "History",
-    A: 65,
-    B: 85,
-    fullMark: 150,
-  },
+const books = getBooks().data;
+const ranges = [
+  "1-100",
+  "100-200",
+  "200-300",
+  "300-400",
+  "400-500",
+  "500-9999",
 ];
+const numbers = [1, 100, 200, 300, 400, 500, 9999];
+const data3 = new Array(numbers.length - 1);
+for (let i = 0; i < numbers.length - 1; i += 1) {
+  data3[i] = {
+    name: ranges[i],
+    value: books.filter(
+      (b) => numbers[i] <= b.book_pages && b.book_pages <= numbers[i + 1]
+    ).length,
+  };
+}
 
 export default function Visualizations() {
   return (
@@ -180,13 +159,13 @@ export default function Visualizations() {
                 <Tooltip />
                 <Legend />
                 <Bar
-                  dataKey="pv"
+                  dataKey="max"
                   shape={<TriangleBar />}
                   label={{ position: "top" }}
                   fill="var(--logo-color)"
                 />
                 <Bar
-                  dataKey="uv"
+                  dataKey="avg"
                   shape={<TriangleBar />}
                   label={{ position: "top" }}
                   fill="var(--background-color)"
@@ -235,11 +214,10 @@ export default function Visualizations() {
             <ResponsiveContainer width="99%" aspect={2}>
               <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data3}>
                 <PolarGrid />
-                <PolarAngleAxis dataKey="subject" />
+                <PolarAngleAxis dataKey="name" />
                 <PolarRadiusAxis />
                 <Radar
-                  name="Mike"
-                  dataKey="A"
+                  dataKey="value"
                   stroke="#8884d8"
                   fill="#8884d8"
                   fillOpacity={0.6}
