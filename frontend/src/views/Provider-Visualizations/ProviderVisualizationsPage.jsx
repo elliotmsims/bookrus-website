@@ -17,9 +17,15 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import {
+  fgetCountries,
+  fgetCharities,
+  fgetArticles,
+} from "../../services/API/apiCalls";
 import styles from "./styles.module.css";
 
 // BAR CHART
+const countries = fgetCountries().result;
 const data1 = [
   {
     name: "Page A",
@@ -80,6 +86,7 @@ function TriangleBar(props) {
 }
 
 // PIE CHART
+const articles = fgetArticles().result;
 const data2 = [
   { name: "Group A", value: 400 },
   { name: "Group B", value: 300 },
@@ -118,6 +125,7 @@ const renderCustomizedLabel = ({
 };
 
 // RADAR CHART
+const charities = fgetCharities().result;
 const data3 = [
   {
     subject: "Math",

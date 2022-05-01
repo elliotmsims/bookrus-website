@@ -143,6 +143,9 @@ export default function Visualizations() {
       <Row>
         <Carousel variant="dark" interval={null}>
           <Carousel.Item>
+            <h1>
+              Top 5 Regions&apos; Max Population and Population Per Country
+            </h1>
             <ResponsiveContainer width="99%" aspect={2}>
               <BarChart
                 data={data1}
@@ -174,6 +177,7 @@ export default function Visualizations() {
             </ResponsiveContainer>
           </Carousel.Item>
           <Carousel.Item>
+            <h1>Top 7 Nationalities of Authors</h1>
             <Row
               style={{ textAlign: "center", color: "white", fontSize: "2vw" }}
             >
@@ -211,6 +215,7 @@ export default function Visualizations() {
             </Row>
           </Carousel.Item>
           <Carousel.Item>
+            <h1>Books Grouped by Length</h1>
             <ResponsiveContainer width="99%" aspect={2}>
               <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data3}>
                 <PolarGrid />
