@@ -277,9 +277,9 @@ export default function Visualizations() {
                   relative to the larger regions, and therefore, the bars would
                   be not visible. With our data, we found that Asia is the most
                   populous with a crazy max country population over a billion
-                  higher than the next region&apos;s max! However,
-                  its average is not as high as the the next region&apos;s max
-                  so it has many smaller countries too.
+                  higher than the next region&apos;s max! However, its average
+                  is not as high as the the next region&apos;s max so it has
+                  many smaller countries too.
                 </li>
                 <li>
                   For our second chart, we chose the top seven nationalities of
