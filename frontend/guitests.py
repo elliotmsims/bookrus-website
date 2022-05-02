@@ -18,7 +18,7 @@ class TestFrontendGui(unittest.TestCase):
         chrome_options.experimental_options["prefs"] = chrome_prefs
         # Disable images
         chrome_prefs["profile.default_content_settings"] = {"images": 2}
-        return webdriver.Chrome(executable_path="C:/Users/willi/Downloads/chromedriver_win32/chromedriver.exe", options=chrome_options)
+        return webdriver.Chrome(options=chrome_options)
 
     def testNavBarListing(self):
         expected_navbar = ["books", "authors", "countries", "visualizations", "provider visualizations", "search", "about"]
