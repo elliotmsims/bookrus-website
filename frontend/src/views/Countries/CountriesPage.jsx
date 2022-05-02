@@ -10,7 +10,9 @@ import { modelAttributes } from "../../util/constants/modelAttributes";
 export default function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
   const [numResults, setNumResults] = useState(10);
-  const [sortCountries, setSortCountries] = useState(null);
+  const [sortCountries, setSortCountries] = useState(
+    localStorage.getItem("Countries-sort-key")
+  );
   const [searchCountries, setSearchCountries] = useState(null);
   const response = getCountries(
     currentPage,

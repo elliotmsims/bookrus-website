@@ -10,14 +10,13 @@ import { modelAttributes } from "../../util/constants/modelAttributes";
 export default function Books() {
   const [currentPage, setCurrentPage] = useState(1);
   const [numResults, setNumResults] = useState(10);
-  const [sortBooks, setSortBooks] = useState(null);
+  const [sortBooks, setSortBooks] = useState(
+    localStorage.getItem("Books-sort-key")
+  );
   const [searchBooks, setSearchBooks] = useState(null);
   const response = getBooks(currentPage, numResults, sortBooks, searchBooks);
   const totalInstances = response.meta_total;
   const books = response.data;
-  const languageNames = new Intl.DisplayNames(["en"], {
-    type: "language",
-  });
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/books/${id}`);
   // eslint-disable-next-line camelcase

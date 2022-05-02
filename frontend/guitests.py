@@ -21,14 +21,14 @@ class TestFrontendGui(unittest.TestCase):
         return webdriver.Chrome(options=chrome_options)
 
     def testNavBarListing(self):
-        expected_navbar = ["about", "search", "books", "authors", "countries"]
+        expected_navbar = ["books", "authors", "countries", "visualizations", "provider visualizations", "search", "about"]
         driver = self.createDriver()
         driver.get(self.url)
         # Check if navbar buttons are listed
-        navbar = driver.find_elements(by=By.CLASS_NAME, value="nav-link")
+        navbar = driver.find_elements(by=By.XPATH, value="//a[@class='nav-link']")
         index = 0
         for option in navbar:
-            option_text = option.text.lower()
+            option_text = option.get_attribute("innerHTML").lower()
             self.assertEqual(option_text, expected_navbar[index])
             index = index + 1
 
@@ -38,11 +38,11 @@ class TestFrontendGui(unittest.TestCase):
         driver = self.createDriver()
         driver.get(self.url)
         # Check if one of the navbar buttons are working
-        navbar = driver.find_elements(by=By.CLASS_NAME, value="nav-link")
+        navbar = driver.find_elements(by=By.XPATH, value="//a[@class='nav-link']")
         # Navigate to about page by clicking on button
         option = navbar[0]
-        option_text = option.text.lower()
-        option.click()
+        option_text = option.get_attribute("innerHTML").lower()
+        driver.execute_script("arguments[0].click();", option)
         self.assertEqual(driver.current_url, self.url + "/" + option_text)
         driver.quit()
 

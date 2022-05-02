@@ -9,7 +9,9 @@ import { modelAttributes } from "../../util/constants/modelAttributes";
 export default function Authors() {
   const [currentPage, setCurrentPage] = useState(1);
   const [numResults, setNumResults] = useState(10);
-  const [sortAuthors, setSortAuthors] = useState(null);
+  const [sortAuthors, setSortAuthors] = useState(
+    localStorage.getItem("Authors-sort-key")
+  );
   const [searchAuthors, setSearchAuthors] = useState(null);
   const response = getAuthors(
     currentPage,

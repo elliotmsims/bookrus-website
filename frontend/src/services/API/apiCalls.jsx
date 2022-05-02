@@ -18,10 +18,13 @@ export function getCountry(countryId) {
   return response;
 }
 
-export function getCountries(index, limit, sort, search) {
+export function getCountries(index, limit, sort, search, region, population) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  let url = `${link}/countries?page=${index}`;
+  let url = `${link}/countries?`;
+  if (index != null) {
+    url += `&page=${index}`;
+  }
   if (limit != null) {
     url += `&limit=${limit}`;
   }
@@ -30,6 +33,12 @@ export function getCountries(index, limit, sort, search) {
   }
   if (search != null) {
     url += `&search=${search}`;
+  }
+  if (region != null) {
+    url += `&region=${region}`;
+  }
+  if (population != null) {
+    url += `&population=${population}`;
   }
   request.open("GET", url, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
@@ -54,10 +63,22 @@ export function getBook(bookId) {
   return response;
 }
 
-export function getBooks(index, limit, sort, search) {
+export function getBooks(
+  index,
+  limit,
+  sort,
+  search,
+  language,
+  genre,
+  length,
+  maturity
+) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  let url = `${link}/books?page=${index}`;
+  let url = `${link}/books?`;
+  if (index != null) {
+    url += `&page=${index}`;
+  }
   if (limit != null) {
     url += `&limit=${limit}`;
   }
@@ -66,6 +87,18 @@ export function getBooks(index, limit, sort, search) {
   }
   if (search != null) {
     url += `&search=${search}`;
+  }
+  if (language != null) {
+    url += `&language=${language}`;
+  }
+  if (genre != null) {
+    url += `&genre=${genre}`;
+  }
+  if (length != null) {
+    url += `&length=${length}`;
+  }
+  if (maturity != null) {
+    url += `&maturity=${maturity}`;
   }
   request.open("GET", url, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
@@ -89,11 +122,22 @@ export function getAuthor(authorId) {
   }
   return response;
 }
-
-export function getAuthors(index, limit, sort, search) {
+// PUT IN FILTERS
+export function getAuthors(
+  index,
+  limit,
+  sort,
+  search,
+  works,
+  genre,
+  nationality
+) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  let url = `${link}/authors?page=${index}`;
+  let url = `${link}/authors?`;
+  if (index != null) {
+    url += `&page=${index}`;
+  }
   if (limit != null) {
     url += `&limit=${limit}`;
   }
@@ -102,6 +146,15 @@ export function getAuthors(index, limit, sort, search) {
   }
   if (search != null) {
     url += `&search=${search}`;
+  }
+  if (works != null) {
+    url += `&work-count=${works}`;
+  }
+  if (genre != null) {
+    url += `&gmain-genre=${genre}`;
+  }
+  if (nationality != null) {
+    url += `&nationality=${nationality}`;
   }
   request.open("GET", url, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
@@ -115,68 +168,74 @@ export function getAuthors(index, limit, sort, search) {
 
 // FindAHome API Calls
 
-// export function fgetCountry(countryId) {
-//   request.open("GET", `${FAHLink}/countries/${countryId}`, false);
-//   request.setRequestHeader("Accept", "application/vnd.api+json");
-//   request.send();
-//   let response = null;
-//   if (request.status === 200) {
-//     response = JSON.parse(request.responseText);
-//   }
-//   return response;
-// }
+export function fgetCountry(countryId) {
+  const request = new XMLHttpRequest();
+  request.open("GET", `${FAHLink}/countries/${countryId}`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+  }
+  return response;
+}
 
-// export function fgetCountries() {
-//   request.open("GET", `${FAHLink}/countries/`, false);
-//   request.setRequestHeader("Accept", "application/vnd.api+json");
-//   request.send();
-//   let response = null;
-//   if (request.status === 200) {
-//     response = JSON.parse(request.responseText);
-//   }
-//   return response;
-// }
+export function fgetCountries() {
+  const request = new XMLHttpRequest();
+  request.open("GET", `${FAHLink}/countries/`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+  }
+  return response;
+}
 
-// export function fgetCharity(charityId) {
-//   request.open("GET", `${FAHLink}/charities/${charityId}`, false);
-//   request.setRequestHeader("Accept", "application/vnd.api+json");
-//   request.send();
-//   let response = null;
-//   if (request.status === 200) {
-//     response = JSON.parse(request.responseText);
-//   }
-//   return response;
-// }
+export function fgetCharity(charityId) {
+  const request = new XMLHttpRequest();
+  request.open("GET", `${FAHLink}/charities/${charityId}`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+  }
+  return response;
+}
 
-// export function fgetCharities() {
-//   request.open("GET", `${FAHLink}/charities/`, false);
-//   request.setRequestHeader("Accept", "application/vnd.api+json");
-//   request.send();
-//   let response = null;
-//   if (request.status === 200) {
-//     response = JSON.parse(request.responseText);
-//   }
-//   return response;
-// }
+export function fgetCharities() {
+  const request = new XMLHttpRequest();
+  request.open("GET", `${FAHLink}/charities/`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+  }
+  return response;
+}
 
-// export function fgetArticle(newsId) {
-//   request.open("GET", `${FAHLink}/news/${newsId}`, false);
-//   request.setRequestHeader("Accept", "application/vnd.api+json");
-//   request.send();
-//   let response = null;
-//   if (request.status === 200) {
-//     response = JSON.parse(request.responseText);
-//   }
-//   return response;
-// }
+export function fgetArticle(newsId) {
+  const request = new XMLHttpRequest();
+  request.open("GET", `${FAHLink}/news/${newsId}`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+  }
+  return response;
+}
 
-// export function fgetArticles() {
-//   request.open("GET", `${FAHLink}/news/`, false);
-//   request.setRequestHeader("Accept", "application/vnd.api+json");
-//   request.send();
-//   let response = null;
-//   if (request.status === 200) {
-//     response = JSON.parse(request.responseText);
-//   }
-//   return response;
-// }
+export function fgetArticles() {
+  const request = new XMLHttpRequest();
+  request.open("GET", `${FAHLink}/news/`, false);
+  request.setRequestHeader("Accept", "application/vnd.api+json");
+  request.send();
+  let response = null;
+  if (request.status === 200) {
+    response = JSON.parse(request.responseText);
+  }
+  return response;
+}
