@@ -59,13 +59,13 @@ function getBarChartData() {
 }
 
 const getPath = (x, y, width, height) => `M${x},${y + height}
-          C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${
-  x + width / 2
-}, ${y}
-          C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${
+            C${x + width / 3},${y + height} ${x + width / 2},${
+  y + height / 3
+} ${x + width / 2}, ${y}
+            C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${
   y + height
 } ${x + width}, ${y + height}
-          Z`;
+            Z`;
 
 function TriangleBar(props) {
   const { fill, x, y, width, height } = props;
@@ -73,8 +73,7 @@ function TriangleBar(props) {
 }
 
 // PIE CHART
-function getPieChartData() {
-  const authors = getAuthors().data;
+function getPieChartData(authors) {
   const data = new Array(7);
   const nationalities = [
     "American",
@@ -134,42 +133,35 @@ const renderCustomizedLabel = ({
 };
 
 // RADAR CHART
-// function getRadarChartData() {
-//   const ranges = {
-//     "1-100": {
-//       data: getBooks(null, null, null, null, null, null, )
-//     },
-//     "100-200",
-//     "200-300",
-//     "300-400",
-//     "400-500",
-//     "500-9999",
-//   };
-
-// }
-
-// const books = getBooks().data;
-// const ranges = [
-//   "1-100",
-//   "100-200",
-//   "200-300",
-//   "300-400",
-//   "400-500",
-//   "500-9999",
-// ];
-// const numbers = [1, 100, 200, 300, 400, 500, 9999];
-// const data3 = new Array(numbers.length - 1);
-// for (let i = 0; i < numbers.length - 1; i += 1) {
-//   data3[i] = {
-//     name: ranges[i],
-//     value: books.filter(
-//       (b) => numbers[i] <= b.book_pages && b.book_pages <= numbers[i + 1]
-//     ).length,
-//   };
-// }
+function getRadarChartData(authors) {
+  const data = new Array(6);
+  const ranges = [
+    [1, 20],
+    [21, 40],
+    [41, 60],
+    [61, 80],
+    [81, 100],
+    [101, 9999],
+  ];
+  for (let i = 0; i < data.length; i += 1) {
+    data[i] = {
+      name: `${ranges[i][0]}-${ranges[i][1]}`,
+      value: Object.keys(
+        authors.filter(
+          (a) =>
+            ranges[i][0] <= a.author_work_count &&
+            a.author_work_count <= ranges[i][1]
+        )
+      ).length,
+    };
+  }
+  return data;
+}
 
 export default function Visualizations() {
-  const pieChartData = getPieChartData();
+  const authors = getAuthors().data;
+  const pieChartData = getPieChartData(authors);
+  const radarChartData = getRadarChartData(authors);
   return (
     <Container>
       <br />
@@ -246,9 +238,14 @@ export default function Visualizations() {
             </Row>
           </Carousel.Item>
           <Carousel.Item>
-            <h1>Books Grouped by Length</h1>
+            <h1>Distribution of Author Work Counts</h1>
             <ResponsiveContainer width="99%" aspect={2}>
-              <RadarChart cx="50%" cy="50%" outerRadius="80%" data={null}>
+              <RadarChart
+                cx="50%"
+                cy="50%"
+                outerRadius="80%"
+                data={radarChartData}
+              >
                 <PolarGrid />
                 <PolarAngleAxis dataKey="name" />
                 <PolarRadiusAxis />
@@ -276,17 +273,49 @@ export default function Visualizations() {
         >
           <Card.Body>
             <b>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <u>Interesting Things We Discovered:</u>
+              <ul>
+                <li>
+                  For our first chart, we chose the top five largest regions to
+                  prevent our bar chart from being overloaded with regions.
+                  Also, smaller regions will logically have tiny populations
+                  relative to the larger regions, and therefore, the bars would
+                  be not visible. With our data, we found that Asia is the most
+                  populous with a crazy max country population over a billion
+                  higher than the next region&apos;s max! However, its However,
+                  its average is not as high as the the next region&apos;s max
+                  so it has many smaller countries too.
+                </li>
+                <li>
+                  For our second chart, we chose the top seven nationalities of
+                  authors for similar reasons as the first chart. We discovered
+                  that our data very English language biased, and specifically,
+                  American English biased. However, there is some representation
+                  of other nationalities/languages such as French and even
+                  Korean. Our data comes comes from Google&apos;s book/author
+                  database, and therefore, it logically makes sense that there
+                  exist a bias. Regardless, English books are very popular, and
+                  there are many good English authors!
+                </li>
+                <li>
+                  For our third chart, we chose multiple ranges of work count
+                  totals for authors, and it pulls from the our entire author
+                  database. We found that the 1-20 range is by far the most
+                  popular since many authors only release a few works. However,
+                  interestingly, the second highest range is 101-9999. This
+                  implies authors tend to write only a few works or the complete
+                  opposite, a ton of works. Lastly, keep in mind that 101-9999
+                  is an extremely large range compared to the other 20 count
+                  ranges. Therefore, it makes sense that such a large range
+                  would have a high work count total, but we included it to
+                  group all authors that write many books together.
+                </li>
+              </ul>
             </b>
           </Card.Body>
         </Card>
       </Row>
+      <br />
     </Container>
   );
 }
