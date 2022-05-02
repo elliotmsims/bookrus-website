@@ -22,7 +22,13 @@ export default function SortDropdown(props) {
         </NavDropdown.Item>
       ))}
       <NavDropdown.Divider />
-      <NavDropdown.Item onClick={() => props.setSort(null)}>
+      <NavDropdown.Item
+        onClick={() => {
+          const sortStorageName = `${props.model}-sort-key`;
+          localStorage.setItem(sortStorageName, "null");
+          props.setSort(null);
+        }}
+      >
         No Sorting
       </NavDropdown.Item>
     </NavDropdown>
