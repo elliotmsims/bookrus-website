@@ -24,119 +24,120 @@ import {
 } from "../../services/API/apiCalls";
 import styles from "./styles.module.css";
 
-// BAR CHART
-const countries = getCountries().data;
-const regions = ["Asia", "Americas", "Africa", "Europe", "Oceania"];
-const data1 = new Array(regions.length);
-for (let i = 0; i < regions.length; i += 1) {
-  const regionCountries = countries.filter(
-    (c) => c.country_region === regions[i]
-  );
-  let max = 0;
-  for (const c in Object.keys(regionCountries)) {
-    if (regionCountries[c].country_population != null)
-      max += regionCountries[c].country_population;
-  }
-  data1[i] = {
-    name: regions[i],
-    max,
-    avg: Math.floor(max / regionCountries.length),
-  };
-}
 const getPath = (x, y, width, height) => `M${x},${y + height}
-          C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${
-  x + width / 2
-}, ${y}
-          C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${
+            C${x + width / 3},${y + height} ${x + width / 2},${
+  y + height / 3
+} ${x + width / 2}, ${y}
+            C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${
   y + height
 } ${x + width}, ${y + height}
-          Z`;
+            Z`;
 
 function TriangleBar(props) {
   const { fill, x, y, width, height } = props;
   return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
 }
 
-// PIE CHART
-const COLORS = [
-  "#FF0000",
-  "#FFA500",
-  "#BFB800",
-  "#008000",
-  "#0000ff",
-  "#4b0082",
-  "#ee82ee",
-];
-const authors = getAuthors().data;
-const nationalities = [
-  "American",
-  "British",
-  "Australian",
-  "French",
-  "German",
-  "Korean",
-  "Indian",
-];
-const data2 = new Array(nationalities.length);
-for (let i = 0; i < nationalities.length; i += 1) {
-  data2[i] = {
-    name: nationalities[i],
-    value: Object.keys(
-      authors.filter((a) => a.author_nationality === nationalities[i])
-    ).length,
-  };
-}
-
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-      style={{ fontSize: "2vw" }}
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-
-// RADAR CHART
-const books = getBooks().data;
-const ranges = [
-  "1-100",
-  "100-200",
-  "200-300",
-  "300-400",
-  "400-500",
-  "500-9999",
-];
-const numbers = [1, 100, 200, 300, 400, 500, 9999];
-const data3 = new Array(numbers.length - 1);
-for (let i = 0; i < numbers.length - 1; i += 1) {
-  data3[i] = {
-    name: ranges[i],
-    value: books.filter(
-      (b) => numbers[i] <= b.book_pages && b.book_pages <= numbers[i + 1]
-    ).length,
-  };
-}
-
 export default function Visualizations() {
+  // BAR CHART
+  const countries = getCountries().data;
+  const regions = ["Asia", "Americas", "Africa", "Europe", "Oceania"];
+  const data1 = new Array(regions.length);
+  for (let i = 0; i < regions.length; i += 1) {
+    const regionCountries = countries.filter(
+      (c) => c.country_region === regions[i]
+    );
+    let max = 0;
+    Object.keys(regionCountries).forEach((c) => {
+      if (regionCountries[c].country_population != null)
+        max += regionCountries[c].country_population;
+    });
+    data1[i] = {
+      name: regions[i],
+      max,
+      avg: Math.floor(max / regionCountries.length),
+    };
+  }
+
+  // PIE CHART
+  const COLORS = [
+    "#FF0000",
+    "#FFA500",
+    "#BFB800",
+    "#008000",
+    "#0000ff",
+    "#4b0082",
+    "#ee82ee",
+  ];
+  const authors = getAuthors().data;
+  const nationalities = [
+    "American",
+    "British",
+    "Australian",
+    "French",
+    "German",
+    "Korean",
+    "Indian",
+  ];
+  const data2 = new Array(nationalities.length);
+  for (let i = 0; i < nationalities.length; i += 1) {
+    data2[i] = {
+      name: nationalities[i],
+      value: Object.keys(
+        authors.filter((a) => a.author_nationality === nationalities[i])
+      ).length,
+    };
+  }
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+        style={{ fontSize: "2vw" }}
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
+  // RADAR CHART
+  const books = getBooks().data;
+  const ranges = [
+    "1-100",
+    "100-200",
+    "200-300",
+    "300-400",
+    "400-500",
+    "500-9999",
+  ];
+  const numbers = [1, 100, 200, 300, 400, 500, 9999];
+  const data3 = new Array(numbers.length - 1);
+  for (let i = 0; i < numbers.length - 1; i += 1) {
+    data3[i] = {
+      name: ranges[i],
+      value: books.filter(
+        (b) => numbers[i] <= b.book_pages && b.book_pages <= numbers[i + 1]
+      ).length,
+    };
+  }
+
   return (
     <Container>
       <br />
