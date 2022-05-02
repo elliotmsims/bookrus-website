@@ -18,17 +18,13 @@ export function getCountry(countryId) {
   return response;
 }
 
-export function getCountries(
-  index,
-  limit,
-  sort,
-  search,
-  region = null,
-  population = null
-) {
+export function getCountries(index, limit, sort, search, region, population) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  let url = `${link}/countries?page=${index}`;
+  let url = `${link}/countries?`;
+  if (index != null) {
+    url += `&page=${index}`;
+  }
   if (limit != null) {
     url += `&limit=${limit}`;
   }
@@ -72,14 +68,17 @@ export function getBooks(
   limit,
   sort,
   search,
-  language = null,
-  genre = null,
-  length = null,
-  maturity = null
+  language,
+  genre,
+  length,
+  maturity
 ) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  let url = `${link}/books?page=${index}`;
+  let url = `${link}/books?`;
+  if (index != null) {
+    url += `&page=${index}`;
+  }
   if (limit != null) {
     url += `&limit=${limit}`;
   }
@@ -129,13 +128,16 @@ export function getAuthors(
   limit,
   sort,
   search,
-  works = null,
-  genre = null,
-  nationality = null
+  works,
+  genre,
+  nationality
 ) {
   const request = new XMLHttpRequest();
   const link = testing ? localLink : deployLink;
-  let url = `${link}/authors?page=${index}`;
+  let url = `${link}/authors?`;
+  if (index != null) {
+    url += `&page=${index}`;
+  }
   if (limit != null) {
     url += `&limit=${limit}`;
   }
