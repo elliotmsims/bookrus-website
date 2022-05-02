@@ -18,11 +18,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import {
-  getAuthors,
-  getCountries,
-  getBooks,
-} from "../../services/API/apiCalls";
+import { getAuthors, getCountries } from "../../services/API/apiCalls";
 import styles from "./styles.module.css";
 
 // BAR CHART
@@ -112,7 +108,6 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index,
 }) => {
   const RADIAN = Math.PI / 180;
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -168,7 +163,7 @@ export default function Visualizations() {
       <Row>
         <Carousel variant="dark" interval={null}>
           <Carousel.Item>
-            <h1>Top 5 Regions&apos; Max and Average Country Population</h1>
+            <h1>Top 5 Regions&apos; Avg and Max Country Population</h1>
             <ResponsiveContainer width="99%" aspect={2}>
               <BarChart
                 data={getBarChartData()}
