@@ -65,7 +65,10 @@ export default function MyPagination(props) {
           menuVariant="dark"
         >
           {numResultsOptions.map((num) => (
-            <NavDropdown.Item onClick={() => props.setNumResults(num)}>
+            <NavDropdown.Item
+              key={num}
+              onClick={() => props.setNumResults(num)}
+            >
               {num}
             </NavDropdown.Item>
           ))}

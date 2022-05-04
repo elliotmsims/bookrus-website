@@ -11,7 +11,7 @@ export default function ModelTable(props) {
         <thead>
           <tr>
             {Object.keys(props.attributes).map((k) => (
-              <th>{props.attributes[k]}</th>
+              <th key={props.attributes[k]}>{props.attributes[k]}</th>
             ))}
           </tr>
         </thead>
@@ -25,10 +25,11 @@ export default function ModelTable(props) {
             });
             return (
               <tr
+                key={entry[specialAttributes.name]}
                 onClick={() => props.handleClick(entry[specialAttributes.id])}
               >
                 {Object.keys(props.attributes).map((k) => (
-                  <td>
+                  <td key={entry[k]}>
                     <Highlight value={entry[k]} search={props.searchModel} />
                   </td>
                 ))}

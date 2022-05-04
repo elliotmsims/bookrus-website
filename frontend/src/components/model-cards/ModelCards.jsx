@@ -29,7 +29,7 @@ export default function ModelCards(props) {
             card[specialAttributes.image] = props.blankPic;
           }
           return (
-            <Row>
+            <Row key={card[specialAttributes.name]}>
               <Card
                 onClick={() => props.handleClick(card[specialAttributes.id])}
                 className={styles.card}
@@ -50,20 +50,15 @@ export default function ModelCards(props) {
                       search={props.searchModel}
                     />
                   </Card.Title>
-                  <Card.Text>
-                    <ListGroup variant="flush">
-                      {Object.keys(props.attributes).map((k) => (
-                        <ListGroupItem>
-                          {props.attributes[k]}
-                          {": "}
-                          <Highlight
-                            value={card[k]}
-                            search={props.searchModel}
-                          />
-                        </ListGroupItem>
-                      ))}
-                    </ListGroup>
-                  </Card.Text>
+                  <ListGroup variant="flush">
+                    {Object.keys(props.attributes).map((k) => (
+                      <ListGroupItem key={props.attributes[k]}>
+                        {props.attributes[k]}
+                        {": "}
+                        <Highlight value={card[k]} search={props.searchModel} />
+                      </ListGroupItem>
+                    ))}
+                  </ListGroup>
                 </Card.Body>
               </Card>
               <br />
