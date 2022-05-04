@@ -23,6 +23,7 @@ export default function ModelNavigation(props) {
           <br />
           <Nav className="justify-content-end">
             <MyPagination
+              modelName={props.modelName}
               totalInstances={props.totalInstances}
               currentPage={props.currentPage}
               setCurrentPage={props.setCurrentPage}
