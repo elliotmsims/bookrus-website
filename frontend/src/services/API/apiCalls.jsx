@@ -180,9 +180,13 @@ export function fgetCountry(countryId) {
   return response;
 }
 
-export function fgetCountries() {
+export function fgetCountries(homicideRate) {
   const request = new XMLHttpRequest();
-  request.open("GET", `${FAHLink}/countries/`, false);
+  let link = `${FAHLink}countries`;
+  if (homicideRate != null) {
+    link = `${link}?homicide_rate=${homicideRate}`;
+  }
+  request.open("GET", link, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -204,9 +208,13 @@ export function fgetCharity(charityId) {
   return response;
 }
 
-export function fgetCharities() {
+export function fgetCharities(donorRange) {
   const request = new XMLHttpRequest();
-  request.open("GET", `${FAHLink}/charities/`, false);
+  let link = `${FAHLink}charities`;
+  if (donorRange != null) {
+    link = `${link}?total_donations=${donorRange}`;
+  }
+  request.open("GET", link, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -228,9 +236,13 @@ export function fgetArticle(newsId) {
   return response;
 }
 
-export function fgetArticles() {
+export function fgetArticles(language) {
   const request = new XMLHttpRequest();
-  request.open("GET", `${FAHLink}/news/`, false);
+  let link = `${FAHLink}news`;
+  if (language != null) {
+    link = `${link}?language=${language}`;
+  }
+  request.open("GET", link, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;

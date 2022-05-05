@@ -18,16 +18,43 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import {
+  fgetCountries,
+  fgetArticles,
+  fgetCharities,
+} from "../../services/API/apiCalls";
 import styles from "./styles.module.css";
 
 // BAR CHART
+function getMax(arr, prop) {
+  let max;
+  for (let i = 0; i < arr.length; i += 1) {
+    if (max == null || parseInt(arr[i][prop], 10) > parseInt(max[prop], 10))
+      max = arr[i];
+  }
+  return max[prop].toFixed(2);
+}
+
+function getAvg(arr, prop) {
+  return (getMax(arr, prop) / arr.length).toFixed(2);
+}
+
 function getBarChartData() {
-  const data = [
-    { name: "0-1", avg: 85, max: 90 },
-    { name: "1-2", avg: 83, max: 86 },
-    { name: "2-3", avg: 76, max: 80 },
-    { name: "3+", avg: 70, max: 79 },
+  const ranges = [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 30],
   ];
+  const data = new Array(ranges.length);
+  for (let i = 0; i < data.length; i += 1) {
+    const countries = fgetCountries(`${ranges[i][0]}-${ranges[i][1]}`).result;
+    data[i] = {
+      name: `${ranges[i][0]}-${ranges[i][1]}`,
+      avg: getAvg(countries, "education_rate"),
+      max: getMax(countries, "education_rate"),
+    };
+  }
   return data;
 }
 
@@ -47,15 +74,15 @@ function TriangleBar(props) {
 
 // PIE CHART
 function getPieChartData() {
-  const data = [
-    { name: "English", value: 3000 },
-    { name: "Spanish", value: 1500 },
-    { name: "Italian", value: 900 },
-    { name: "German", value: 300 },
-    { name: "French", value: 300 },
-    { name: "Chinese", value: 200 },
-    { name: "Japanese", value: 200 },
-  ];
+  const languages = ["en", "es", "de", "pt", "nl", "it", "fr"];
+  const data = new Array(languages.length);
+  const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
+  for (let i = 0; i < languages.length; i += 1) {
+    data[i] = {
+      name: languageNames.of(languages[i]),
+      value: fgetArticles(languages[i]).count,
+    };
+  }
   return data;
 }
 
@@ -97,14 +124,20 @@ const renderCustomizedLabel = ({
 
 // RADAR CHART
 function getRadarChartData() {
-  const data = [
-    { name: "0-50", value: 1500 },
-    { name: "51-200", value: 700 },
-    { name: "201-500", value: 200 },
-    { name: "501-1000", value: 600 },
-    { name: "1001-5000", value: 500 },
-    { name: "5000+", value: 1300 },
+  const ranges = [
+    [0, 10],
+    [10, 100],
+    [100, 1000],
+    [1000, 5000],
+    [5001, 100000],
   ];
+  const data = new Array(ranges.length);
+  for (let i = 0; i < data.length; i += 1) {
+    data[i] = {
+      name: `${ranges[i][0]}-${ranges[i][1]}`,
+      value: fgetCharities(`${ranges[i][0]}-${ranges[i][1]}`).count,
+    };
+  }
   return data;
 }
 
@@ -230,10 +263,10 @@ export default function ProviderVisualizations() {
                   For our first chart, we chose to look at homicide ranges of
                   countries since FindAHome had a good filter for it, and we
                   chose to compare education rates. We discovered that more
-                  educated countries tend to have a lower homicide range. Of
-                  course, many factors combined determine homicide rate, and we
-                  are not implying education causes decreased homicides, or
-                  vice-versa.
+                  educated countries seem to be no different than uneducated
+                  ones. Of course, many factors combined determine homicide
+                  rate, and we are not implying education causes decreased
+                  homicides, or vice-versa.
                 </li>
                 <li>
                   For our second chart, we chose the top seven languages used in
@@ -248,11 +281,12 @@ export default function ProviderVisualizations() {
                   For our third chart, we chose number of charities by donor
                   range for a similar reason as the first chart. We discovered
                   that the biggest percentage of charities have only a few
-                  donors. We suspect that this is due to many charities never
-                  gaining popularity or an increase in new charities. The second
-                  largest percentage has 5000+ donors. These are usually the big
-                  charities that people know by name and will have large money
-                  goals/funding.
+                  hundred donors. Popularity of charities above and below this
+                  range taper off as a normal bell curve would. There are very
+                  few charities with over a thousand donors. We suspect that
+                  this is because charities can get a foothold market in its
+                  immediate community, but not many can garner the attention of
+                  huge swathes of people.
                 </li>
               </ul>
             </b>
