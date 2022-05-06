@@ -168,9 +168,9 @@ export function getAuthors(
 
 // FindAHome API Calls
 
-export function fgetCountry(countryId) {
+export function fgetCountries() {
   const request = new XMLHttpRequest();
-  request.open("GET", `${FAHLink}/countries/${countryId}`, false);
+  request.open("GET", `${FAHLink}countries?per_page=45`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;
@@ -180,69 +180,13 @@ export function fgetCountry(countryId) {
   return response;
 }
 
-export function fgetCountries(homicideRate) {
-  const request = new XMLHttpRequest();
-  let link = `${FAHLink}countries`;
-  if (homicideRate != null) {
-    link = `${link}?homicide_rate=${homicideRate}`;
-  }
-  request.open("GET", link, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
-
-export function fgetCharity(charityId) {
-  const request = new XMLHttpRequest();
-  request.open("GET", `${FAHLink}/charities/${charityId}`, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
-
-export function fgetCharities(donorRange) {
-  const request = new XMLHttpRequest();
-  let link = `${FAHLink}charities`;
-  if (donorRange != null) {
-    link = `${link}?total_donations=${donorRange}`;
-  }
-  request.open("GET", link, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
-
-export function fgetArticle(newsId) {
-  const request = new XMLHttpRequest();
-  request.open("GET", `${FAHLink}/news/${newsId}`, false);
-  request.setRequestHeader("Accept", "application/vnd.api+json");
-  request.send();
-  let response = null;
-  if (request.status === 200) {
-    response = JSON.parse(request.responseText);
-  }
-  return response;
-}
-
+// to protect against overload, only works with filtering
 export function fgetArticles(language) {
-  const request = new XMLHttpRequest();
-  let link = `${FAHLink}news`;
-  if (language != null) {
-    link = `${link}?language=${language}`;
+  if (language == null) {
+    return null;
   }
-  request.open("GET", link, false);
+  const request = new XMLHttpRequest();
+  request.open("GET", `${FAHLink}news?language=${language}`, false);
   request.setRequestHeader("Accept", "application/vnd.api+json");
   request.send();
   let response = null;

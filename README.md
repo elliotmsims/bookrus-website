@@ -67,4 +67,5 @@ Leader's Responisibility: The leader is well-informed on all aspects of the proj
 
 ## Comments
 
-Starting early is the most important thing!
+Starting early is the most important thing! We used example code
+from Recharts to help design our charts/graphs.

@@ -70,7 +70,6 @@ function TriangleBar(props) {
 
 // PIE CHART
 function getPieChartData(authors) {
-  const data = new Array(7);
   const nationalities = [
     "American",
     "British",
@@ -80,6 +79,7 @@ function getPieChartData(authors) {
     "Korean",
     "Indian",
   ];
+  const data = new Array(nationalities.length);
   for (let i = 0; i < data.length; i += 1) {
     data[i] = {
       name: nationalities[i],
@@ -129,7 +129,6 @@ const renderCustomizedLabel = ({
 
 // RADAR CHART
 function getRadarChartData(authors) {
-  const data = new Array(6);
   const ranges = [
     [1, 20],
     [21, 40],
@@ -138,6 +137,7 @@ function getRadarChartData(authors) {
     [81, 100],
     [101, 9999],
   ];
+  const data = new Array(ranges.length);
   for (let i = 0; i < data.length; i += 1) {
     data[i] = {
       name: `${ranges[i][0]}-${ranges[i][1]}`,
@@ -163,7 +163,9 @@ export default function Visualizations() {
       <Row>
         <Carousel variant="dark" interval={null}>
           <Carousel.Item>
-            <h1>Top 5 Regions&apos; Avg and Max Country Population</h1>
+            <h1 className={styles.title}>
+              Regions&apos; Avg and Max Country Population
+            </h1>
             <ResponsiveContainer width="99%" aspect={2}>
               <BarChart
                 data={getBarChartData()}
@@ -195,7 +197,9 @@ export default function Visualizations() {
             </ResponsiveContainer>
           </Carousel.Item>
           <Carousel.Item>
-            <h1>Top 7 Nationalities of Authors</h1>
+            <h1 className={styles.title}>
+              Distribution of Author Nationalities
+            </h1>
             <Row
               style={{ textAlign: "center", color: "white", fontSize: "2vw" }}
             >
@@ -233,7 +237,7 @@ export default function Visualizations() {
             </Row>
           </Carousel.Item>
           <Carousel.Item>
-            <h1>Distribution of Author Work Counts</h1>
+            <h1 className={styles.title}>Distribution of Author Work Counts</h1>
             <ResponsiveContainer width="99%" aspect={2}>
               <RadarChart
                 cx="50%"
@@ -271,39 +275,37 @@ export default function Visualizations() {
               <u>Interesting Things We Discovered:</u>
               <ul>
                 <li>
-                  For our first chart, we chose the top five largest regions to
-                  prevent our bar chart from being overloaded with regions.
-                  Also, smaller regions will logically have tiny populations
-                  relative to the larger regions, and therefore, the bars would
-                  be not visible. With our data, we found that Asia is the most
-                  populous with a crazy max country population over a billion
-                  higher than the next region&apos;s max! However, its average
-                  is not as high as the the next region&apos;s max so it has
-                  many smaller countries too.
+                  For our first chart, we looked at the population data of
+                  regions around the world. We found that Asia is highly
+                  populous, and its max country population is over a billion
+                  higher than the next largest region&apos;s max. Asia&apos;s
+                  average population is also higher than most regions&apos; max.
+                  It puts into perspective how many people live in this one land
+                  area.
                 </li>
                 <li>
-                  For our second chart, we chose the top seven nationalities of
-                  authors for similar reasons as the first chart. We discovered
-                  that our data very English language biased, and specifically,
-                  American English biased. However, there is some representation
-                  of other nationalities/languages such as French and even
-                  Korean. Our data comes comes from Google&apos;s book/author
-                  database, and therefore, it logically makes sense that there
-                  exist a bias. Regardless, English books are very popular, and
-                  there are many good English authors!
+                  For our second chart, we looked at the distribution of
+                  nationalities of authors. We discovered that our book data
+                  must be English-language biased considering the large amount
+                  of authors from English-speaking countries. However, there is
+                  some representation of other nationalities/languages such as
+                  French and even Korean. Our data comes from Google&apos;s
+                  book/author database. Since Google is an American company, it
+                  is understandable that there is a bias, however, English books
+                  are also just popular.
                 </li>
                 <li>
-                  For our third chart, we chose multiple ranges of work count
-                  totals for authors, and it pulls from the our entire author
-                  database. We found that the 1-20 range is by far the most
-                  popular since many authors only release a few works. However,
-                  interestingly, the second highest range is 101-9999. This
-                  implies authors tend to write only a few works or the complete
-                  opposite, a ton of works. Lastly, keep in mind that 101-9999
-                  is an extremely large range compared to the other 20 count
-                  ranges. Therefore, it makes sense that such a large range
-                  would have a high work count total, but we included it to
-                  group all authors that write many books together.
+                  For our third chart, we looked at multiple ranges of work
+                  count totals for authors. We discovered most authors were in
+                  the 1-20 range, which means they only released a few works.
+                  However, interestingly, the second highest range is 101-9999.
+                  This implies authors tend to write only a few works or the
+                  complete opposite, a ton of works. Keep in mind though that
+                  101-9999 is an extremely large range compared to the other
+                  size 20 ranges. Therefore, it also makes sense that such a
+                  large range would have a high work count total. We included it
+                  to group authors that wrote a significant amount of books in
+                  one range.
                 </li>
               </ul>
             </b>
