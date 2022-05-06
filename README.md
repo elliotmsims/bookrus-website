@@ -17,7 +17,7 @@
 | 1        | Matthew Escobar      | a9ef89b3d9710546e84b6a5cd4b94c1fff161134         |
 | 2        | William Eng          | dad1e98ffa06e92d08426f0fbe76962db6a864ea         |
 | 3        | Elliot Sims          | 05d744be7afa80659f0b3e75a32fc3bdeefdc126         |
-| 4        | Hrithik Ramganesh    | -         |
+| 4        | Hrithik Ramganesh    | f2a4526664c5841e9170d8506ed466e24be8b65d         |
 
 Leader's Responisibility: The leader is well-informed on all aspects of the project phase, organizes the team to perform effectively, and promotes equal collaboration from all members.
 
