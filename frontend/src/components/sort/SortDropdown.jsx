@@ -12,6 +12,7 @@ export default function SortDropdown(props) {
     >
       {Object.keys(attributes).map((k) => (
         <NavDropdown.Item
+          key={attributes[k]}
           onClick={() => {
             const sortStorageName = `${props.model}-sort-key`;
             localStorage.setItem(sortStorageName, k);

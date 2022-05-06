@@ -5,3 +5,9 @@
 .card:hover {
     transform: scale(1.05)
 }
+
+.title {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

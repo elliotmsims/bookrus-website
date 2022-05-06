@@ -8,7 +8,23 @@ import blankBookPic from "../../assets/blankbookimg.jpg";
 import { modelAttributes } from "../../util/constants/modelAttributes";
 
 export default function Books() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(() => {
+    const pageValue = localStorage.getItem("Books-page-key");
+    const numRegex = /[0-9]+/;
+    if (pageValue) {
+      const pageNum = numRegex.exec(pageValue);
+      if (pageNum) {
+        let pageNumInt = parseInt(pageNum, 10);
+        if (pageNumInt < 1) {
+          pageNumInt = 1;
+        }
+
+        return pageNumInt;
+      }
+    }
+
+    return 1;
+  });
   const [numResults, setNumResults] = useState(10);
   const [sortBooks, setSortBooks] = useState(
     localStorage.getItem("Books-sort-key")

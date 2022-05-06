@@ -9,10 +9,10 @@ class TestFlaskBackend(unittest.TestCase):
 
     def testAuthorAll(self):
         with self.client:
-            response = self.client.get("/authors")
+            response = self.client.get("/authors?&page=1")
             self.assertEqual(response.status_code, 200)
             res_json = json.loads(response.data)
-            self.assertEqual(len(res_json["data"]), 10)
+            self.assertEqual(len(res_json["data"]), 20)
 
     def testAuthorById(self):
         with self.client:
@@ -23,10 +23,10 @@ class TestFlaskBackend(unittest.TestCase):
 
     def testCountryAll(self):
         with self.client:
-            response = self.client.get("/countries")
+            response = self.client.get("/countries?&page=1")
             self.assertEqual(response.status_code, 200)
             res_json = json.loads(response.data)
-            self.assertEqual(len(res_json["data"]), 10)
+            self.assertEqual(len(res_json["data"]), 20)
 
     def testCountryById(self):
         with self.client:
@@ -37,10 +37,10 @@ class TestFlaskBackend(unittest.TestCase):
 
     def testBookAll(self):
         with self.client:
-            response = self.client.get("/books")
+            response = self.client.get("/books?&page=1")
             self.assertEqual(response.status_code, 200)
             res_json = json.loads(response.data)
-            self.assertEqual(len(res_json["data"]), 10)
+            self.assertEqual(len(res_json["data"]), 20)
 
     def testBookById(self):
         with self.client:

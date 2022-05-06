@@ -17,10 +17,24 @@ export default function MyPagination(props) {
     end = props.totalInstances;
   }
   const numResultsOptions = [10, 15, 20, 25];
-  const handleFirst = () => props.setCurrentPage(1);
-  const handlePrev = () => props.setCurrentPage(currentPage - 1);
-  const handleNext = () => props.setCurrentPage(currentPage + 1);
-  const handleLast = () => props.setCurrentPage(totalPages);
+  const handleStorage = (page) =>
+    localStorage.setItem(`${props.modelName}-page-key`, page);
+  const handleFirst = () => {
+    props.setCurrentPage(1);
+    handleStorage(1);
+  };
+  const handlePrev = () => {
+    props.setCurrentPage(currentPage - 1);
+    handleStorage(currentPage - 1);
+  };
+  const handleNext = () => {
+    props.setCurrentPage(currentPage + 1);
+    handleStorage(currentPage + 1);
+  };
+  const handleLast = () => {
+    props.setCurrentPage(totalPages);
+    handleStorage(totalPages);
+  };
   return (
     <Container>
       <Col className="d-flex justify-content-center">
@@ -51,7 +65,10 @@ export default function MyPagination(props) {
           menuVariant="dark"
         >
           {numResultsOptions.map((num) => (
-            <NavDropdown.Item onClick={() => props.setNumResults(num)}>
+            <NavDropdown.Item
+              key={num}
+              onClick={() => props.setNumResults(num)}
+            >
               {num}
             </NavDropdown.Item>
           ))}
